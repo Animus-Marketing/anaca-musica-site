@@ -1,0 +1,200 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const eventos = await getCollection('eventos');
+  return eventos.map(evento => ({
+    params: { slug: evento.data.slug },
+    props: { evento },
+  }));
+}
+
+const { evento } = Astro.props;
+const { Content } = await render(evento);
+---
+
+<BaseLayout
+  title={evento.data.titulo}
+  description={`${evento.data.titulo} - ${evento.data.local}`}
+  image={evento.data.imagem_capa}
+>
+  <Hero
+    title={evento.data.titulo}
+    subtitles={["Eventos"]}
+    backgroundImage="/images/cursos/microfone-hero.webp"
+    compact
+  />
+
+  <div class="container section">
+    <div class="prose evento-prose">
+      <Content />
+    </div>
+
+    {evento.data.galeria && evento.data.galeria.length > 0 && (
+      <div class="evento-galeria">
+        {evento.data.galeria.map((src, i) => (
+          <a href={src} class="evento-galeria__item" data-lightbox="galeria">
+            <img
+              src={src}
+              alt={`${evento.data.titulo} ${i + 1}`}
+              loading="lazy"
+            />
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .evento-prose {
+    margin-bottom: var(--space-xl);
+  }
+
+  .evento-prose :global(h2) {
+    display: none;
+  }
+
+  .evento-prose :global(p) {
+    color: var(--color-text-muted);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.7em;
+    margin-bottom: var(--space-md);
+  }
+
+  .evento-prose :global(strong) {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  /* Masonry gallery */
+  .evento-galeria {
+    columns: 4;
+    column-gap: 10px;
+  }
+
+  .evento-galeria__item {
+    display: block;
+    margin-bottom: 10px;
+    break-inside: avoid;
+    cursor: pointer;
+  }
+
+  .evento-galeria__item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.2s;
+  }
+
+  .evento-galeria__item:hover img {
+    opacity: 0.8;
+  }
+
+  @media (max-width: 1024px) {
+    .evento-galeria { columns: 3; }
+  }
+
+  @media (max-width: 768px) {
+    .evento-galeria { columns: 2; }
+  }
+
+</style>
+
+<style is:global>
+  .lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.92);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+
+  .lightbox-overlay.active {
+    display: flex;
+  }
+
+  .lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #fff;
+    font-size: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 20px;
+    line-height: 1;
+  }
+
+  .lightbox-prev { left: 10px; }
+  .lightbox-next { right: 10px; }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const links = document.querySelectorAll<HTMLAnchorElement>('[data-lightbox]');
+    if (!links.length) return;
+
+    const srcs = Array.from(links).map(a => a.href);
+    let current = 0;
+
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'lightbox-overlay';
+    overlay.innerHTML = `
+      <button class="lightbox-close" aria-label="Fechar">&times;</button>
+      <button class="lightbox-nav lightbox-prev" aria-label="Anterior">&#8249;</button>
+      <img src="" alt="" />
+      <button class="lightbox-nav lightbox-next" aria-label="Próxima">&#8250;</button>
+    `;
+    document.body.appendChild(overlay);
+
+    const img = overlay.querySelector('img')!;
+    const show = (i: number) => { current = i; img.src = srcs[current]; };
+
+    links.forEach((a, i) => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        show(i);
+        overlay.classList.add('active');
+      });
+    });
+
+    overlay.querySelector('.lightbox-close')!.addEventListener('click', () => overlay.classList.remove('active'));
+    overlay.querySelector('.lightbox-prev')!.addEventListener('click', (e) => { e.stopPropagation(); show((current - 1 + srcs.length) % srcs.length); });
+    overlay.querySelector('.lightbox-next')!.addEventListener('click', (e) => { e.stopPropagation(); show((current + 1) % srcs.length); });
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.classList.remove('active'); });
+
+    document.addEventListener('keydown', (e) => {
+      if (!overlay.classList.contains('active')) return;
+      if (e.key === 'Escape') overlay.classList.remove('active');
+      if (e.key === 'ArrowLeft') show((current - 1 + srcs.length) % srcs.length);
+      if (e.key === 'ArrowRight') show((current + 1) % srcs.length);
+    });
+  });
+</script>

@@ -1,0 +1,392 @@
+---
+interface Props {
+  variant: 'light' | 'dark';
+  slides: number;
+  tabs: { key: string; label: string }[];
+  id?: string;
+}
+
+const { variant, slides, tabs, id } = Astro.props;
+---
+
+<div class="tc" data-variant={variant} data-slides={slides} id={id}>
+  {tabs.map((tab, i) => (
+    <div class="tc-item">
+      <button
+        class:list={['tc-btn', `tc-btn--${variant}`, { active: i === 0 }]}
+        data-tab={tab.key}
+      >
+        {tab.label}
+      </button>
+      <div class:list={['tc-panel', { active: i === 0 }]} data-panel={tab.key}>
+        <div class="tc-track-wrap"><div class="tc-track"></div></div>
+        <button class="tc-arrow tc-arrow--prev" aria-label="Anterior" data-dir="-1">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="tc-arrow tc-arrow--next" aria-label="Próximo" data-dir="1">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  ))}
+  <div class="tc-slot" style="display:none;"><slot /></div>
+</div>
+
+<style>
+  /* ===== BASE ===== */
+  .tc {
+    text-align: center;
+  }
+
+  .tc-panel {
+    display: none;
+    position: relative;
+  }
+  .tc-panel.active {
+    display: block;
+  }
+
+  .tc-track-wrap {
+    overflow: hidden;
+  }
+
+  .tc-track {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    cursor: grab;
+    justify-content: center;
+    margin-bottom: -20px;
+    padding-bottom: 20px;
+  }
+
+  .tc-track.is-scrollable {
+    justify-content: flex-start;
+  }
+
+  .tc-track:active { cursor: grabbing; }
+  .tc-track::-webkit-scrollbar { display: none; height: 0; width: 0; }
+
+  .tc-track > :global(*) {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  /* Slide widths */
+  .tc[data-slides="3"] .tc-track > :global(*) {
+    width: calc(33.333% - 20px);
+  }
+
+  .tc[data-slides="4"] .tc-track > :global(*) {
+    width: calc(25% - 22.5px);
+  }
+
+  /* ===== ARROWS ===== */
+  .tc-arrow {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    background: rgba(30, 30, 30, 0.9);
+    border: none;
+    color: #fff;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transition: opacity 0.3s ease;
+  }
+
+  .tc-arrow:hover {
+    background: rgba(60, 60, 60, 0.95);
+  }
+
+  .tc-arrow.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .tc-arrow--prev { left: -10px; }
+  .tc-arrow--next { right: -10px; }
+
+  /* ===== BUTTONS SHARED ===== */
+  .tc-btn {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all var(--transition);
+    border-radius: 0;
+  }
+
+  /* ===== LIGHT VARIANT ===== */
+  .tc-btn--light {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-right: 1px solid #ddd;
+    color: var(--color-accent);
+    padding: 14px 35px;
+    white-space: nowrap;
+  }
+
+  .tc-btn--light:last-of-type {
+    border-right: none;
+  }
+
+  .tc-btn--light:hover,
+  .tc-btn--light.active {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  /* ===== DARK VARIANT ===== */
+  .tc-btn--dark {
+    background: #000000;
+    border: 1px solid var(--color-accent);
+    color: #FFFFFF;
+    padding: 10px 25px;
+  }
+
+  .tc-btn--dark:hover,
+  .tc-btn--dark.active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+  }
+
+  /* ===== DESKTOP (>767px) ===== */
+  @media (min-width: 768px) {
+    .tc {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .tc-item {
+      display: contents;
+    }
+
+    .tc-btn {
+      margin-bottom: var(--space-lg);
+    }
+
+    .tc[data-variant="light"] .tc-btn:first-of-type {
+      border-left: 1px solid #ddd;
+    }
+
+    .tc[data-variant="light"] {
+      border: none;
+    }
+
+    /* Light variant: wrap buttons in a border group */
+    .tc[data-variant="light"] .tc-btn {
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .tc-panel {
+      width: 100%;
+      order: 99;
+    }
+  }
+
+  /* ===== MOBILE (<=767px) — ACCORDION ===== */
+  @media (max-width: 767px) {
+    .tc {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .tc-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tc-btn {
+      width: 100%;
+      border-radius: 4px;
+      padding: 12px 20px;
+      white-space: normal;
+    }
+
+    .tc-btn--light {
+      border: none;
+      border-right: none;
+      background: #f0f0f0;
+      color: var(--color-accent);
+    }
+
+    .tc-btn--light.active,
+    .tc-btn--light:hover {
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    .tc-btn--dark {
+      border: none;
+      background: #111;
+      color: var(--color-accent);
+    }
+
+    .tc-btn--dark.active,
+    .tc-btn--dark:hover {
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    .tc-panel.active {
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+
+    .tc-track {
+      scroll-snap-type: x mandatory;
+      gap: 0;
+      justify-content: flex-start;
+    }
+
+    .tc[data-slides="3"] .tc-track > :global(*),
+    .tc[data-slides="4"] .tc-track > :global(*) {
+      width: 100%;
+      min-width: 100%;
+      scroll-snap-align: center;
+    }
+
+    .tc-arrow--prev { left: 4px; }
+    .tc-arrow--next { right: 4px; }
+  }
+
+  /* ===== TABLET ===== */
+  @media (max-width: 1024px) and (min-width: 768px) {
+    .tc[data-slides="3"] .tc-track > :global(*),
+    .tc[data-slides="4"] .tc-track > :global(*) {
+      width: calc(50% - 15px);
+    }
+
+    .tc-arrow--prev { left: 8px; }
+    .tc-arrow--next { right: 8px; }
+  }
+</style>
+
+<script>
+  function updateArrows(panel: HTMLElement) {
+    const track = panel.querySelector('.tc-track') as HTMLElement;
+    if (!track) return;
+    const prev = panel.querySelector('.tc-arrow--prev');
+    const next = panel.querySelector('.tc-arrow--next');
+    const canScroll = track.scrollWidth > track.clientWidth + 5;
+    track.classList.toggle('is-scrollable', canScroll);
+    if (!canScroll) {
+      prev?.classList.add('hidden');
+      next?.classList.add('hidden');
+    } else {
+      const atStart = track.scrollLeft <= 5;
+      const atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 5;
+      prev?.classList.toggle('hidden', atStart);
+      next?.classList.toggle('hidden', atEnd);
+    }
+  }
+
+  document.querySelectorAll('.tc').forEach(tc => {
+    // Distribute slot content into panels
+    const slotContainer = tc.querySelector('.tc-slot');
+    if (slotContainer) {
+      slotContainer.querySelectorAll(':scope > [data-tab-content]').forEach(el => {
+        const key = (el as HTMLElement).dataset.tabContent;
+        const track = tc.querySelector(`.tc-panel[data-panel="${key}"] .tc-track`);
+        if (track) {
+          while (el.firstChild) track.appendChild(el.firstChild);
+        }
+      });
+      slotContainer.remove();
+    }
+
+    const btns = tc.querySelectorAll('.tc-btn');
+    const panels = tc.querySelectorAll('.tc-panel');
+
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = (btn as HTMLElement).dataset.tab;
+        btns.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        const panel = tc.querySelector(`[data-panel="${tab}"]`) as HTMLElement;
+        panel?.classList.add('active');
+        if (panel) updateArrows(panel);
+      });
+    });
+
+    panels.forEach(panel => {
+      const track = panel.querySelector('.tc-track') as HTMLElement;
+      if (!track) return;
+
+      updateArrows(panel as HTMLElement);
+      track.addEventListener('scroll', () => updateArrows(panel as HTMLElement));
+      window.addEventListener('resize', () => updateArrows(panel as HTMLElement));
+
+      panel.querySelectorAll('.tc-arrow').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const dir = Number((btn as HTMLElement).dataset.dir);
+          const firstChild = track.firstElementChild as HTMLElement;
+          if (!firstChild) return;
+          const gap = parseInt(getComputedStyle(track).gap) || 30;
+          track.scrollBy({ left: dir * (firstChild.offsetWidth + gap), behavior: 'smooth' });
+        });
+      });
+
+      let isDown = false;
+      let startX: number;
+      let scrollLeft: number;
+      let hasDragged = false;
+
+      track.addEventListener('mousedown', (e) => {
+        isDown = true;
+        hasDragged = false;
+        track.style.scrollBehavior = 'auto';
+        startX = e.pageX;
+        scrollLeft = track.scrollLeft;
+      });
+
+      track.addEventListener('mouseleave', () => {
+        isDown = false;
+        track.style.scrollBehavior = 'smooth';
+      });
+
+      track.addEventListener('mouseup', () => {
+        isDown = false;
+        track.style.scrollBehavior = 'smooth';
+      });
+
+      track.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const walk = e.pageX - startX;
+        if (Math.abs(walk) > 5) hasDragged = true;
+        track.scrollLeft = scrollLeft - walk;
+      });
+
+      track.addEventListener('click', (e) => {
+        if (hasDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+          hasDragged = false;
+        }
+      }, true);
+    });
+  });
+</script>

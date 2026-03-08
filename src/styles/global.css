@@ -1,0 +1,547 @@
+:root {
+  /* Colors - exact from Elementor kit (site-settings.json) */
+  --color-bg: #000000;
+  --color-bg-light: #FFFFFF;
+  --color-text: #FFFFFF;
+  --color-text-dark: #000000;
+  --color-text-muted: #CCCCCC;
+  --color-text-body: #333333;
+  --color-text-subtle: #666666;
+  --color-text-light: #CCCCCC;
+  --color-accent: #FF6530;
+  --color-accent-hover: #BF4C24;
+  --color-accent-light: #FF8459;
+  --color-accent-dark: #803318;
+  --color-border: #222222;
+
+  /* Fonts */
+  --font-heading: 'Darker Grotesque', sans-serif;
+  --font-body: 'Poppins', sans-serif;
+
+  /* Spacing - matching Elementor 80px section padding */
+  --section-padding: 80px;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 5rem;
+  --space-2xl: 8rem;
+
+  --container-max: 1200px;
+  --container-padding: clamp(10px, 3vw, 2rem);
+
+  /* Typography scale — from WP Elementor site-settings.json */
+  --text-sm: 15px;
+  --text-base: 17px;
+  --text-lg: 19px;
+  --text-xl: 22px;
+
+  --radius-sm: 8px;
+  --radius-md: 15px;
+  --transition: 0.3s ease;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.7em;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==============================================
+   Typography — exact WP Elementor kit values
+   Source: wp-export/site-settings.json
+   ============================================== */
+
+/* Heading base — Darker Grotesque for H1-H3 */
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  line-height: 1em;
+  letter-spacing: -0.04em;
+}
+
+/* H1: 70px desktop → 40px mobile */
+h1 {
+  font-size: 70px;
+  font-weight: 800;
+}
+
+/* H2: 58px desktop → 42px mobile */
+h2 {
+  font-size: 58px;
+  font-weight: 700;
+}
+
+/* H3: 35px desktop → 35px mobile */
+h3 {
+  font-size: 35px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2em;
+}
+
+/* H4: Poppins 22px desktop → 20px mobile, light weight */
+h4 {
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1.7em;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* H5: Poppins 19px desktop → 18px mobile */
+h5 {
+  font-family: var(--font-body);
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.7em;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* H6: Poppins 18px desktop → 16px mobile, section label style */
+h6 {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+}
+
+/* Mobile typography — matching WP Elementor responsive */
+@media (max-width: 767px) {
+  :root {
+    --section-padding: 48px;
+  }
+  body { font-size: 15px; }
+  h1 { font-size: 40px; }
+  h2 { font-size: 42px; }
+  h4 { font-size: 20px; }
+  h5 { font-size: 18px; }
+  h6 { font-size: 16px; }
+}
+
+/* --- Typographic utility classes (WP custom styles) --- */
+
+/* "Big Body" — Poppins 22px bold, used for intro sentences (H4 with bold weight) */
+.text-intro {
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.36em;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+@media (max-width: 767px) {
+  .text-intro { font-size: 20px; }
+}
+
+/* "H2.5" — Darker Grotesque 45px, for mid-size heading */
+.text-h2half {
+  font-family: var(--font-heading);
+  font-size: 45px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1em;
+  letter-spacing: -0.04em;
+}
+
+@media (max-width: 767px) {
+  .text-h2half { font-size: 40px; }
+}
+
+/* Section label H6 always accent colored */
+.section-label-tag {
+  color: var(--color-accent);
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-inline: var(--container-padding);
+}
+
+/* Section */
+.section {
+  padding: var(--section-padding) 0;
+}
+
+/* Light section (white bg, dark text) */
+.section--light {
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
+}
+
+.section--light h1,
+.section--light h2,
+.section--light h3 {
+  color: var(--color-text-dark);
+}
+
+.section--light h4 {
+  color: var(--color-text-subtle);
+}
+
+.section--light p {
+  color: var(--color-text-body);
+}
+
+.section--light h6 {
+  color: var(--color-accent);
+}
+
+/* Hero */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: var(--hero-bg, none) center/cover no-repeat;
+  padding: 80px 0;
+}
+
+@media (max-width: 767px) {
+  .hero {
+    min-height: 60vh;
+    padding: 48px 0;
+  }
+
+  .hero--compact {
+    min-height: 36vh;
+  }
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  z-index: 0;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  text-align: left;
+  max-width: var(--container-max);
+  width: 100%;
+  margin: 0 auto;
+  padding-inline: var(--container-padding);
+}
+
+.hero__title {
+  margin-bottom: var(--space-md);
+}
+
+.hero__subtitles {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-md);
+}
+
+.hero__subtitle {
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.hero--compact {
+  min-height: 46vh;
+  text-align: center;
+}
+
+.hero--compact .hero__content {
+  text-align: center;
+}
+
+.hero--compact .hero__title {
+  margin-inline: auto;
+}
+
+.hero--compact .hero__subtitles {
+  justify-content: center;
+}
+
+.hero--compact::after {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hero--compact .hero__content {
+  text-align: center;
+}
+
+.hero--compact .hero__subtitles {
+  justify-content: center;
+}
+
+/* Buttons - exact WP values */
+.btn {
+  display: inline-block;
+  min-height: 40px;
+  padding: 12px 24px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 0;
+  transition: all var(--transition);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.btn--primary {
+  background: var(--color-accent);
+  color: var(--color-bg-light);
+  border: none;
+}
+
+.btn--primary:hover {
+  background: var(--color-accent-hover);
+  color: var(--color-bg-light);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+}
+
+.btn--outline:hover {
+  background: var(--color-accent);
+  color: var(--color-bg-light);
+}
+
+/* Cards */
+.card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform var(--transition), border-color var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+}
+
+.card__image {
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  width: 100%;
+}
+
+.card__image--square {
+  aspect-ratio: 1;
+}
+
+.card__body {
+  padding: var(--space-md);
+}
+
+.card__title {
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1.7em;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-bottom: var(--space-xs);
+}
+
+.card__text {
+  color: var(--color-text-muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.card__tags {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+  margin-top: var(--space-sm);
+}
+
+.tag {
+  font-size: 13px;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  color: var(--color-text-muted);
+}
+
+.tag--link {
+  transition: all var(--transition);
+}
+
+.tag--link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.grid--2 {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr));
+}
+
+.grid--3 {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+}
+
+.grid--4 {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+}
+
+/* Gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--space-xs);
+}
+
+.gallery img {
+  border-radius: var(--radius-sm);
+  aspect-ratio: 1;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* Page header (for listing pages) */
+.page-header {
+  text-align: center;
+  padding: var(--section-padding) var(--container-padding) var(--space-lg);
+}
+
+.page-header__title {
+  margin-bottom: var(--space-sm);
+}
+
+.page-header__subtitle {
+  color: var(--color-text-muted);
+  font-weight: 300;
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+/* Content prose (for markdown rendered content) */
+.prose {
+  margin-inline: auto;
+}
+
+.prose h2 {
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-sm);
+  color: var(--color-accent);
+}
+
+.prose h3 {
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xs);
+}
+
+.prose p {
+  margin-bottom: var(--space-sm);
+  color: var(--color-text-muted);
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding-left: var(--space-md);
+  margin-block: var(--space-md);
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+/* Two-column section */
+.split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .split {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.split--reverse > :first-child {
+  order: 2;
+}
+
+@media (min-width: 768px) {
+  .split--reverse > :first-child {
+    order: 0;
+  }
+}
+
+/* Divider */
+.divider {
+  width: 60px;
+  height: 3px;
+  background: var(--color-accent);
+  border: none;
+  margin-block: var(--space-md);
+}
+
+/* Visually hidden (for accessibility) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

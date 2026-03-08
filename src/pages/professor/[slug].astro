@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Button from '../../components/Button.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const professores = await getCollection('professores');
+  return professores.map(prof => ({
+    params: { slug: prof.data.slug },
+    props: { prof },
+  }));
+}
+
+const { prof } = Astro.props;
+const { Content } = await render(prof);
+
+// Build modalidade → curso slug map for linking
+const cursos = await getCollection('cursos');
+const modalidadeAliases: Record<string, string> = {
+  'musicalização baby': 'musicalização infantil',
+};
+
+function modalidadeToSlug(mod: string): string | null {
+  const key = mod.toLowerCase();
+  const resolved = modalidadeAliases[key] || key;
+  // Try exact titulo match first
+  const match = cursos.find(c => c.data.titulo.toLowerCase() === resolved);
+  if (match) return match.data.slug;
+  // Try matching the part after ">" (e.g., "Teclas>Piano" → "Piano")
+  const parts = mod.split('>');
+  const name = parts[parts.length - 1].trim().toLowerCase();
+  const resolvedName = modalidadeAliases[name] || name;
+  const partMatch = cursos.find(c => c.data.titulo.toLowerCase() === resolvedName);
+  if (partMatch) return partMatch.data.slug;
+  return null;
+}
+
+// Extract display name from modalidade (strip category prefix)
+function modalidadeLabel(mod: string): string {
+  const parts = mod.split('>');
+  return parts[parts.length - 1].trim();
+}
+---
+
+<BaseLayout
+  title={prof.data.nome}
+  description={prof.data.excerpt || `${prof.data.nome} - Professor(a) na Anacã Música`}
+  image={prof.data.foto}
+>
+  <Hero
+    title="A história por trás da música."
+    subtitles={['Conheça o professor']}
+    backgroundImage="/images/hero-professores.webp"
+    compact
+  />
+
+  <div class="container section">
+    <div class="prof-layout">
+      <div class="prof-layout__photo">
+        {prof.data.foto && (
+          <img
+            src={prof.data.foto}
+            alt={prof.data.nome}
+            width="800"
+            height="800"
+            loading="lazy"
+          />
+        )}
+      </div>
+      <div class="prof-layout__info">
+        <h2 class="prof-layout__name">{prof.data.nome}</h2>
+
+        {prof.data.excerpt && (
+          <h4 class="prof-layout__excerpt">{prof.data.excerpt}</h4>
+        )}
+
+        <div class="prose prof-layout__bio">
+          <Content />
+        </div>
+
+        {prof.data.modalidades.length > 0 && (
+          <div class="prof-layout__modalidades">
+            {prof.data.modalidades.map(mod => {
+              const slug = modalidadeToSlug(mod);
+              const label = modalidadeLabel(mod);
+              return slug
+                ? <a href={`/curso/${slug}/`} class="prof-layout__mod">{label}</a>
+                : <span class="prof-layout__mod">{label}</span>;
+            })}
+          </div>
+        )}
+
+        <div class="prof-layout__cta">
+          <Button />
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .prof-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    align-items: start;
+  }
+
+  @media (min-width: 768px) {
+    .prof-layout {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .prof-layout__photo img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+  }
+
+  .prof-layout__name {
+    margin-bottom: var(--space-sm);
+  }
+
+  .prof-layout__excerpt {
+    margin-bottom: var(--space-md);
+  }
+
+  .prof-layout__bio {
+    margin-bottom: var(--space-lg);
+  }
+
+  .prof-layout__modalidades {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .prof-layout__mod {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text);
+    text-decoration: none;
+    padding-bottom: var(--space-xs);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .prof-layout__mod:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .prof-layout__cta {
+    margin-top: var(--space-md);
+  }
+</style>

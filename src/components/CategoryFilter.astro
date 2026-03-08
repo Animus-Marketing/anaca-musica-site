@@ -1,0 +1,45 @@
+---
+import { categorias } from '../lib/categorias';
+
+interface Props {
+  active?: string;
+}
+
+const { active = 'todos' } = Astro.props;
+---
+
+<nav class="category-filter" aria-label="Filtrar por categoria">
+  <button
+    class:list={['category-filter__btn', { active: active === 'todos' }]}
+    data-category="todos"
+  >Todos</button>
+  {Object.entries(categorias).map(([key, cat]) => (
+    <button
+      class:list={['category-filter__btn', { active: active === key }]}
+      data-category={key}
+    >{cat.label}</button>
+  ))}
+</nav>
+
+<script>
+  document.querySelectorAll('.category-filter').forEach(nav => {
+    const buttons = nav.querySelectorAll('[data-category]');
+    const items = document.querySelectorAll('[data-cat]');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = (btn as HTMLElement).dataset.category;
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        items.forEach(item => {
+          const el = item as HTMLElement;
+          if (cat === 'todos' || el.dataset.cat?.includes(cat!)) {
+            el.style.display = '';
+          } else {
+            el.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>

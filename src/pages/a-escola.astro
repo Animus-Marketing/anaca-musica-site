@@ -1,0 +1,726 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Button from '../components/Button.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import TabsCarousel from '../components/TabsCarousel.astro';
+import MarqueeGallery from '../components/MarqueeGallery.astro';
+import { getCollection } from 'astro:content';
+import { categorias } from '../lib/categorias';
+
+const professores = (await getCollection('professores'))
+  .filter(p => p.data.ativo)
+  .sort((a, b) => a.data.ordem - b.data.ordem);
+
+const profCats = [
+  { key: 'todos', label: 'Todos', profs: professores },
+  ...Object.entries(categorias).map(([key, cat]) => ({
+    key,
+    label: cat.label,
+    profs: professores.filter(p => p.data.categorias.includes(key as any)),
+  })).filter(t => t.profs.length > 0),
+];
+
+const porqueItems = [
+  { num: '01', title: 'AULAS PRÁTICAS', desc: 'Comece a tocar desde a primeira aula e divirta-se enquanto aprende.' },
+  { num: '02', title: 'PROFESSORES ESPECIALIZADOS', desc: 'Aprenda com profissionais apaixonados e experientes.' },
+  { num: '03', title: 'VARIEDADE DE CURSOS', desc: 'Oferecemos opções para todos os estilos, ritmos e níveis.' },
+  { num: '04', title: 'AMBIENTE INSPIRADOR', desc: 'Um espaço acolhedor que promove o aprendizado e a criatividade.' },
+  { num: '05', title: 'AULAS PARA TODAS AS IDADES', desc: 'De crianças a adultos, todos são bem-vindos para aprender música.' },
+];
+---
+
+<BaseLayout title="A Escola" description="Conheça a Anacã Música, escola de música em São Paulo. Aulas personalizadas para todas as idades desde 2023.">
+  <!-- 1. Hero -->
+  <Hero
+    title="Seja bem vindo ao Anacã Música"
+    subtitles={["A Escola"]}
+    backgroundImage="/images/escola-hero.webp"
+    compact
+  />
+
+  <!-- 2. Quem Somos -->
+  <section class="section section--light quem-somos-section">
+    <div class="container">
+      <div class="quem-somos-layout">
+        <div class="quem-somos-content">
+          <SectionLabel
+            label="QUEM SOMOS"
+            title="Aulas de música de qualidade"
+            center={false}
+          />
+          <h4>Nossa escola reflete a paixão pela arte e pela educação musical.</h4>
+          <p>
+            O Anacã Música, fundado em 2023 e integrado ao renomado Estúdio de Dança Anacã,
+            nasceu com o propósito de tornar o aprendizado musical uma experiência divertida,
+            acolhedora e transformadora. Aqui, os alunos começam a tocar desde a primeira aula,
+            vivendo a música de forma prática e envolvente.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Onde o Som Ganha Vida -->
+  <section class="section som-section">
+    <div class="container som-container">
+      <div class="som-text">
+        <h2 class="som-title">Onde o som ganha vida</h2>
+        <h4>Um espaço pensado para transformar cada aula em uma experiência única.</h4>
+        <p>
+          Oferecemos 11 cursos livres – entre eles violão, piano, guitarra, bateria, canto
+          e musicalização infantil – que atendem todas as idades e níveis, do iniciante ao
+          avançado. Nosso compromisso é inspirar e capacitar cada aluno a explorar sua
+          criatividade, desenvolvendo técnica e expressão musical em seu próprio ritmo.
+        </p>
+        <p>
+          Com uma infraestrutura de 14 salas multiuso e professores experientes e apaixonados
+          pela arte de ensinar, garantimos um ensino de qualidade em um ambiente que valoriza
+          o talento individual e o prazer de aprender.
+        </p>
+      </div>
+      <div class="cursos-list">
+        <span class="curso-label">Violão</span>
+        <span class="curso-label">Piano</span>
+        <span class="curso-label">Canto</span>
+        <span class="curso-label">Bateria</span>
+        <span class="curso-label">Guitarra</span>
+        <span class="curso-label">Musicalização Infantil</span>
+        <span class="curso-label">E muito mais</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Nossa Direção -->
+  <section class="section section--light direcao-section">
+    <div class="container">
+      <SectionLabel
+        label="NOSSA DIREÇÃO"
+        title="Quem conduz o ritmo do Anacã."
+        center={false}
+      />
+
+      <!-- Álvaro Carolei -->
+      <div class="split diretor">
+        <div class="diretor__foto">
+          <img
+            src="/images/alvaro.webp"
+            alt="Álvaro Carolei — Sócio-Diretor do Anacã Música"
+            width="400"
+            height="570"
+          />
+        </div>
+        <div class="diretor__bio">
+          <h4 class="text-intro">O Anacã Música é liderado pelo Sócio-Diretor Álvaro Carolei.</h4>
+          <p>
+            Músico profissional formado pela FMU (FAAM), com especialização em Técnica Vocal
+            e Produção Musical. Com 26 anos de experiência como professor e músico, Álvaro
+            atuou em algumas das principais escolas de música de São Paulo, formando artistas
+            que hoje fazem parte do cenário musical brasileiro. Também participou de projetos
+            socioculturais relevantes, como os da FUNSAI, levando música e oportunidades a
+            diversas comunidades.
+          </p>
+        </div>
+      </div>
+
+      <!-- Ana Maria Diniz -->
+      <div class="split split--reverse diretor">
+        <div class="diretor__bio">
+          <h4 class="text-intro">Ao lado de Ana Maria Diniz, também sócia do Anacã Música e fundadora do Estúdio de Dança Anacã.</h4>
+          <p>
+            É empresária, educadora e cofundadora do Estúdio Anacã, criado com o propósito
+            de unir arte, movimento e bem-estar. Apaixonada por música e canto, ela idealizou
+            a expansão do espaço com o Anacã Música, dedicado ao ensino de instrumentos,
+            canto e musicalização infantil. Ana acredita profundamente no poder transformador
+            da arte e da educação — pilares que também inspiram sua atuação em iniciativas
+            como o Instituto Península e o POLVO LAB, que promovem o desenvolvimento humano
+            e social por meio da criatividade e do conhecimento. Para ela, a arte é um
+            instrumento de autodescoberta, expressão e alegria, capaz de conectar corpo,
+            mente e alma.
+          </p>
+        </div>
+        <div class="diretor__foto">
+          <img
+            src="/images/ana.webp"
+            alt="Ana Maria Diniz — Sócia do Anacã Música"
+            width="400"
+            height="570"
+          />
+        </div>
+      </div>
+
+      <!-- Helô Gouvêa -->
+      <div class="split diretor">
+        <div class="diretor__foto">
+          <img
+            src="/images/helo.webp"
+            alt="Helô Gouvêa — Sócia do Anacã Música"
+            width="400"
+            height="570"
+          />
+        </div>
+        <div class="diretor__bio">
+          <h4 class="text-intro">Junto da Helô Gouvêa, também sócia e uma das fundadoras do Estúdio de Dança Anacã.</h4>
+          <p>
+            É bailarina, professora e uma das fundadoras do Estúdio de Dança Anacã,
+            reconhecida por sua trajetória dedicada à dança e ao empoderamento por meio
+            do movimento. Ao longo dos anos, desenvolveu uma metodologia que une técnica,
+            presença e emoção, ajudando especialmente mulheres a se reconectarem com o
+            próprio corpo e a confiança. Criadora do método Walk Dance, acredita que dançar
+            é mais do que se mover — é uma forma de viver com leveza e autenticidade. Hoje,
+            também é sócia do Anacã Música, reforçando sua crença de que a arte é um todo
+            integrado, onde corpo e som se unem para transformar e inspirar.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Por que Escolher o Anacã Música -->
+  <section class="section porque-section">
+    <div class="container">
+      <SectionLabel
+        label="PORQUE"
+        title="Por que Escolher o Anacã Música?"
+        center={false}
+      />
+      <div class="porque-grid">
+        {porqueItems.map(item => (
+          <div class="porque-item">
+            <span class="porque-item__num">{item.num}</span>
+            <h6 class="porque-item__title">{item.title}</h6>
+            <p class="porque-item__desc">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Nossa Estrutura (marquee gallery) -->
+  <section class="section" style="padding: 100px 0; overflow: hidden;">
+    <div class="container">
+      <div class="estrutura-header">
+        <SectionLabel
+          label="NOSSA ESTRUTURA"
+          title="Descubra o Anacã"
+          center={false}
+        />
+        <p class="estrutura-intro">
+          O Anacã Música foi pensado para que cada aluno se sinta em casa enquanto descobre
+          e desenvolve sua relação com a música. Nossa escola conta com 14 salas multiuso e
+          uma programação com mais de 11 cursos livres, atendendo todas as idades e níveis
+          de experiência.
+        </p>
+      </div>
+    </div>
+    <MarqueeGallery />
+  </section>
+
+  <!-- 7. Nosso Time (professor carousel with tabs) -->
+  <section class="section nosso-time-section">
+    <div class="container">
+      <div class="section-label" style="margin-bottom: var(--space-lg);">
+        <h6 style="color: var(--color-accent); margin-bottom: var(--space-xs);">NOSSO TIME</h6>
+        <h2 style="max-width: 550px; margin-bottom: var(--space-sm);">Conheça nosso time de professores</h2>
+      </div>
+
+      <div style="margin-top: var(--space-lg);">
+        <TabsCarousel variant="dark" slides={4} tabs={profCats.map(t => ({ key: t.key, label: t.label }))} id="profs-tabs">
+          {profCats.map(cat => (
+            <div data-tab-content={cat.key}>
+              {cat.profs.map(prof => (
+                <a href={`/professor/${prof.data.slug}/`} class="prof-card">
+                  {prof.data.foto && (
+                    <img src={prof.data.foto} alt={prof.data.nome} class="prof-card__img" loading="lazy" width="300" height="300" />
+                  )}
+                  <div class="prof-card__body">
+                    <h4 class="prof-card__name">{prof.data.nome}</h4>
+                    {prof.data.excerpt && (
+                      <p class="prof-card__bio">{prof.data.excerpt}</p>
+                    )}
+                    <span class="prof-card__link">Saiba Mais</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          ))}
+        </TabsCarousel>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Salas (icon boxes) -->
+  <section class="section salas-section">
+    <img src="/images/vector-2.png" alt="" class="salas-vector salas-vector--left" aria-hidden="true" />
+    <img src="/images/vector-3.png" alt="" class="salas-vector salas-vector--right" aria-hidden="true" />
+    <div class="container">
+      <div class="grid grid--3" style="gap: var(--space-lg);">
+        <div class="icon-box">
+          <div class="icon-box__icon">
+            <img src="/images/icons/sala-baby.svg" alt="" width="48" height="48" />
+          </div>
+          <h3 class="icon-box__title">Sala Baby:</h3>
+          <p class="icon-box__text">preparada especialmente para acolher bebês a partir de 6 meses em suas primeiras vivências musicais em grupo.</p>
+        </div>
+        <div class="icon-box">
+          <div class="icon-box__icon">
+            <img src="/images/icons/sala-kids.svg" alt="" width="48" height="48" />
+          </div>
+          <h3 class="icon-box__title">Salas de Musicalização Kids:</h3>
+          <p class="icon-box__text">4 espaços equipados com instrumentos e recursos didáticos que tornam o aprendizado das crianças lúdico e envolvente.</p>
+        </div>
+        <div class="icon-box">
+          <div class="icon-box__icon">
+            <img src="/images/icons/sala-bateria.svg" alt="" width="48" height="48" />
+          </div>
+          <h3 class="icon-box__title">Salas de Bateria:</h3>
+          <p class="icon-box__text">3 ambientes dedicados exclusivamente ao estudo do instrumento, com isolamento acústico e equipamentos de alta qualidade.</p>
+        </div>
+        <div class="icon-box">
+          <div class="icon-box__icon">
+            <img src="/images/icons/sala-multiuso.svg" alt="" width="48" height="48" />
+          </div>
+          <h3 class="icon-box__title">Salas Multiuso:</h3>
+          <p class="icon-box__text">flexíveis e versáteis, adaptam-se a diferentes instrumentos e formações. Algumas contam com luz natural, proporcionando bem-estar e conforto durante as aulas.</p>
+        </div>
+        <div class="icon-box">
+          <div class="icon-box__icon">
+            <img src="/images/icons/sala-studio.svg" alt="" width="48" height="48" />
+          </div>
+          <h3 class="icon-box__title">Studio Anacã Música:</h3>
+          <p class="icon-box__text">sala exclusiva para ensaios de banda, equipada para oferecer a experiência completa da prática em grupo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Nossa Localização -->
+  <section class="section localizacao-section">
+    <div class="container">
+      <div class="localizacao-split">
+        <div class="mapa-wrapper">
+          <iframe
+            src="https://maps.google.com/maps?q=Anac%C3%A3+M%C3%BAsica&t=m&z=15&output=embed&iwloc=near"
+            title="Anacã Música"
+            aria-label="Localização do Anacã Música"
+            loading="lazy"
+            style="border:0; width:100%; height:100%;"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="localizacao-content">
+          <div class="section-label" style="margin-bottom: var(--space-lg);">
+            <h6 style="color: var(--color-text); margin-bottom: var(--space-xs);">NOSSA LOCALIZAÇÃO</h6>
+            <h2 style="margin-bottom: var(--space-sm);">A música é ainda melhor ao vivo.</h2>
+          </div>
+          <h4>Experimente o som da Anacã bem de perto.</h4>
+          <p>
+            Venha conhecer nosso estúdio e participar de uma aula experimental. Aqui, cada
+            visita é um convite pra se conectar com a música de um jeito novo e inspirador.
+          </p>
+          <p class="localizacao-endereco">
+            <img src="/images/icons/local.svg" alt="" width="20" height="20" style="display:inline-block;vertical-align:middle;margin-right:6px;" />
+            Av. Brasil, 649 – Jardim Paulista, São Paulo
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero title centering fix */
+  :global(.hero--compact .hero__title) {
+    margin-inline: auto;
+  }
+
+  /* Quem Somos (light section with bg image) */
+  .quem-somos-section {
+    background-image: url('/images/quem-somos-bg.webp');
+    background-position: bottom center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+  }
+
+  .quem-somos-layout {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .quem-somos-content {
+    text-align: left;
+    max-width: 550px;
+  }
+
+  .quem-somos-content h4 {
+    margin-bottom: var(--space-sm);
+  }
+
+  .quem-somos-content p {
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .quem-somos-section {
+      background-image: url('/images/quem-somos-bg-mob.webp');
+      background-position: bottom center;
+      min-height: auto;
+      padding-bottom: 400px;
+    }
+
+    .quem-somos-layout {
+      justify-content: center;
+    }
+
+    .quem-somos-content {
+      max-width: 100%;
+    }
+  }
+
+  /* Onde o Som Ganha Vida */
+  .som-section {
+    background-image: url('/images/nossa-estrutura-bg.webp');
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    min-height: 700px;
+  }
+
+  .som-container {
+    position: relative;
+  }
+
+  .som-title {
+    margin-bottom: var(--space-md);
+  }
+
+  .som-text {
+    max-width: 420px;
+  }
+
+  .som-text h4 {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-sm);
+  }
+
+  .som-text p {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-sm);
+    line-height: 1.8;
+  }
+
+  .cursos-list {
+    position: absolute;
+    top: 140px;
+    right: 0;
+    max-width: 380px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-lg);
+  }
+
+  .curso-label {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text);
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--color-text);
+  }
+
+  @media (max-width: 768px) {
+    .som-section {
+      background-size: 70%;
+      background-position: bottom right;
+      min-height: auto;
+      padding-bottom: 200px;
+    }
+
+    .som-text {
+      max-width: 100%;
+    }
+
+    .cursos-list {
+      position: static;
+      max-width: 100%;
+      margin-top: var(--space-md);
+    }
+  }
+
+  /* Direção */
+  .direcao-section {
+    overflow: hidden;
+  }
+
+  .diretor {
+    margin-bottom: var(--space-xl);
+  }
+
+  .diretor:last-child {
+    margin-bottom: 0;
+  }
+
+  .diretor__foto img {
+    border-radius: var(--radius-md);
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 7/10;
+  }
+
+  .diretor__foto {
+    display: flex;
+    justify-content: center;
+  }
+
+  .diretor__bio h4 {
+    margin-bottom: var(--space-md);
+  }
+
+  .diretor__bio p {
+    color: var(--color-text-body);
+    margin-bottom: var(--space-sm);
+    line-height: 1.8;
+  }
+
+  /* Por que Escolher */
+  .porque-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .porque-section {
+    background: #0a0a0a;
+  }
+
+  .porque-item__num {
+    font-family: var(--font-heading);
+    font-size: clamp(48px, 5vw, 72px);
+    font-weight: 800;
+    color: var(--color-accent);
+    line-height: 1;
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  /* H6 titles in accent orange — inherits global H6 sizing */
+  .porque-item__title {
+    margin-bottom: var(--space-xs);
+    color: var(--color-accent);
+  }
+
+  .porque-item__desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 1024px) {
+    .porque-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .porque-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Estrutura header — split: title left, text right */
+  .estrutura-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    align-items: end;
+    margin-bottom: var(--space-lg);
+  }
+
+  .estrutura-intro {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .estrutura-header {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Professor cards */
+  .prof-card {
+    display: block;
+    color: inherit;
+    transition: transform var(--transition);
+  }
+
+  .prof-card:hover {
+    transform: translateY(-4px);
+    color: inherit;
+  }
+
+  .prof-card__img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  .prof-card__body {
+    padding: 10px 0;
+  }
+
+  .prof-card__name {
+    font-family: var(--font-body);
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.7em;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--color-text);
+    margin-bottom: 4px;
+  }
+
+  .prof-card__bio {
+    color: #CCCCCC;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: var(--space-sm);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .prof-card__link {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text);
+    border: 1px solid var(--color-accent);
+    padding: 8px 20px;
+    transition: all var(--transition);
+  }
+
+  .prof-card:hover .prof-card__link {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  /* Salas section with decorative vectors */
+  .salas-section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .salas-vector {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+    height: auto;
+    max-width: 20vh;
+  }
+
+  .salas-vector--left {
+    right: 0;
+    top: -80px;
+  }
+
+  .salas-vector--right {
+    left: 0;
+    bottom: 0;
+  }
+
+  .salas-section .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 768px) {
+    .salas-vector {
+      display: none;
+    }
+  }
+
+  /* Icon boxes */
+  .icon-box {
+    text-align: center;
+  }
+
+  .icon-box__icon {
+    margin-bottom: var(--space-sm);
+    display: flex;
+    justify-content: center;
+  }
+
+  .icon-box__title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: var(--space-xs);
+    color: var(--color-accent);
+  }
+
+  .icon-box__text {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.7;
+  }
+
+  /* Localização — split inside container */
+  .localizacao-section {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .localizacao-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  .localizacao-content h4 {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-sm);
+  }
+
+  .localizacao-content p {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  .localizacao-endereco {
+    color: var(--color-text) !important;
+    font-weight: 400;
+    margin-top: var(--space-sm);
+  }
+
+  .mapa-wrapper {
+    width: 100%;
+    height: 60vh;
+    overflow: hidden;
+  }
+
+  @media (max-width: 768px) {
+    .localizacao-split {
+      grid-template-columns: 1fr;
+    }
+
+    .mapa-wrapper {
+      height: 350px;
+    }
+  }
+</style>
+

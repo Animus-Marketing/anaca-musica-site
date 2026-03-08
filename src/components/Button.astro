@@ -1,0 +1,22 @@
+---
+import { whatsappUrl } from '../lib/categorias';
+
+interface Props {
+  text?: string;
+  href?: string;
+  variant?: 'primary' | 'outline';
+}
+
+const {
+  text = 'Marcar uma aula',
+  href = whatsappUrl,
+  variant = 'primary',
+} = Astro.props;
+---
+
+<a
+  class:list={['btn', `btn--${variant}`]}
+  href={href}
+  target={href.startsWith('http') ? '_blank' : undefined}
+  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+>{text}</a>

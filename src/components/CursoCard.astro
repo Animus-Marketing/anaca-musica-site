@@ -1,0 +1,86 @@
+---
+interface Props {
+  titulo: string;
+  slug: string;
+  descricao_curta: string;
+  categoria: string;
+  imagem_card?: string;
+}
+
+const { titulo, slug, descricao_curta, categoria, imagem_card } = Astro.props;
+---
+
+<a href={`/curso/${slug}/`} class="curso-card" data-cat={categoria}>
+  {imagem_card && (
+    <div class="curso-card__img-wrap">
+      <img
+        src={imagem_card}
+        alt={titulo}
+        class="curso-card__img"
+        loading="lazy"
+        width="400"
+        height="300"
+        draggable="false"
+      />
+    </div>
+  )}
+  <div class="curso-card__body">
+    <h3 class="curso-card__title">{titulo}</h3>
+    <p class="curso-card__text">{descricao_curta}</p>
+  </div>
+</a>
+
+<style>
+  .curso-card {
+    display: block;
+    color: inherit;
+    width: 100%;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .curso-card:hover {
+    color: inherit;
+  }
+
+  .curso-card__img-wrap {
+    position: relative;
+  }
+
+  .curso-card__img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    -webkit-mask-image: url('/images/mask-cursos.webp');
+    mask-image: url('/images/mask-cursos.webp');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-position-x: 30px;
+    mask-position-x: 30px;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    pointer-events: none;
+  }
+
+  .curso-card__body {
+    padding: 30px 0 0 0;
+  }
+
+  .curso-card__title {
+    font-family: var(--font-body);
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.7em;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--color-text-body);
+    margin-bottom: 4px;
+  }
+
+  .curso-card__text {
+    color: var(--color-text-body);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+</style>

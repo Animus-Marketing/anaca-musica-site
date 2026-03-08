@@ -1,0 +1,49 @@
+---
+interface Props {
+  label?: string;
+  title: string;
+  subtitle?: string;
+  center?: boolean;
+}
+
+const { label, title, subtitle, center = true } = Astro.props;
+---
+
+<div class:list={['section-label', { 'section-label--center': center }]}>
+  {label && <h6 class="section-label__tag">{label}</h6>}
+  <h2 class="section-label__title">{title}</h2>
+  {subtitle && <h4 class="section-label__subtitle">{subtitle}</h4>}
+  <slot />
+</div>
+
+<style>
+  .section-label {
+    margin-bottom: var(--space-lg);
+  }
+
+  .section-label--center {
+    text-align: center;
+  }
+
+  /* Tag inherits global H6 (Poppins 18px/600/uppercase/0.14em) — only add color */
+  .section-label__tag {
+    color: var(--color-accent);
+    margin-bottom: var(--space-xs);
+  }
+
+  /* Title inherits global H2 (Darker Grotesque 58px/700/uppercase) — only add spacing */
+  .section-label__title {
+    margin-bottom: var(--space-sm);
+  }
+
+  /* Subtitle uses global H4 (Poppins 22px/300) — add color + constraints */
+  .section-label__subtitle {
+    color: var(--color-text-muted);
+    max-width: 700px;
+    line-height: 1.5;
+  }
+
+  .section-label--center .section-label__subtitle {
+    margin-inline: auto;
+  }
+</style>

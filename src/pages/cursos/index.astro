@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import CursoCard from '../../components/CursoCard.astro';
+import TabsCarousel from '../../components/TabsCarousel.astro';
+import { getCollection } from 'astro:content';
+import { categorias } from '../../lib/categorias';
+
+const cursos = (await getCollection('cursos'))
+  .filter(c => c.data.ativo)
+  .sort((a, b) => a.data.ordem - b.data.ordem);
+
+const tabs = Object.entries(categorias).map(([key, cat]) => ({
+  key,
+  label: cat.label,
+  cursos: cursos.filter(c => c.data.categoria === key),
+})).filter(t => t.cursos.length > 0);
+---
+
+<BaseLayout title="Cursos" description="Conheça os cursos de música da Anacã. Aulas de violão, piano, bateria, canto, saxofone e muito mais.">
+  <Hero
+    title="Conheça nossos cursos"
+    subtitles={["Cursos"]}
+    backgroundImage="/images/hero-professores.webp"
+    compact
+  />
+
+  <section class="section section--light">
+    <div class="container">
+      <TabsCarousel variant="light" slides={3} tabs={tabs.map(t => ({ key: t.key, label: t.label }))} id="cursos-tabs">
+        {tabs.map(tab => (
+          <div data-tab-content={tab.key}>
+            {tab.cursos.map(curso => (
+              <CursoCard
+                titulo={curso.data.titulo}
+                slug={curso.data.slug}
+                descricao_curta={curso.data.descricao_curta}
+                categoria={curso.data.categoria}
+                imagem_card={curso.data.imagem_card}
+              />
+            ))}
+          </div>
+        ))}
+      </TabsCarousel>
+    </div>
+  </section>
+</BaseLayout>
+

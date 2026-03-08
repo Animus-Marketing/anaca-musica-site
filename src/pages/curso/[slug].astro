@@ -1,0 +1,588 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/Button.astro';
+import MarqueeGallery from '../../components/MarqueeGallery.astro';
+import { getCollection } from 'astro:content';
+import { categorias } from '../../lib/categorias';
+
+export async function getStaticPaths() {
+  const cursos = await getCollection('cursos');
+  return cursos.map(curso => ({
+    params: { slug: curso.data.slug },
+    props: { curso },
+  }));
+}
+
+const { curso } = Astro.props;
+const d = curso.data;
+const catLabel = categorias[d.categoria]?.label ?? d.categoria;
+
+const slug = d.slug;
+const heroImg = d.imagem_hero || `/images/cursos/${slug}-hero.webp`;
+const cardImg = d.imagem_card || `/images/cursos/${slug}-card.webp`;
+const secao3Img = `/images/cursos/${slug}-secao-3.webp`;
+const secao2Img = `/images/cursos/${slug}-secao-2.webp`;
+const secao4Img = `/images/cursos/${slug}-secao-4.webp`;
+
+import fs from 'node:fs';
+import path from 'node:path';
+const publicDir = path.resolve('./public');
+const hasHero = fs.existsSync(path.join(publicDir, heroImg.replace(/^\//, '')));
+const hasSecao3 = fs.existsSync(path.join(publicDir, `images/cursos/${slug}-secao-3.webp`));
+const hasSecao2 = fs.existsSync(path.join(publicDir, `images/cursos/${slug}-secao-2.webp`));
+const hasCardImg = fs.existsSync(path.join(publicDir, `images/cursos/${slug}-card.webp`));
+const hasSecao4 = fs.existsSync(path.join(publicDir, `images/cursos/${slug}-secao-4.webp`));
+
+const isKids = d.categoria === 'kids';
+
+---
+
+<BaseLayout
+  title={d.titulo}
+  description={d.descricao_curta}
+  image={d.imagem_hero}
+>
+  {isKids ? (
+    <Fragment>
+      <!-- HERO: same style as other courses -->
+      <section class="c-hero" style="background-image: url('/images/cursos/microfone-hero.webp')">
+        <div class="c-hero__overlay"></div>
+        <div class="container c-hero__body">
+          <h6 class="c-hero__cat">{d.titulo}</h6>
+          <h2 class="c-hero__title">Crescendo com a música!</h2>
+        </div>
+      </section>
+
+      <!-- QUEM SOMOS: bg image (kid + trumpet) with text overlay right -->
+      <section class="kids-quem">
+        <div class="kids-quem__inner">
+          <div class="kids-quem__spacer"></div>
+          <div class="kids-quem__text">
+            <h6>Quem somos</h6>
+            <h2>Aqui, aprender é uma alegria.</h2>
+            <h4>Música, expressão e diversão em um só lugar.</h4>
+            <p>Na Anacã Música, as crianças aprendem de forma leve e envolvente. Além do aprendizado musical, desenvolvem coordenação, concentração e criatividade em um ambiente acolhedor. As aulas unem técnica, expressão e emoção, trazendo a música para o dia a dia de forma divertida e significativa.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- NÍVEIS DAS AULAS -->
+      <section class="section">
+        <div class="container">
+          <div class="curso-kids__levels">
+            <h6>Níveis das aulas</h6>
+            <h2>Música para cada fase da infância.</h2>
+            <div class="kids-grid">
+              <div class="kids-card">
+                <img src="/images/cursos/musicalizacao-para-bebes.webp" alt="Musicalização para Bebês" loading="lazy" width="800" height="534" />
+                <div class="kids-card__header">
+                  <h4>Musicalização para bebês</h4>
+                  <h6>6 meses a 3 anos</h6>
+                </div>
+                <p>As aulas são pensadas para estimular o desenvolvimento cognitivo, motor e emocional, sempre com a participação dos responsáveis.</p>
+              </div>
+              <div class="kids-card">
+                <img src="/images/cursos/instrumentalizacao-infantil.webp" alt="Instrumentalização Infantil" loading="lazy" width="800" height="534" />
+                <div class="kids-card__header">
+                  <h4>Instrumentalização infantil</h4>
+                  <h6>3 a 7 anos</h6>
+                </div>
+                <p>As aulas estimulam coordenação motora, atenção, expressão e socialização, sempre respeitando a fase de desenvolvimento de cada criança.</p>
+              </div>
+              <div class="kids-card">
+                <img src="/images/cursos/area-jovem.webp" alt="Curso de Área" loading="lazy" width="800" height="534" />
+                <div class="kids-card__header">
+                  <h4>Curso de área</h4>
+                  <h6>A partir de 7 anos</h6>
+                </div>
+                <p>O curso transforma o instrumento ou o canto escolhido na principal forma de expressão musical do aluno.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NOSSA ESTRUTURA (marquee gallery) -->
+      <section class="section" style="padding: 100px 0; overflow: hidden;">
+        <div class="container">
+          <div class="kids-estrutura__header">
+            <div>
+              <h6>Nossa estrutura</h6>
+              <h2>Descubra o Anacã</h2>
+            </div>
+            <p>O Anacã Música foi pensado para que cada aluno se sinta em casa enquanto descobre e desenvolve sua relação com a música. Nossa escola conta com 14 salas multiuso e uma programação com mais de 11 cursos livres, atendendo todas as idades e níveis de experiência.</p>
+          </div>
+        </div>
+        <MarqueeGallery />
+      </section>
+    </Fragment>
+  ) : (
+    <Fragment>
+      <!-- HERO: shared bg image (microfone-hero) + dark overlay -->
+      <section class="c-hero" style="background-image: url('/images/cursos/microfone-hero.webp')">
+        <div class="c-hero__overlay"></div>
+        <div class="container c-hero__body">
+          <h6 class="c-hero__cat">{catLabel}</h6>
+          <h2 class="c-hero__title">{d.titulo}</h2>
+        </div>
+      </section>
+
+      <!-- SEC 2: image left with gradient | text right -->
+      {(d.secao2_h6 || d.secao2_h2 || d.secao2_h4) && (
+        <section class="c-sec2">
+          <div class="c-sec2__inner">
+            {hasCardImg && (
+              <div class="c-sec2__img-col" style={`background-image: url('${cardImg}')`}>
+                <div class="c-sec2__gradient"></div>
+              </div>
+            )}
+            <div class="c-sec2__text-col">
+              <hr class="divider" />
+              {d.secao2_h6 && <h6>{d.secao2_h6}</h6>}
+              {d.secao2_h2 && <h2>{d.secao2_h2}</h2>}
+              {d.secao2_h4 && <h3 class="c-sec2__h4">{d.secao2_h4}</h3>}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <!-- SEC 3: texto esquerda | imagem direita + grafismo (container) -->
+      <section class="c-sec3">
+        <div class="container">
+          <div class="c-sec3__grid">
+            <div class="c-sec3__text">
+              {d.secao3_h6 && <h6>{d.secao3_h6}</h6>}
+              {d.secao3_h2 && <h2>{d.secao3_h2}</h2>}
+              {d.secao3_h4 && <h4>{d.secao3_h4}</h4>}
+              {d.secao3_corpo && d.secao3_corpo.split('\n\n').map(p => <p>{p}</p>)}
+            </div>
+            {hasSecao3 && (
+              <div class="c-sec3__img">
+                <img src={secao3Img} alt={d.titulo} loading="lazy" />
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <!-- SEC 4: imagem esquerda (flush left) | texto direita -->
+      <section class="c-sec4">
+        <div class="c-sec4__grid">
+          {hasSecao2 && (
+            <div class="c-sec4__img">
+              <img src={secao2Img} alt={d.titulo} loading="lazy" />
+            </div>
+          )}
+          <div class="c-sec4__text">
+            {d.secao4_h6 && <h6>{d.secao4_h6}</h6>}
+            {d.secao4_h2 && <h2>{d.secao4_h2}</h2>}
+            {d.secao4_h4 && <h4>{d.secao4_h4}</h4>}
+            {d.secao4_corpo && d.secao4_corpo.split('\n\n').map(p => <p>{p}</p>)}
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section
+        class="c-cta"
+        style={hasSecao4 ? `background-image: url('${secao4Img}')` : undefined}
+      >
+        <div class="c-cta__overlay"></div>
+        <div class="container c-cta__body">
+          <div class="c-cta__copy">
+            {d.cta_h6 && <h6>{d.cta_h6}</h6>}
+            <h2>{d.cta_h2 || `tocar ${d.titulo.toLowerCase()} no Anacã é viver a música de forma autêntica`}</h2>
+            <p>{d.cta_p || 'respeitando o tempo de cada um e valorizando o prazer de tocar.'}</p>
+            <Button text="Marcar uma aula" />
+          </div>
+        </div>
+      </section>
+    </Fragment>
+  )}
+</BaseLayout>
+
+<style>
+  /* ── HERO ──
+     WP: min-height 46vh, bg microfone-estudio.webp, overlay 0.3 black
+     H6: Poppins 18px 600 uppercase ls:0.14em color:accent
+     H2: Darker Grotesque 58px 700 uppercase ls:-0.04em line-height:1em
+  */
+  .c-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46vh;
+    text-align: center;
+    background-color: var(--color-bg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .c-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .c-hero__body {
+    position: relative;
+    z-index: 1;
+    padding-block: 80px;
+  }
+
+  .c-hero__cat {
+    color: var(--color-accent);
+    margin-bottom: var(--space-xs);
+    /* h6 style: Poppins 18px 600 uppercase ls:0.14em */
+  }
+
+  .c-hero__title {
+    /* WP h2: Darker Grotesque 58px 700 uppercase, mobile 42px */
+    font-size: clamp(42px, 5vw, 58px);
+    line-height: 1em;
+    letter-spacing: -0.04em;
+  }
+
+  /* ── SEC 2: bg-image left with gradient | text right ──
+     WP: e-con-boxed, flex-direction row, gap 30px, padding 80px 10px
+     Left col: bg-image cover, gradient overlay linear-gradient(90deg, #000 0%, transparent 100%), opacity 1
+     Right col: padding 30px 50px 0 0, h6 + h2 + h4(a5f819d = DG 45px 700 uppercase)
+  */
+  .c-sec2 {
+    padding-block: var(--section-padding);
+  }
+
+  .c-sec2__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: stretch;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding-inline: var(--container-padding);
+  }
+
+  @media (min-width: 768px) {
+    .c-sec2__inner {
+      flex-direction: row;
+    }
+  }
+
+  .c-sec2__img-col {
+    position: relative;
+    flex: 1;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  .c-sec2__gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #000000 0%, rgba(255, 255, 255, 0) 100%);
+  }
+
+  .c-sec2__text-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    padding: 30px 0 50px;
+  }
+
+  .c-sec2__text-col h6 {
+    color: var(--color-accent);
+    /* Poppins 18px 600 uppercase ls:0.14em — inherits from global h6 */
+  }
+
+  .c-sec2__text-col h2 {
+    /* Darker Grotesque 58px 700 uppercase, mobile 42px */
+    font-size: clamp(42px, 5vw, 58px);
+    line-height: 1em;
+    letter-spacing: -0.04em;
+  }
+
+  /* H4 in sec2 uses WP typography a5f819d: Darker Grotesque 45px 700 uppercase */
+  .c-sec2__h4 {
+    font-family: var(--font-heading);
+    font-size: clamp(30px, 4vw, 45px);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1em;
+    letter-spacing: -0.04em;
+    color: var(--color-accent);
+  }
+
+  /* ── SEC 3: texto | imagem + grafismo (viewport inteiro) ── */
+  .c-sec3 {
+    padding-top: var(--section-padding);
+    background-image: url('/images/vector-4.png');
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    background-size: 48% auto;
+  }
+
+  @media (max-width: 767px) {
+    .c-sec3 {
+      background-position: bottom center;
+      background-size: 150% auto;
+    }
+  }
+
+  .c-sec3__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    align-items: end;
+  }
+
+  @media (min-width: 768px) {
+    .c-sec3__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .c-sec3__text {
+    padding-bottom: 40px;
+  }
+
+  .c-sec3__text h6 {
+    color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+  }
+
+  .c-sec3__text h2 {
+    font-size: clamp(28px, 3.5vw, 42px);
+    line-height: 1.15;
+    margin-bottom: var(--space-sm);
+  }
+
+  .c-sec3__text h4 {
+    color: #ffffff;
+    margin-bottom: var(--space-md);
+    font-size: clamp(15px, 1.5vw, 18px);
+    line-height: 1.5;
+  }
+
+  .c-sec3__text p {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-bottom: var(--space-sm);
+    font-size: 15px;
+  }
+
+  .c-sec3__img img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ── SEC 4: imagem flush-left | texto direita ── */
+  .c-sec4 {
+    padding-top: var(--section-padding);
+    padding-bottom: 0;
+    overflow: hidden;
+  }
+
+  .c-sec4__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    align-items: end;
+  }
+
+  @media (min-width: 768px) {
+    .c-sec4__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+  }
+
+  .c-sec4__img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .c-sec4__text {
+    padding: 40px var(--container-padding) 40px 30px;
+  }
+
+  @media (min-width: 768px) {
+    .c-sec4__text {
+      padding: 40px 0 40px 30px;
+      max-width: calc(var(--container-max) / 2);
+    }
+  }
+
+  .c-sec4__text h6 {
+    color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+  }
+
+  .c-sec4__text h2 {
+    font-size: clamp(28px, 3.5vw, 42px);
+    line-height: 1.15;
+    margin-bottom: var(--space-sm);
+  }
+
+  .c-sec4__text h4 {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+    font-size: clamp(15px, 1.5vw, 18px);
+    line-height: 1.5;
+  }
+
+  .c-sec4__text p {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-bottom: var(--space-sm);
+    font-size: 15px;
+  }
+
+  /* ── CTA ── */
+  .c-cta {
+    position: relative;
+    padding: var(--section-padding) 0;
+    background-color: var(--color-bg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .c-cta__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 100%);
+  }
+
+  .c-cta__body {
+    position: relative;
+    z-index: 1;
+  }
+
+  .c-cta__copy {
+    max-width: 600px;
+  }
+
+  .c-cta__copy h6 {
+    color: var(--color-accent);
+    margin-bottom: var(--space-xs);
+  }
+
+  .c-cta__copy h2 {
+    font-size: clamp(28px, 3.5vw, 46px);
+    line-height: 1.15;
+    margin-bottom: var(--space-md);
+  }
+
+  .c-cta__copy p {
+    color: #ffffff;
+    margin-bottom: var(--space-lg);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── KIDS: QUEM SOMOS (bg image with text overlay right) ── */
+  .kids-quem {
+    background-image: url('/images/cursos/kids-e-teens-mob.webp');
+    background-position: bottom center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 100px 10px;
+  }
+
+  @media (min-width: 768px) {
+    .kids-quem {
+      background-image: url('/images/cursos/kids-e-teens.webp');
+    }
+  }
+
+  .kids-quem__inner {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding-inline: var(--container-padding);
+    padding-bottom: 180px;
+  }
+
+  @media (min-width: 768px) {
+    .kids-quem__inner {
+      flex-direction: row;
+      padding-bottom: 0;
+    }
+  }
+
+  .kids-quem__spacer {
+    flex: 1;
+  }
+
+  .kids-quem__text {
+    flex: 1;
+  }
+
+  .kids-quem__text h6 { color: #000000; margin-bottom: var(--space-xs); }
+  .kids-quem__text h2 { color: #000000; margin-bottom: var(--space-sm); }
+  .kids-quem__text h4 { color: #000000; margin-bottom: var(--space-md); }
+  .kids-quem__text p  { color: #333333; line-height: 1.7; font-size: 15px; }
+
+  /* ── KIDS: NÍVEIS DAS AULAS ── */
+  .curso-kids__levels h6 { color: var(--color-accent); margin-bottom: var(--space-xs); }
+  .curso-kids__levels > h2 { margin-bottom: var(--space-lg); }
+
+  .kids-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 30px;
+  }
+  .kids-card img {
+    aspect-ratio: 3/2;
+    object-fit: cover;
+    width: 100%;
+    margin-bottom: var(--space-sm);
+  }
+  .kids-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: var(--space-xs);
+  }
+  .kids-card__header h4 {
+    margin: 0;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .kids-card__header h6 { color: var(--color-accent); margin: 0; }
+  .kids-card p { color: var(--color-text-muted); font-size: 17px; font-weight: 300; line-height: 1.7; }
+
+  @media (max-width: 768px) {
+    .kids-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── KIDS: NOSSA ESTRUTURA ── */
+  .kids-estrutura__header {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .kids-estrutura__header {
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+    }
+  }
+
+  .kids-estrutura__header h6 { color: var(--color-accent); margin-bottom: var(--space-xs); }
+  .kids-estrutura__header h2 { margin-bottom: 0; }
+  .kids-estrutura__header p { color: var(--color-text-muted); font-size: 15px; line-height: 1.7; }
+
+</style>

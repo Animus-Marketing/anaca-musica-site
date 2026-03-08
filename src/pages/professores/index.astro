@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import TabsCarousel from '../../components/TabsCarousel.astro';
+import { getCollection } from 'astro:content';
+import { categorias } from '../../lib/categorias';
+
+const professores = (await getCollection('professores'))
+  .filter(p => p.data.ativo)
+  .sort((a, b) => a.data.ordem - b.data.ordem);
+
+const tabs = [
+  { key: 'todos', label: 'Todos', profs: professores },
+  ...Object.entries(categorias).map(([key, cat]) => ({
+    key,
+    label: cat.label,
+    profs: professores.filter(p => p.data.categorias.includes(key as any)),
+  })).filter(t => t.profs.length > 0),
+];
+---
+
+<BaseLayout title="Professores" description="Conheça os professores da Anacã Música. Aprenda com quem faz da música um estilo de vida.">
+  <Hero
+    title="Aprenda com quem faz da música um estilo de vida."
+    subtitles={["Professores"]}
+    backgroundImage="/images/hero-professores.webp"
+    compact
+  />
+
+  <div class="container section">
+    <TabsCarousel variant="dark" slides={4} tabs={tabs.map(t => ({ key: t.key, label: t.label }))} id="profs-tabs">
+      {tabs.map(tab => (
+        <div data-tab-content={tab.key}>
+          {tab.profs.map(prof => (
+            <a href={`/professor/${prof.data.slug}/`} class="prof-card">
+              {prof.data.foto && (
+                <img src={prof.data.foto} alt={prof.data.nome} class="prof-card__img" loading="lazy" width="300" height="300" draggable="false" />
+              )}
+              <div class="prof-card__body">
+                <h4 class="prof-card__name">{prof.data.nome}</h4>
+                {prof.data.excerpt && (
+                  <p class="prof-card__bio">{prof.data.excerpt}</p>
+                )}
+                <span class="prof-card__link">Saiba Mais</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      ))}
+    </TabsCarousel>
+  </div>
+</BaseLayout>
+
+<style>
+  .hero__title {
+    max-width: 750px;
+  }
+
+  .prof-card {
+    display: block;
+    color: inherit;
+    transition: transform var(--transition);
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .prof-card:hover {
+    transform: translateY(-4px);
+    color: inherit;
+  }
+
+  .prof-card__img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
+  .prof-card__body { padding: 10px 0; }
+
+  .prof-card__name {
+    font-family: var(--font-body);
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.7em;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--color-text);
+    margin-bottom: 4px;
+  }
+
+  .prof-card__bio {
+    color: #CCCCCC;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: var(--space-sm);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .prof-card__link {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text);
+    border: 1px solid var(--color-accent);
+    padding: 8px 20px;
+    transition: all var(--transition);
+  }
+
+  .prof-card:hover .prof-card__link {
+    background: var(--color-accent);
+    color: #fff;
+  }
+</style>

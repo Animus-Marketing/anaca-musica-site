@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Button from '../../components/Button.astro';
+import { getCollection } from 'astro:content';
+
+const eventos = (await getCollection('eventos'))
+  .sort((a, b) => new Date(b.data.data).getTime() - new Date(a.data.data).getTime());
+---
+
+<BaseLayout title="Eventos" description="Nossos eventos – Onde o palco vira aprendizado.">
+  <Hero
+    title="Onde o palco vira aprendizado"
+    subtitles={["Nossos eventos"]}
+    backgroundImage="/images/cursos/microfone-hero.webp"
+    compact
+  />
+
+  <div class="container section">
+    {eventos.map(evento => (
+      <div class="evento-item">
+        <div class="evento-item__header">
+          <h3 class="evento-item__title">
+            <a href={`/evento/${evento.data.slug}/`}>{evento.data.titulo}</a>
+          </h3>
+          <Button text="Saiba mais" href={`/evento/${evento.data.slug}/`} />
+        </div>
+        {(evento.data.imagem_wide || evento.data.imagem_capa) && (
+          <a href={`/evento/${evento.data.slug}/`} class="evento-item__img-link">
+            <img
+              src={evento.data.imagem_wide || evento.data.imagem_capa}
+              alt={evento.data.titulo}
+              loading="lazy"
+              width="1920"
+              height="558"
+            />
+          </a>
+        )}
+      </div>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .evento-item {
+    margin-bottom: var(--space-xl);
+  }
+
+  .evento-item__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+  }
+
+  .evento-item__title {
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .evento-item__title a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .evento-item__title a:hover {
+    color: var(--color-accent);
+  }
+
+  .evento-item__img-link {
+    display: block;
+  }
+
+  .evento-item__img-link img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

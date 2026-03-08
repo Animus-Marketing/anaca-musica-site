@@ -1,0 +1,31 @@
+---
+interface Props {
+  title: string;
+  subtitles?: string[];
+  backgroundImage?: string;
+  compact?: boolean;
+}
+
+const { title, subtitles = [], backgroundImage, compact = false } = Astro.props;
+---
+
+<section
+  class:list={['hero', { 'hero--compact': compact }]}
+  style={backgroundImage ? `--hero-bg: url(${backgroundImage})` : ''}
+>
+  <div class="hero__content">
+    {subtitles.length > 0 && (
+      <div class="hero__subtitles">
+        {subtitles.map(s => compact
+          ? <h6 class="hero__subtitle">{s}</h6>
+          : <span class="hero__subtitle">{s}</span>
+        )}
+      </div>
+    )}
+    {compact
+      ? <h2 class="hero__title">{title}</h2>
+      : <h1 class="hero__title">{title}</h1>
+    }
+    <slot />
+  </div>
+</section>

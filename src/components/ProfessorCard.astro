@@ -1,0 +1,39 @@
+---
+interface Props {
+  nome: string;
+  slug: string;
+  foto?: string;
+  instrumentos: string[];
+  categorias: string[];
+}
+
+const { nome, slug, foto, instrumentos, categorias: cats } = Astro.props;
+---
+
+<a href={`/professor/${slug}/`} class="card" data-cat={cats.join(' ')}>
+  {foto && (
+    <img
+      src={foto}
+      alt={nome}
+      class="card__image card__image--square"
+      loading="lazy"
+      width="400"
+      height="400"
+    />
+  )}
+  <div class="card__body">
+    <h3 class="card__title">{nome}</h3>
+    <div class="card__tags">
+      {instrumentos.map(inst => (
+        <span class="tag">{inst}</span>
+      ))}
+    </div>
+  </div>
+</a>
+
+<style>
+  a.card {
+    color: inherit;
+    display: block;
+  }
+</style>

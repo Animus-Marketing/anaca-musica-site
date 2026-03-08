@@ -1,0 +1,22 @@
+---
+interface Props {
+  images: string[];
+  alt?: string;
+}
+
+const { images, alt = 'Foto do evento' } = Astro.props;
+---
+
+{images.length > 0 && (
+  <div class="gallery">
+    {images.map((src, i) => (
+      <img
+        src={src}
+        alt={`${alt} ${i + 1}`}
+        loading="lazy"
+        width="400"
+        height="400"
+      />
+    ))}
+  </div>
+)}

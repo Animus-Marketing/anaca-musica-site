@@ -1,0 +1,60 @@
+---
+interface Props {
+  texto: string;
+  nome: string;
+  profissao: string;
+}
+
+const { texto, nome, profissao } = Astro.props;
+---
+
+<div class="testimonial">
+  <blockquote class="testimonial__text">&ldquo;{texto}&rdquo;</blockquote>
+  <div class="testimonial__author">
+    <span class="testimonial__name">{nome}</span>
+    <span class="testimonial__role">{profissao}</span>
+  </div>
+</div>
+
+<style>
+  .testimonial {
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .testimonial__text {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+    font-style: italic;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .testimonial__author {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .testimonial__name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: var(--text-base);
+    text-transform: uppercase;
+    color: var(--color-text);
+  }
+
+  .testimonial__role {
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+  }
+</style>

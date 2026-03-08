@@ -1,0 +1,428 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import Counter from '../components/Counter.astro';
+import CursoCard from '../components/CursoCard.astro';
+import TabsCarousel from '../components/TabsCarousel.astro';
+import MarqueeGallery from '../components/MarqueeGallery.astro';
+import { getCollection } from 'astro:content';
+import { categorias } from '../lib/categorias';
+
+const cursos = (await getCollection('cursos'))
+  .filter(c => c.data.ativo)
+  .sort((a, b) => a.data.ordem - b.data.ordem);
+
+const professores = (await getCollection('professores'))
+  .filter(p => p.data.ativo)
+  .sort((a, b) => a.data.ordem - b.data.ordem);
+
+const cursoTabs = Object.entries(categorias).map(([key, cat]) => ({
+  key,
+  label: cat.label,
+  cursos: cursos.filter(c => c.data.categoria === key),
+})).filter(t => t.cursos.length > 0);
+
+const profCats = [
+  { key: 'todos', label: 'Todos', profs: professores },
+  ...Object.entries(categorias).map(([key, cat]) => ({
+    key,
+    label: cat.label,
+    profs: professores.filter(p => p.data.categorias.includes(key as any)),
+  })).filter(t => t.profs.length > 0),
+];
+
+const depoimentos = [
+  {
+    texto: 'Sempre achei que bateria fosse difícil e muito teórica, mas a abordagem do professor no Anacã Música me surpreendeu. Já na primeira aula consegui tirar um som e percebi que, mesmo adulto, com filhos e rotina cheia, ainda dá para encaixar isso na minha vida.',
+    nome: 'Luis Valle',
+    profissao: 'Engenheiro, 38 anos',
+  },
+];
+---
+
+<BaseLayout title="Home" description="Anacã Música – Escola de música em São Paulo. Aulas de violão, piano, bateria, canto e mais.">
+
+  <!-- 1. Hero (dark, bg image, NO overlay) -->
+  <section class="hero" style={`--hero-bg: url(/images/hero-home.webp)`}>
+    <div class="hero__content">
+      <h1 class="hero__title">A escola de música<br/>que transforma</h1>
+      <p class="hero__tagline">
+        No Anacã Música, som e corpo se encontram<br/>em um espaço feito para inspirar e transformar.
+      </p>
+      <Button text="Descubra Mais" variant="outline" />
+    </div>
+  </section>
+
+  <!-- 2. Descubra Seu Som (WHITE bg, split: image left, text right) -->
+  <section class="descubra-section">
+    <img src="/images/descubra-som-mobile.webp" alt="Alunos tocando música" class="descubra-img-mobile" loading="lazy" />
+    <div class="descubra-inner">
+      <div class="descubra-text">
+        <h6>Descubra Seu Som</h6>
+        <h2>Apaixonados pela arte de ensinar</h2>
+        <h4>No Anacã, acreditamos que a música é uma poderosa forma de expressão e desenvolvimento.</h4>
+        <p>
+          São 11 opções de cursos, incluindo violão, piano, guitarra, canto, bateria e musicalização infantil,
+          com turmas desde bebês até adultos. Aqui, cada aluno aprende seu ritmo, explorando sua criatividade
+          e talento com professores experientes e apaixonados pela arte de ensinar.
+        </p>
+        <div class="counters">
+          <Counter target={200} suffix="+" label="Alunos inscritos" />
+          <Counter target={10000} suffix="+" label="Aulas praticadas" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. CTA (dark bg image with gradient, text LEFT) -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Venha descobrir o mundo da música no anacã</h2>
+      <p>Inscreva-se hoje e comece sua jornada musical!</p>
+      <Button text="Descubra Mais" />
+    </div>
+  </section>
+
+  <!-- 4. Cursos (WHITE bg, tabs + carousel, centered headings) -->
+  <section class="section section--light">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: var(--space-lg);">
+        <h6 style="color: var(--color-accent);">Nosso Time</h6>
+        <h2 style="color: var(--color-text-dark);">Conheça nossos cursos</h2>
+        <h4 style="color: var(--color-text-subtle); max-width: 700px; margin-inline: auto;">
+          Oferecemos aulas de música para todas as idades, adaptadas às suas necessidades individuais. Nossas aulas de música são envolventes e dinâmicas.
+        </h4>
+      </div>
+
+      <TabsCarousel variant="light" slides={3} tabs={cursoTabs.map(t => ({ key: t.key, label: t.label }))} id="cursos-tabs">
+        {cursoTabs.map(tab => (
+          <div data-tab-content={tab.key}>
+            {tab.cursos.map(curso => (
+              <CursoCard
+                titulo={curso.data.titulo}
+                slug={curso.data.slug}
+                descricao_curta={curso.data.descricao_curta}
+                categoria={curso.data.categoria}
+                imagem_card={curso.data.imagem_card}
+              />
+            ))}
+          </div>
+        ))}
+      </TabsCarousel>
+    </div>
+  </section>
+
+  <!-- 5. Estrutura (DARK bg, auto-scrolling rows) -->
+  <section class="section" style="padding: 100px 0; overflow: hidden;">
+    <div class="container">
+      <h6 style="color: var(--color-accent);">Estrutura Anacã</h6>
+      <h2>Conheça nosso espaço</h2>
+    </div>
+    <MarqueeGallery />
+  </section>
+
+  <!-- 6. Professores (DARK bg, tabs + carousel with drag) -->
+  <section class="section">
+    <div class="container">
+      <h6 style="color: var(--color-accent);">Nosso Time</h6>
+      <h2>Conheça nosso time<br/>de professores</h2>
+
+      <div style="margin-top: var(--space-lg);">
+        <TabsCarousel variant="dark" slides={4} tabs={profCats.map(t => ({ key: t.key, label: t.label }))} id="profs-tabs">
+          {profCats.map(cat => (
+            <div data-tab-content={cat.key}>
+              {cat.profs.map(prof => (
+                <a href={`/professor/${prof.data.slug}/`} class="prof-card">
+                  {prof.data.foto && (
+                    <img src={prof.data.foto} alt={prof.data.nome} class="prof-card__img" loading="lazy" width="300" height="300" />
+                  )}
+                  <div class="prof-card__body">
+                    <h4 class="prof-card__name">{prof.data.nome}</h4>
+                    {prof.data.excerpt && (
+                      <p class="prof-card__bio">{prof.data.excerpt}</p>
+                    )}
+                    <span class="prof-card__link">Saiba Mais</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          ))}
+        </TabsCarousel>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Depoimentos (DARK bg, split: heading left, testimonial right) -->
+  <section class="section">
+    <div class="container">
+      <div class="depoimentos-split">
+        <div class="depoimentos-left">
+          <h6 style="color: var(--color-accent);">Depoimentos</h6>
+          <h2>O que os nossos alunos dizem</h2>
+        </div>
+        <div class="depoimentos-right">
+          {depoimentos.map(d => (
+            <div class="depoimento">
+              <p class="depoimento__text">{d.texto}</p>
+              <div class="depoimento__author">
+                <span class="depoimento__name">{d.nome}</span>
+                <span class="depoimento__role">{d.profissao}</span>
+              </div>
+              <div class="depoimento__quotes">
+                <svg width="54" height="36" viewBox="0 0 54 36" fill="none">
+                  <path d="M0 36V20.4C0 14.16 1.26 9.24 3.78 5.64C6.42 1.92 10.56 0 16.2 0V8.4C13.08 8.4 10.92 9.48 9.72 11.64C8.64 13.68 8.1 16.44 8.1 19.92H16.2V36H0ZM30.6 36V20.4C30.6 14.16 31.86 9.24 34.38 5.64C37.02 1.92 41.16 0 46.8 0V8.4C43.68 8.4 41.52 9.48 40.32 11.64C39.24 13.68 38.7 16.44 38.7 19.92H46.8V36H30.6Z" fill="#FF6530"/>
+                </svg>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. CTA Final (WHITE bg, text LEFT, dark text) -->
+  <section class="section section--light" style="min-height: 70vh; display: flex; align-items: center;">
+    <div class="container">
+      <h6 style="color: var(--color-accent);">Contato</h6>
+      <h2 style="color: var(--color-text-dark);">Venha fazer uma<br/>aula experimental</h2>
+      <div style="margin-top: var(--space-lg);">
+        <Button text="Agendar minha aula" />
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* Hero - NO dark overlay */
+  .hero__tagline {
+    max-width: 415px;
+    color: var(--color-text);
+    font-size: 17px;
+    line-height: 1.7em;
+    margin-bottom: var(--space-lg);
+  }
+
+  /* Descubra Seu Som - WHITE bg, image bg left, text right */
+  .descubra-section {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    background-color: var(--color-bg-light);
+    background-image: url('/images/descubra-som.webp');
+    background-position: center left;
+    background-size: cover;
+    padding: 80px 0;
+  }
+
+  .descubra-img-mobile {
+    display: none;
+  }
+
+  .descubra-inner {
+    max-width: var(--container-max);
+    width: 100%;
+    margin: 0 auto;
+    padding-inline: var(--container-padding);
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .descubra-text {
+    max-width: 50%;
+  }
+
+  .descubra-text h6 { color: var(--color-text-dark); }
+  .descubra-text h2 { color: var(--color-text-dark); }
+  .descubra-text h4 { color: var(--color-text-dark); margin-top: var(--space-sm); }
+  .descubra-text p { color: var(--color-text-body); margin-top: var(--space-md); line-height: 1.7em; }
+
+  .counters {
+    display: flex;
+    gap: 40px;
+    margin-top: var(--space-lg);
+    color: var(--color-text-dark);
+  }
+
+  /* CTA Banner - bg image + gradient left, FILLED button */
+  .cta-banner {
+    min-height: auto;
+    padding: 80px 0;
+    background-image:
+      linear-gradient(90deg, #000000 45%, #00000000 100%),
+      url('/images/cta-piano.webp');
+    background-position: center right;
+    background-size: cover;
+  }
+
+  .cta-banner h2 {
+    color: var(--color-text);
+    max-width: 600px;
+    margin-bottom: var(--space-xs);
+  }
+
+  .cta-banner p {
+    color: var(--color-text);
+    margin-bottom: var(--space-md);
+  }
+
+
+  /* Professor cards */
+  .prof-card {
+    display: block;
+    color: inherit;
+    transition: transform var(--transition);
+  }
+
+  .prof-card:hover {
+    transform: translateY(-4px);
+    color: inherit;
+  }
+
+  .prof-card__img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  .prof-card__body {
+    padding: 10px 0;
+  }
+
+  .prof-card__name {
+    font-family: var(--font-body);
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.7em;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--color-text);
+    margin-bottom: 4px;
+  }
+
+  .prof-card__bio {
+    color: #CCCCCC;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: var(--space-sm);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .prof-card__link {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text);
+    border: 1px solid var(--color-accent);
+    padding: 8px 20px;
+    transition: all var(--transition);
+  }
+
+  .prof-card:hover .prof-card__link {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  /* Depoimentos - split */
+  .depoimentos-split {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .depoimento {
+    position: relative;
+    padding: 50px;
+  }
+
+  .depoimento__text {
+    color: var(--color-text);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.7em;
+    margin-bottom: 20px;
+  }
+
+  .depoimento__author {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .depoimento__name {
+    font-family: var(--font-body);
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.36em;
+    color: var(--color-text);
+  }
+
+  .depoimento__role {
+    font-size: 14px;
+    color: var(--color-accent);
+  }
+
+  .depoimento__quotes {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+
+  @media (max-width: 768px) {
+    .descubra-section {
+      flex-direction: column;
+      background-image: none;
+      min-height: auto;
+      padding: 0 0 60px;
+    }
+
+    .descubra-img-mobile {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      max-height: 50vh;
+    }
+
+    .descubra-inner {
+      justify-content: center;
+      padding-top: var(--space-lg);
+    }
+
+    .descubra-text {
+      max-width: 100%;
+    }
+
+    .counters {
+      gap: 20px;
+    }
+
+    .depoimentos-split {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+
+    .depoimento {
+      padding: 20px;
+    }
+
+    .cta-banner {
+      padding: 48px 0;
+    }
+
+    .cta-banner h2 {
+      font-size: 32px;
+    }
+  }
+
+</style>
+

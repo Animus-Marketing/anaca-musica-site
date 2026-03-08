@@ -1,0 +1,330 @@
+---
+import { categorias } from '../lib/categorias';
+import { getCollection } from 'astro:content';
+
+const currentPath = Astro.url.pathname;
+
+const cursos = (await getCollection('cursos'))
+  .filter(c => c.data.ativo)
+  .sort((a, b) => a.data.ordem - b.data.ordem);
+
+// Build dropdown structure: categories with their courses
+const cursosByCategory = Object.entries(categorias).map(([key, cat]) => ({
+  key,
+  label: cat.label,
+  courses: cursos.filter(c => c.data.categoria === key),
+})).filter(g => g.courses.length > 0);
+
+// Categories with single course go directly, categories with multiple get submenus
+const cursoMenuItems = cursosByCategory.map(cat => {
+  if (cat.courses.length === 1 && (cat.key === 'canto' || cat.key === 'kids')) {
+    // Direct link (no submenu)
+    return { label: cat.label, href: `/curso/${cat.courses[0].data.slug}/`, children: null };
+  }
+  return {
+    label: cat.label,
+    href: '#',
+    children: cat.courses.map(c => ({
+      label: c.data.titulo,
+      href: `/curso/${c.data.slug}/`,
+    })),
+  };
+});
+---
+
+<header class="header" id="header">
+  <div class="header__inner container">
+    <a href="/" class="header__logo" aria-label="Anacã Música - Home">
+      <img src="/images/logo.svg" alt="Anacã Música" width="156" height="59" />
+    </a>
+
+    <button class="header__toggle" aria-label="Abrir menu" aria-expanded="false" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="header__nav" id="main-nav" aria-label="Navegação principal">
+      <ul class="header__menu">
+        <li class="header__item">
+          <a href="/" class:list={['header__link', { active: currentPath === '/' }]}>Home</a>
+        </li>
+        <li class="header__item">
+          <a href="/a-escola/" class:list={['header__link', { active: currentPath === '/a-escola/' }]}>A Escola</a>
+        </li>
+        <li class="header__item has-dropdown">
+          <a href="/cursos/" class:list={['header__link', { active: currentPath.startsWith('/curso') }]}>
+            Cursos
+            <svg class="header__caret" width="10" height="6" viewBox="0 0 10 6" fill="currentColor"><path d="M5 6L0 0h10z"/></svg>
+          </a>
+          <ul class="header__dropdown">
+            {cursoMenuItems.map(item => (
+              <li class:list={['header__dropdown-item', { 'has-submenu': item.children }]}>
+                <a href={item.href} class="header__dropdown-link">
+                  {item.label}
+                  {item.children && (
+                    <svg class="header__subcaret" width="6" height="10" viewBox="0 0 6 10" fill="currentColor"><path d="M0 0l6 5-6 5z"/></svg>
+                  )}
+                </a>
+                {item.children && (
+                  <ul class="header__subdropdown">
+                    {item.children.map(sub => (
+                      <li>
+                        <a href={sub.href} class="header__dropdown-link">{sub.label}</a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </li>
+        <li class="header__item">
+          <a href="/professores/" class:list={['header__link', { active: currentPath === '/professores/' }]}>Professores</a>
+        </li>
+        <li class="header__item">
+          <a href="/eventos/" class:list={['header__link', { active: currentPath === '/eventos/' }]}>Eventos</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: #000000;
+    box-shadow: 0px 0px 3px 1px rgba(64, 64, 64, 0.84);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 20px;
+  }
+
+  .header__logo img {
+    width: 130px;
+    height: auto;
+  }
+
+  .header__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .header__toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #BF4C24;
+    transition: all var(--transition);
+  }
+
+  .header__menu {
+    display: flex;
+    gap: 0;
+    align-items: center;
+  }
+
+  .header__link {
+    color: #FFFFFF;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+    padding: 10px 25px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .header__link:hover,
+  .header__link.active {
+    color: #BF4C24;
+  }
+
+  .header__caret {
+    width: 8px;
+    height: 5px;
+    transition: transform var(--transition);
+  }
+
+  .has-dropdown:hover .header__caret {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown - Level 1 */
+  .has-dropdown {
+    position: relative;
+  }
+
+  .header__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000000;
+    border-top: 2px solid #FF6530;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    z-index: 101;
+  }
+
+  .has-dropdown:hover .header__dropdown {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .header__dropdown-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    color: #FFFFFF;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 15px;
+    white-space: nowrap;
+    transition: color var(--transition);
+  }
+
+  .header__dropdown-link:hover {
+    color: #FF6530;
+  }
+
+  .header__subcaret {
+    width: 5px;
+    height: 8px;
+    margin-left: 8px;
+    opacity: 0.6;
+  }
+
+  /* Dropdown - Level 2 (submenu) */
+  .has-submenu {
+    position: relative;
+  }
+
+  .header__subdropdown {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background: #000000;
+    border-top: 2px solid #FF6530;
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+  }
+
+  .has-submenu:hover .header__subdropdown {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  @media (max-width: 768px) {
+    .header__logo img {
+      width: 110px;
+    }
+
+    .header__toggle {
+      display: flex;
+    }
+
+    .header__nav {
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.98);
+      padding: var(--space-lg);
+      transform: translateX(100%);
+      transition: transform var(--transition);
+      overflow-y: auto;
+    }
+
+    .header__nav.open {
+      transform: translateX(0);
+    }
+
+    .header__menu {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .header__link {
+      font-size: 20px;
+      padding: 10px 0;
+    }
+
+    .header__dropdown,
+    .header__subdropdown {
+      position: static;
+      transform: none;
+      opacity: 1;
+      visibility: visible;
+      background: transparent;
+      border: none;
+      border-top: none;
+      padding-left: 20px;
+      min-width: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .header__dropdown.mobile-open,
+    .header__subdropdown.mobile-open {
+      max-height: 500px;
+    }
+
+    .header__toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .header__toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+    .header__toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('main-nav');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+    nav?.classList.toggle('open');
+  });
+
+  // Mobile: toggle dropdown/subdropdown on click
+  if (window.matchMedia('(max-width: 768px)').matches) {
+    document.querySelectorAll('.has-dropdown > .header__link, .has-submenu > .header__dropdown-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const parent = (link as HTMLElement).parentElement;
+        const dropdown = parent?.querySelector(':scope > .header__dropdown, :scope > .header__subdropdown');
+        if (dropdown) {
+          e.preventDefault();
+          dropdown.classList.toggle('mobile-open');
+        }
+      });
+    });
+  }
+</script>
