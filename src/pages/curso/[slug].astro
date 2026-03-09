@@ -20,16 +20,16 @@ const catLabel = categorias[d.categoria]?.label ?? d.categoria;
 const slug = d.slug;
 const heroImg = d.imagem_hero || `/images/cursos/${slug}-hero.webp`;
 const cardImg = d.imagem_card || `/images/cursos/${slug}-card.webp`;
-const secao3Img = `/images/cursos/${slug}-secao-3.webp`;
 const secao2Img = `/images/cursos/${slug}-secao-2.webp`;
+const secao3Img = `/images/cursos/${slug}-secao-3.webp`;
 const secao4Img = `/images/cursos/${slug}-secao-4.webp`;
 
 import fs from 'node:fs';
 import path from 'node:path';
 const publicDir = path.resolve('./public');
 const hasHero = fs.existsSync(path.join(publicDir, heroImg.replace(/^\//, '')));
-const hasSecao3 = fs.existsSync(path.join(publicDir, `images/cursos/${slug}-secao-3.webp`));
 const hasSecao2 = fs.existsSync(path.join(publicDir, `images/cursos/${slug}-secao-2.webp`));
+const hasSecao3 = fs.existsSync(path.join(publicDir, `images/cursos/${slug}-secao-3.webp`));
 const hasCardImg = fs.existsSync(path.join(publicDir, `images/cursos/${slug}-card.webp`));
 const hasSecao4 = fs.existsSync(path.join(publicDir, `images/cursos/${slug}-secao-4.webp`));
 
@@ -156,9 +156,9 @@ const isKids = d.categoria === 'kids';
               {d.secao3_h4 && <h4>{d.secao3_h4}</h4>}
               {d.secao3_corpo && d.secao3_corpo.split('\n\n').map(p => <p>{p}</p>)}
             </div>
-            {hasSecao3 && (
+            {hasSecao2 && (
               <div class="c-sec3__img">
-                <img src={secao3Img} alt={d.titulo} loading="lazy" />
+                <img src={secao2Img} alt={d.titulo} loading="lazy" />
               </div>
             )}
           </div>
@@ -168,9 +168,9 @@ const isKids = d.categoria === 'kids';
       <!-- SEC 4: imagem esquerda (flush left) | texto direita -->
       <section class="c-sec4">
         <div class="c-sec4__grid">
-          {hasSecao2 && (
+          {hasSecao3 && (
             <div class="c-sec4__img">
-              <img src={secao2Img} alt={d.titulo} loading="lazy" />
+              <img src={secao3Img} alt={d.titulo} loading="lazy" />
             </div>
           )}
           <div class="c-sec4__text">
@@ -451,7 +451,7 @@ const isKids = d.categoria === 'kids';
   .c-cta__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 100%);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
   }
 
   .c-cta__body {

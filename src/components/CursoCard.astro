@@ -74,12 +74,12 @@ const { titulo, slug, descricao_curta, categoria, imagem_card } = Astro.props;
     line-height: 1.7em;
     text-transform: none;
     letter-spacing: 0;
-    color: #FFFFFF;
+    color: var(--card-title-color, #FFFFFF);
     margin-bottom: 4px;
   }
 
   .curso-card__text {
-    color: var(--color-text-muted);
+    color: var(--card-text-color, var(--color-text-muted));
     font-size: 15px;
     line-height: 1.6;
   }

@@ -38,6 +38,16 @@ const { variant, slides, tabs, id } = Astro.props;
     text-align: center;
   }
 
+  .tc[data-variant="light"] {
+    --card-title-color: var(--color-text-dark);
+    --card-text-color: var(--color-text-subtle);
+  }
+
+  .tc[data-variant="dark"] {
+    --card-title-color: #FFFFFF;
+    --card-text-color: var(--color-text-muted);
+  }
+
   .tc-panel {
     display: none;
     position: relative;
