@@ -1,0 +1,1067 @@
+@font-face{font-display:swap;font-family:swiper-icons;src:url('data:application/font-woff;charset=utf-8;base64, d09GRgABAAAAAAZgABAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAAGRAAAABoAAAAci6qHkUdERUYAAAWgAAAAIwAAACQAYABXR1BPUwAABhQAAAAuAAAANuAY7+xHU1VCAAAFxAAAAFAAAABm2fPczU9TLzIAAAHcAAAASgAAAGBP9V5RY21hcAAAAkQAAACIAAABYt6F0cBjdnQgAAACzAAAAAQAAAAEABEBRGdhc3AAAAWYAAAACAAAAAj//wADZ2x5ZgAAAywAAADMAAAD2MHtryVoZWFkAAABbAAAADAAAAA2E2+eoWhoZWEAAAGcAAAAHwAAACQC9gDzaG10eAAAAigAAAAZAAAArgJkABFsb2NhAAAC0AAAAFoAAABaFQAUGG1heHAAAAG8AAAAHwAAACAAcABAbmFtZQAAA/gAAAE5AAACXvFdBwlwb3N0AAAFNAAAAGIAAACE5s74hXjaY2BkYGAAYpf5Hu/j+W2+MnAzMYDAzaX6QjD6/4//Bxj5GA8AuRwMYGkAPywL13jaY2BkYGA88P8Agx4j+/8fQDYfA1AEBWgDAIB2BOoAeNpjYGRgYNBh4GdgYgABEMnIABJzYNADCQAACWgAsQB42mNgYfzCOIGBlYGB0YcxjYGBwR1Kf2WQZGhhYGBiYGVmgAFGBiQQkOaawtDAoMBQxXjg/wEGPcYDDA4wNUA2CCgwsAAAO4EL6gAAeNpj2M0gyAACqxgGNWBkZ2D4/wMA+xkDdgAAAHjaY2BgYGaAYBkGRgYQiAHyGMF8FgYHIM3DwMHABGQrMOgyWDLEM1T9/w8UBfEMgLzE////P/5//f/V/xv+r4eaAAeMbAxwIUYmIMHEgKYAYjUcsDAwsLKxc3BycfPw8jEQA/gZBASFhEVExcQlJKWkZWTl5BUUlZRVVNXUNTQZBgMAAMR+E+gAEQFEAAAAKgAqACoANAA+AEgAUgBcAGYAcAB6AIQAjgCYAKIArAC2AMAAygDUAN4A6ADyAPwBBgEQARoBJAEuATgBQgFMAVYBYAFqAXQBfgGIAZIBnAGmAbIBzgHsAAB42u2NMQ6CUAyGW568x9AneYYgm4MJbhKFaExIOAVX8ApewSt4Bic4AfeAid3VOBixDxfPYEza5O+Xfi04YADggiUIULCuEJK8VhO4bSvpdnktHI5QCYtdi2sl8ZnXaHlqUrNKzdKcT8cjlq+rwZSvIVczNiezsfnP/uznmfPFBNODM2K7MTQ45YEAZqGP81AmGGcF3iPqOop0r1SPTaTbVkfUe4HXj97wYE+yNwWYxwWu4v1ugWHgo3S1XdZEVqWM7ET0cfnLGxWfkgR42o2PvWrDMBSFj/IHLaF0zKjRgdiVMwScNRAoWUoH78Y2icB/yIY09An6AH2Bdu/UB+yxopYshQiEvnvu0dURgDt8QeC8PDw7Fpji3fEA4z/PEJ6YOB5hKh4dj3EvXhxPqH/SKUY3rJ7srZ4FZnh1PMAtPhwP6fl2PMJMPDgeQ4rY8YT6Gzao0eAEA409DuggmTnFnOcSCiEiLMgxCiTI6Cq5DZUd3Qmp10vO0LaLTd2cjN4fOumlc7lUYbSQcZFkutRG7g6JKZKy0RmdLY680CDnEJ+UMkpFFe1RN7nxdVpXrC4aTtnaurOnYercZg2YVmLN/d/gczfEimrE/fs/bOuq29Zmn8tloORaXgZgGa78yO9/cnXm2BpaGvq25Dv9S4E9+5SIc9PqupJKhYFSSl47+Qcr1mYNAAAAeNptw0cKwkAAAMDZJA8Q7OUJvkLsPfZ6zFVERPy8qHh2YER+3i/BP83vIBLLySsoKimrqKqpa2hp6+jq6RsYGhmbmJqZSy0sraxtbO3sHRydnEMU4uR6yx7JJXveP7WrDycAAAAAAAH//wACeNpjYGRgYOABYhkgZgJCZgZNBkYGLQZtIJsFLMYAAAw3ALgAeNolizEKgDAQBCchRbC2sFER0YD6qVQiBCv/H9ezGI6Z5XBAw8CBK/m5iQQVauVbXLnOrMZv2oLdKFa8Pjuru2hJzGabmOSLzNMzvutpB3N42mNgZGBg4GKQYzBhYMxJLMlj4GBgAYow/P/PAJJhLM6sSoWKfWCAAwDAjgbRAAB42mNgYGBkAIIbCZo5IPrmUn0hGA0AO8EFTQAA');font-weight:400;font-style:normal}
+@font-face {
+	font-family: 'Conduit ITC';
+	font-display:swap;
+	src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/wp-content/uploads/2024/11/698ced83190636b0574e2046/698ced83190636b0574e2046-8b125ee67b84409b78adfbebab571363_Conduit_ITC_converted97fd041ced00f98557f1dc8895dc62db.woff2) format('woff2'), url('https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/./wp-content/uploads/2024/11/698ced83190636b0574e2046/698ced83190636b0574e2046-8b125ee67b84409b78adfbebab571363_Conduit_ITC.ttf');
+}
+@font-face{font-family:"Happy Icons";src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/wp-content/plugins/happy-elementor-addons/assets/fonts/698ced83190636b0574e2046/698ced83190636b0574e2046-49abf6f585b6c116e09c94124180b9cf_happy-icons_converted955440e9cfc889915711fb97ea17cccd.woff2) format('woff2'), url("https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/./wp-content/plugins/happy-elementor-addons/assets/fonts/698ced83190636b0574e2046/698ced83190636b0574e2046-026fa7bf232535e5f2e83a3aa548d5da_happy-icons.woff") format('woff'), url("https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/./wp-content/plugins/happy-elementor-addons/assets/fonts/happy-icons.svg698ced83190636b0574e2046/698ced83190636b0574e2046-3876a53df1b0bf15a06131385506df00_happy-icons.svg#happy-icons") format('svg');font-weight:normal;font-style:normal;font-display:swap;}
+@font-face{font-display:swap;font-family:'FontAwesome';src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/wp-content/plugins/elementor/assets/lib/font-awesome/fonts/698ced83190636b0574e2046/698ced83190636b0574e2046-af7ae505a9eed503f8b8e6982036873e_fontawesome-webfont_converted743d69f90fdb9d1af03376a055a50a6e.woff2) format('woff2'), url('https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/./wp-content/plugins/elementor/assets/lib/font-awesome/fonts/698ced83190636b0574e2046/698ced83190636b0574e2046-674f50d287a8c48dc19ba404d20fe713_fontawesome-webfont.eot'), url('https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/./wp-content/plugins/elementor/assets/lib/font-awesome/fonts/698ced83190636b0574e2046/698ced83190636b0574e2046-674f50d287a8c48dc19ba404d20fe713_fontawesome-webfont.eot'), url('https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/./wp-content/plugins/elementor/assets/lib/font-awesome/fonts/698ced83190636b0574e2046/698ced83190636b0574e2046-fee66e712a8a08eef5805a46892932ad_fontawesome-webfont.woff'), url('https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/./wp-content/plugins/elementor/assets/lib/font-awesome/fonts/698ced83190636b0574e2046/698ced83190636b0574e2046-b06871f281fee6b241d60582ae9369b9_fontawesome-webfont.ttf'), url('https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/./wp-content/plugins/elementor/assets/lib/font-awesome/fonts/698ced83190636b0574e2046/698ced83190636b0574e2046-912ec66d7572ff821749319396470bde_fontawesome-webfont.svg');font-weight:normal;font-style:normal}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 300;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-b93b37e39e028c5c73f61fa0000be963_U9MH6cuh-mLQlC4BKCtayOfARkSVq77UJFcK_converted26f42f640c4426424c269729410189f8.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 300;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-701af3d6ff1d333084ba23b3747d81aa_U9MH6cuh-mLQlC4BKCtayOfARkSVq7_UJFcK_converted26f42f640c4426424c269729410189f8.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 300;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-24e29e2cc417a7562a56326df03e8cba_U9MH6cuh-mLQlC4BKCtayOfARkSVq7HUJA_convertede282eb8aee4708a85f122e57a1d5a9bf.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 400;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-b93b37e39e028c5c73f61fa0000be963_U9MH6cuh-mLQlC4BKCtayOfARkSVq77UJFcK_converted26f42f640c4426424c269729410189f8.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 400;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-701af3d6ff1d333084ba23b3747d81aa_U9MH6cuh-mLQlC4BKCtayOfARkSVq7_UJFcK_converted26f42f640c4426424c269729410189f8.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 400;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-24e29e2cc417a7562a56326df03e8cba_U9MH6cuh-mLQlC4BKCtayOfARkSVq7HUJA_convertede282eb8aee4708a85f122e57a1d5a9bf.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 500;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-b93b37e39e028c5c73f61fa0000be963_U9MH6cuh-mLQlC4BKCtayOfARkSVq77UJFcK_converted26f42f640c4426424c269729410189f8.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 500;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-701af3d6ff1d333084ba23b3747d81aa_U9MH6cuh-mLQlC4BKCtayOfARkSVq7_UJFcK_converted26f42f640c4426424c269729410189f8.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 500;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-24e29e2cc417a7562a56326df03e8cba_U9MH6cuh-mLQlC4BKCtayOfARkSVq7HUJA_convertede282eb8aee4708a85f122e57a1d5a9bf.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 600;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-b93b37e39e028c5c73f61fa0000be963_U9MH6cuh-mLQlC4BKCtayOfARkSVq77UJFcK_converted26f42f640c4426424c269729410189f8.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 600;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-701af3d6ff1d333084ba23b3747d81aa_U9MH6cuh-mLQlC4BKCtayOfARkSVq7_UJFcK_converted26f42f640c4426424c269729410189f8.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 600;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-24e29e2cc417a7562a56326df03e8cba_U9MH6cuh-mLQlC4BKCtayOfARkSVq7HUJA_convertede282eb8aee4708a85f122e57a1d5a9bf.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 700;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-b93b37e39e028c5c73f61fa0000be963_U9MH6cuh-mLQlC4BKCtayOfARkSVq77UJFcK_converted26f42f640c4426424c269729410189f8.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 700;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-701af3d6ff1d333084ba23b3747d81aa_U9MH6cuh-mLQlC4BKCtayOfARkSVq7_UJFcK_converted26f42f640c4426424c269729410189f8.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 700;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-24e29e2cc417a7562a56326df03e8cba_U9MH6cuh-mLQlC4BKCtayOfARkSVq7HUJA_convertede282eb8aee4708a85f122e57a1d5a9bf.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 800;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-b93b37e39e028c5c73f61fa0000be963_U9MH6cuh-mLQlC4BKCtayOfARkSVq77UJFcK_converted26f42f640c4426424c269729410189f8.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 800;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-701af3d6ff1d333084ba23b3747d81aa_U9MH6cuh-mLQlC4BKCtayOfARkSVq7_UJFcK_converted26f42f640c4426424c269729410189f8.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 800;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-24e29e2cc417a7562a56326df03e8cba_U9MH6cuh-mLQlC4BKCtayOfARkSVq7HUJA_convertede282eb8aee4708a85f122e57a1d5a9bf.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 900;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-b93b37e39e028c5c73f61fa0000be963_U9MH6cuh-mLQlC4BKCtayOfARkSVq77UJFcK_converted26f42f640c4426424c269729410189f8.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 900;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-701af3d6ff1d333084ba23b3747d81aa_U9MH6cuh-mLQlC4BKCtayOfARkSVq7_UJFcK_converted26f42f640c4426424c269729410189f8.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 900;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-24e29e2cc417a7562a56326df03e8cba_U9MH6cuh-mLQlC4BKCtayOfARkSVq7HUJA_convertede282eb8aee4708a85f122e57a1d5a9bf.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 100;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-23dd4c95b5107b8f6536cb202c5b9b8c_pxiAyp8kv8JHgFVrJJLmE0tDMPKzSQ_convertedc07afb06ffbb92b068f174000ae80382.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 100;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-4144aba297de048d98676a4a0e4e0558_pxiAyp8kv8JHgFVrJJLmE0tMMPKzSQ_converteddcdef1c0041c14b7404e866d6524da13.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 100;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-acd438d2fbb9a101c703f916d0567425_pxiAyp8kv8JHgFVrJJLmE0tCMPI_converted74f262b072dafff89f648f9c74f0fbb6.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 200;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-ffb17caa08e75f1d1d31a7bb7144a822_pxiDyp8kv8JHgFVrJJLmv1pVFteOcEg_converted6f1340881ab83a06309e5bcda5201992.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 200;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-5961f56b674f917283cfc75cfe3afc5f_pxiDyp8kv8JHgFVrJJLmv1pVGdeOcEg_converted4a37248dadaadd5c7f7ea6e2a7855889.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 200;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-a51528d2000e9b4c894c275cc5722adb_pxiDyp8kv8JHgFVrJJLmv1pVF9eO_converted9c7776a2ab295897b8eef0c1b442ca6e.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 300;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-1ac1b6e0107a30dc4172415c779f825d_pxiDyp8kv8JHgFVrJJLm21lVFteOcEg_convertededf32654106b817dd4156d2c29a12566.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 300;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-2e2c665494adb1e4a7dc1bd81f160026_pxiDyp8kv8JHgFVrJJLm21lVGdeOcEg_convertede6e13f8ec3e6615efb714a824851526a.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 300;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-2c12ab3a0b1db8654af95a12a6320231_pxiDyp8kv8JHgFVrJJLm21lVF9eO_converted2de88ccb1b83100e749d44abb3f5a0ce.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 400;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-b58c42967ef15601f1a7e66089519ca0_pxiGyp8kv8JHgFVrJJLucXtAKPY_converteda6ebe4163d6edd33e645c1a7af0aecc6.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 400;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-3554826b93187f4eff93edd76a5aff33_pxiGyp8kv8JHgFVrJJLufntAKPY_converted3713c982c472515be7201c775a8e4465.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 400;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-a242ba0df3a128a2cab929a8c45d5056_pxiGyp8kv8JHgFVrJJLucHtA_convertedba51b242b71bfe935a393c4e9b480d7b.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 500;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-22f8a264916b65d0063b659b3ec80e8d_pxiDyp8kv8JHgFVrJJLmg1hVFteOcEg_converted0bde1d735fdbf1eabc4fa213c1aedc0e.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 500;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-cb5f077808bc172a98c5f029d263ce15_pxiDyp8kv8JHgFVrJJLmg1hVGdeOcEg_converted61c6bafc9b82c1c480404301c7784449.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 500;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-88042d51a299f20ab0ddf917838fe403_pxiDyp8kv8JHgFVrJJLmg1hVF9eO_convertedfe67de1685fb8e82fef69533f1c4bf4f.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 600;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-9876e35b25e64818656e0b0fe1c7ce46_pxiDyp8kv8JHgFVrJJLmr19VFteOcEg_converted947d48a1a9c51c8a9b178a74a1ce8f28.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 600;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-374d80280376a0a01df0899f657d09bd_pxiDyp8kv8JHgFVrJJLmr19VGdeOcEg_convertede30ce212c4abb189eacf675e61633dd8.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 600;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-267ebe38acb78ca90441cdb3f0f44b7d_pxiDyp8kv8JHgFVrJJLmr19VF9eO_converted8db9570b032d4c7b3baeb9f0a28449f0.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 700;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-3a8ea8ba5c624512d65372c278c6665f_pxiDyp8kv8JHgFVrJJLmy15VFteOcEg_converted901bfa312246e71fc2f570138fe43f1e.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 700;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-7f50df0abca8ff8f16c96787c18bc2be_pxiDyp8kv8JHgFVrJJLmy15VGdeOcEg_converted4ce56a7716812b7e89d8f6c666f98852.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 700;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-858549c2cb50c37c733cfa191fdb07ea_pxiDyp8kv8JHgFVrJJLmy15VF9eO_convertedf9b7d021bc92cff4381c5dc9339c6865.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 800;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-e8103abd50f3e3c7215cae17828af6e4_pxiDyp8kv8JHgFVrJJLm111VFteOcEg_convertedc9b995bfdf943de778dd155348268199.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 800;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-cd4d43d525ef5d07eb6ced88ef8e2c6a_pxiDyp8kv8JHgFVrJJLm111VGdeOcEg_convertedfbd97ccac0c0fcb515e63c3d4c35bc07.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 800;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-613d05fdd4da294c041ffac04802b86b_pxiDyp8kv8JHgFVrJJLm111VF9eO_convertedd788d330e48d4996417a674f21c17e2f.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 900;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-197989e1f95f9189d357c2520f2b3851_pxiDyp8kv8JHgFVrJJLm81xVFteOcEg_converted87710e117b57b7a350e81c028bf40422.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 900;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-125a30a9c05a987b1ed3befde90bc42d_pxiDyp8kv8JHgFVrJJLm81xVGdeOcEg_converted8b873259b7dbe6b553551ff399253b7a.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 900;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-c6f04b95e5ab4580b45e6cc8fe41f58b_pxiDyp8kv8JHgFVrJJLm81xVF9eO_converted1738635b417d9382ee7ec8e6207e174d.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 100;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-868eaa5e23a23de6fa1991d959f88cba_pxiGyp8kv8JHgFVrLPTucXtAKPY_converted9516220097d9703523e32a536ebbfcf1.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 100;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-95a801a2cfc352ee7daa1652f07144fd_pxiGyp8kv8JHgFVrLPTufntAKPY_convertedaf38e3340188914dff014bc598d61c97.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 100;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-15ef609d3bea2ccc8a36910ba440e1f3_pxiGyp8kv8JHgFVrLPTucHtA_converteded5a30a73a0cebdc1a26b7693ebfce45.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-3afc2ae9e50fc98c40cf6ea20a31b98f_pxiByp8kv8JHgFVrLFj_Z11lFc-K_converted1cdf94a25910f5336fb2915562e958da.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-9b30526557262d431438db3a8f233870_pxiByp8kv8JHgFVrLFj_Z1JlFc-K_converteda9938dddfb2f3525a9ac7c1e9e47740c.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-a7f7eebec745ef48ccf7a3d08c66d84a_pxiByp8kv8JHgFVrLFj_Z1xlFQ_convertedcdadbcf67e17c6fa845742a0bd8be2b1.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-d6f4101841118d6d8886f20832cda72c_pxiByp8kv8JHgFVrLDz8Z11lFc-K_converted0ae79d262f6f4f89934bd6b36ae3364d.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-264b2ba2a496b6ded03fb14f893ad1b4_pxiByp8kv8JHgFVrLDz8Z1JlFc-K_converteddda4767f080698c25b8482499731a07f.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-8d91ec1ca2d8b56640a47117e313a3e9_pxiByp8kv8JHgFVrLDz8Z1xlFQ_convertedf76d60ba10cd2d44444a09db54b80c2f.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-ae8f61e6b2b935b49a7ff31aecfc7696_pxiEyp8kv8JHgFVrJJbecmNE_convertedf572ce48d395e9dd44c5f6f6f586c892.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-90926c36b712cb131f3f890bbb8c477e_pxiEyp8kv8JHgFVrJJnecmNE_converted84a5e3e710abcbe2d450202be09fc78e.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-9212f6f9860f9fc6c69b02fedf6db8c3_pxiEyp8kv8JHgFVrJJfecg_converted32b5498534afc766a1621de2c7eaf427.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-0fba8261faa0b63ae4f44da4b870ba18_pxiByp8kv8JHgFVrLGT9Z11lFc-K_convertedcd4dd0b77bd4235f2e74112b801b2460.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-1f24684cbd726414ff212d90accc8cdf_pxiByp8kv8JHgFVrLGT9Z1JlFc-K_converted1394dbc9d16a7aabfea08330d13cb705.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-a09f2fccfee35b7247b08a1a266f0328_pxiByp8kv8JHgFVrLGT9Z1xlFQ_converted4d7c804d46cf0b180e585be8470aa0ce.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-8de9fc06981ebcc459c074bd14561833_pxiByp8kv8JHgFVrLEj6Z11lFc-K_convertedf5b2ebaf746ccb4e8ce1558530bd034e.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-a575b6d9df987563f85571f442cfe795_pxiByp8kv8JHgFVrLEj6Z1JlFc-K_convertede4384bdaa83742f4b3f71e0c91797feb.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-72993dddf88a63e8f226656f7de88e57_pxiByp8kv8JHgFVrLEj6Z1xlFQ_converteddc8aad229eb1b51861b1aa8426f94473.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-5854492aa44da1dbb0b73810db7688fc_pxiByp8kv8JHgFVrLCz7Z11lFc-K_converted205b88513969a55ec9a7c2baa6fdfa0d.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-367d2aa05bf0382d8bc48614fbaf8740_pxiByp8kv8JHgFVrLCz7Z1JlFc-K_convertedb0ea3f55ab0f9b91f7863fddc8a69519.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-25b0e113ca7cce3770d542736db26368_pxiByp8kv8JHgFVrLCz7Z1xlFQ_converted7e6ebb6f276c1d7d4e38977c8f0c3eca.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-cbad35f3803865c2778d684242d2c9d8_pxiByp8kv8JHgFVrLDD4Z11lFc-K_converted21705da567585e8c6a1c0eda99bd2335.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-6b2835047d683902c68c1faef3a5e94d_pxiByp8kv8JHgFVrLDD4Z1JlFc-K_converted8f0b486d25cff827f3d2e983c83f2a49.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-af4d371a10271dafeb343f1eace762bc_pxiByp8kv8JHgFVrLDD4Z1xlFQ_converted8d1c6852daa15324e99f3b2b1f2a5ab4.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 900;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-52ec0fb08f1ae2feb47d232072d49a11_pxiByp8kv8JHgFVrLBT5Z11lFc-K_converted6527b80ae9ee9a3fb91f70dcff17693d.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 900;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-cbff460e5ab95e94bc4bfa19125bc9ee_pxiByp8kv8JHgFVrLBT5Z1JlFc-K_converted9aaf971691efcb80bfb56ba11be2f2d6.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 900;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br//wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-5426bf50c8455aab7a3e89d1138eb969_pxiByp8kv8JHgFVrLBT5Z1xlFQ_convertedbf5d681e2ddbf741d02c47f683f7c8d3.woff2) format('woff2');
+}
+
+
+@font-face{font-family:"Happy Icons";src:url("https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/./wp-content/plugins/happy-elementor-addons/assets/fonts/698ced83190636b0574e2046/698ced83190636b0574e2046-49abf6f585b6c116e09c94124180b9cf_happy-icons.woff2") format("woff2"),url("https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/./wp-content/plugins/happy-elementor-addons/assets/fonts/698ced83190636b0574e2046/698ced83190636b0574e2046-026fa7bf232535e5f2e83a3aa548d5da_happy-icons.woff") format("woff"),url("https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/./wp-content/plugins/happy-elementor-addons/assets/fonts/happy-icons.svg698ced83190636b0574e2046/698ced83190636b0574e2046-3876a53df1b0bf15a06131385506df00_happy-icons.svg#happy-icons") format("svg");font-weight:normal;font-style:normal;font-display:swap;; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+	font-family: 'Conduit ITC';
+	font-display:swap;
+	src: url('https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/./wp-content/uploads/2024/11/698ced83190636b0574e2046/698ced83190636b0574e2046-8b125ee67b84409b78adfbebab571363_Conduit_ITC.ttf') format('truetype');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face{font-display:swap;font-family:'FontAwesome';src:url('https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/./wp-content/plugins/elementor/assets/lib/font-awesome/fonts/698ced83190636b0574e2046/698ced83190636b0574e2046-674f50d287a8c48dc19ba404d20fe713_fontawesome-webfont.eot');src:url('https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/./wp-content/plugins/elementor/assets/lib/font-awesome/fonts/698ced83190636b0574e2046/698ced83190636b0574e2046-674f50d287a8c48dc19ba404d20fe713_fontawesome-webfont.eot') format('embedded-opentype'),url('https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/./wp-content/plugins/elementor/assets/lib/font-awesome/fonts/698ced83190636b0574e2046/698ced83190636b0574e2046-af7ae505a9eed503f8b8e6982036873e_fontawesome-webfont.woff2') format('woff2'),url('https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/./wp-content/plugins/elementor/assets/lib/font-awesome/fonts/698ced83190636b0574e2046/698ced83190636b0574e2046-fee66e712a8a08eef5805a46892932ad_fontawesome-webfont.woff') format('woff'),url('https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/./wp-content/plugins/elementor/assets/lib/font-awesome/fonts/698ced83190636b0574e2046/698ced83190636b0574e2046-b06871f281fee6b241d60582ae9369b9_fontawesome-webfont.ttf') format('truetype'),url('https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/anacamusica.com.br/./wp-content/plugins/elementor/assets/lib/font-awesome/fonts/698ced83190636b0574e2046/698ced83190636b0574e2046-912ec66d7572ff821749319396470bde_fontawesome-webfont.svg') format('svg');font-weight:normal;font-style:normal; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 300;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-b93b37e39e028c5c73f61fa0000be963_U9MH6cuh-mLQlC4BKCtayOfARkSVq77UJFcK.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 300;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-701af3d6ff1d333084ba23b3747d81aa_U9MH6cuh-mLQlC4BKCtayOfARkSVq7_UJFcK.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 300;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-24e29e2cc417a7562a56326df03e8cba_U9MH6cuh-mLQlC4BKCtayOfARkSVq7HUJA.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 400;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-b93b37e39e028c5c73f61fa0000be963_U9MH6cuh-mLQlC4BKCtayOfARkSVq77UJFcK.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 400;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-701af3d6ff1d333084ba23b3747d81aa_U9MH6cuh-mLQlC4BKCtayOfARkSVq7_UJFcK.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 400;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-24e29e2cc417a7562a56326df03e8cba_U9MH6cuh-mLQlC4BKCtayOfARkSVq7HUJA.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 500;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-701af3d6ff1d333084ba23b3747d81aa_U9MH6cuh-mLQlC4BKCtayOfARkSVq7_UJFcK.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 500;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-24e29e2cc417a7562a56326df03e8cba_U9MH6cuh-mLQlC4BKCtayOfARkSVq7HUJA.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 500;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-b93b37e39e028c5c73f61fa0000be963_U9MH6cuh-mLQlC4BKCtayOfARkSVq77UJFcK.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 600;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-b93b37e39e028c5c73f61fa0000be963_U9MH6cuh-mLQlC4BKCtayOfARkSVq77UJFcK.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 600;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-24e29e2cc417a7562a56326df03e8cba_U9MH6cuh-mLQlC4BKCtayOfARkSVq7HUJA.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 700;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-b93b37e39e028c5c73f61fa0000be963_U9MH6cuh-mLQlC4BKCtayOfARkSVq77UJFcK.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 700;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-24e29e2cc417a7562a56326df03e8cba_U9MH6cuh-mLQlC4BKCtayOfARkSVq7HUJA.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 600;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-701af3d6ff1d333084ba23b3747d81aa_U9MH6cuh-mLQlC4BKCtayOfARkSVq7_UJFcK.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 700;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-701af3d6ff1d333084ba23b3747d81aa_U9MH6cuh-mLQlC4BKCtayOfARkSVq7_UJFcK.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 800;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-b93b37e39e028c5c73f61fa0000be963_U9MH6cuh-mLQlC4BKCtayOfARkSVq77UJFcK.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 800;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-701af3d6ff1d333084ba23b3747d81aa_U9MH6cuh-mLQlC4BKCtayOfARkSVq7_UJFcK.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 800;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-24e29e2cc417a7562a56326df03e8cba_U9MH6cuh-mLQlC4BKCtayOfARkSVq7HUJA.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 900;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-b93b37e39e028c5c73f61fa0000be963_U9MH6cuh-mLQlC4BKCtayOfARkSVq77UJFcK.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 900;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-24e29e2cc417a7562a56326df03e8cba_U9MH6cuh-mLQlC4BKCtayOfARkSVq7HUJA.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 100;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-23dd4c95b5107b8f6536cb202c5b9b8c_pxiAyp8kv8JHgFVrJJLmE0tDMPKzSQ.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 100;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-4144aba297de048d98676a4a0e4e0558_pxiAyp8kv8JHgFVrJJLmE0tMMPKzSQ.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 100;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-acd438d2fbb9a101c703f916d0567425_pxiAyp8kv8JHgFVrJJLmE0tCMPI.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-style: normal;
+  font-weight: 900;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/darkergrotesque/v10/698ced83190636b0574e2046/698ced83190636b0574e2046-701af3d6ff1d333084ba23b3747d81aa_U9MH6cuh-mLQlC4BKCtayOfARkSVq7_UJFcK.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 200;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-5961f56b674f917283cfc75cfe3afc5f_pxiDyp8kv8JHgFVrJJLmv1pVGdeOcEg.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 200;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-ffb17caa08e75f1d1d31a7bb7144a822_pxiDyp8kv8JHgFVrJJLmv1pVFteOcEg.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 200;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-a51528d2000e9b4c894c275cc5722adb_pxiDyp8kv8JHgFVrJJLmv1pVF9eO.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 300;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-1ac1b6e0107a30dc4172415c779f825d_pxiDyp8kv8JHgFVrJJLm21lVFteOcEg.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 300;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-2e2c665494adb1e4a7dc1bd81f160026_pxiDyp8kv8JHgFVrJJLm21lVGdeOcEg.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 300;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-2c12ab3a0b1db8654af95a12a6320231_pxiDyp8kv8JHgFVrJJLm21lVF9eO.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 400;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-a242ba0df3a128a2cab929a8c45d5056_pxiGyp8kv8JHgFVrJJLucHtA.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 400;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-3554826b93187f4eff93edd76a5aff33_pxiGyp8kv8JHgFVrJJLufntAKPY.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 500;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-22f8a264916b65d0063b659b3ec80e8d_pxiDyp8kv8JHgFVrJJLmg1hVFteOcEg.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 400;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-b58c42967ef15601f1a7e66089519ca0_pxiGyp8kv8JHgFVrJJLucXtAKPY.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 500;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-88042d51a299f20ab0ddf917838fe403_pxiDyp8kv8JHgFVrJJLmg1hVF9eO.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 500;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-cb5f077808bc172a98c5f029d263ce15_pxiDyp8kv8JHgFVrJJLmg1hVGdeOcEg.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 600;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-9876e35b25e64818656e0b0fe1c7ce46_pxiDyp8kv8JHgFVrJJLmr19VFteOcEg.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 600;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-374d80280376a0a01df0899f657d09bd_pxiDyp8kv8JHgFVrJJLmr19VGdeOcEg.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 600;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-267ebe38acb78ca90441cdb3f0f44b7d_pxiDyp8kv8JHgFVrJJLmr19VF9eO.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 700;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-3a8ea8ba5c624512d65372c278c6665f_pxiDyp8kv8JHgFVrJJLmy15VFteOcEg.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 700;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-7f50df0abca8ff8f16c96787c18bc2be_pxiDyp8kv8JHgFVrJJLmy15VGdeOcEg.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 700;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-858549c2cb50c37c733cfa191fdb07ea_pxiDyp8kv8JHgFVrJJLmy15VF9eO.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 800;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-e8103abd50f3e3c7215cae17828af6e4_pxiDyp8kv8JHgFVrJJLm111VFteOcEg.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 800;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-cd4d43d525ef5d07eb6ced88ef8e2c6a_pxiDyp8kv8JHgFVrJJLm111VGdeOcEg.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 800;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-613d05fdd4da294c041ffac04802b86b_pxiDyp8kv8JHgFVrJJLm111VF9eO.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 900;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-197989e1f95f9189d357c2520f2b3851_pxiDyp8kv8JHgFVrJJLm81xVFteOcEg.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 900;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-c6f04b95e5ab4580b45e6cc8fe41f58b_pxiDyp8kv8JHgFVrJJLm81xVF9eO.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 900;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-125a30a9c05a987b1ed3befde90bc42d_pxiDyp8kv8JHgFVrJJLm81xVGdeOcEg.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 100;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-868eaa5e23a23de6fa1991d959f88cba_pxiGyp8kv8JHgFVrLPTucXtAKPY.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 100;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-95a801a2cfc352ee7daa1652f07144fd_pxiGyp8kv8JHgFVrLPTufntAKPY.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 100;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-15ef609d3bea2ccc8a36910ba440e1f3_pxiGyp8kv8JHgFVrLPTucHtA.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-3afc2ae9e50fc98c40cf6ea20a31b98f_pxiByp8kv8JHgFVrLFj_Z11lFc-K.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-a7f7eebec745ef48ccf7a3d08c66d84a_pxiByp8kv8JHgFVrLFj_Z1xlFQ.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-264b2ba2a496b6ded03fb14f893ad1b4_pxiByp8kv8JHgFVrLDz8Z1JlFc-K.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-9b30526557262d431438db3a8f233870_pxiByp8kv8JHgFVrLFj_Z1JlFc-K.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-d6f4101841118d6d8886f20832cda72c_pxiByp8kv8JHgFVrLDz8Z11lFc-K.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-8d91ec1ca2d8b56640a47117e313a3e9_pxiByp8kv8JHgFVrLDz8Z1xlFQ.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-ae8f61e6b2b935b49a7ff31aecfc7696_pxiEyp8kv8JHgFVrJJbecmNE.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-9212f6f9860f9fc6c69b02fedf6db8c3_pxiEyp8kv8JHgFVrJJfecg.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-90926c36b712cb131f3f890bbb8c477e_pxiEyp8kv8JHgFVrJJnecmNE.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-1f24684cbd726414ff212d90accc8cdf_pxiByp8kv8JHgFVrLGT9Z1JlFc-K.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-a09f2fccfee35b7247b08a1a266f0328_pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-8de9fc06981ebcc459c074bd14561833_pxiByp8kv8JHgFVrLEj6Z11lFc-K.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-0fba8261faa0b63ae4f44da4b870ba18_pxiByp8kv8JHgFVrLGT9Z11lFc-K.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-a575b6d9df987563f85571f442cfe795_pxiByp8kv8JHgFVrLEj6Z1JlFc-K.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-72993dddf88a63e8f226656f7de88e57_pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-367d2aa05bf0382d8bc48614fbaf8740_pxiByp8kv8JHgFVrLCz7Z1JlFc-K.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-25b0e113ca7cce3770d542736db26368_pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-6b2835047d683902c68c1faef3a5e94d_pxiByp8kv8JHgFVrLDD4Z1JlFc-K.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-5854492aa44da1dbb0b73810db7688fc_pxiByp8kv8JHgFVrLCz7Z11lFc-K.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 900;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-cbff460e5ab95e94bc4bfa19125bc9ee_pxiByp8kv8JHgFVrLBT5Z1JlFc-K.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-cbad35f3803865c2778d684242d2c9d8_pxiByp8kv8JHgFVrLDD4Z11lFc-K.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 900;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-52ec0fb08f1ae2feb47d232072d49a11_pxiByp8kv8JHgFVrLBT5Z11lFc-K.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 900;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-5426bf50c8455aab7a3e89d1138eb969_pxiByp8kv8JHgFVrLBT5Z1xlFQ.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-display:swap;
+  src: url(https://anacamusica.com.br/wp-content/uploads/al_opt_content/FONT/fonts.gstatic.com/./s/poppins/v24/698ced83190636b0574e2046/698ced83190636b0574e2046-af4d371a10271dafeb343f1eace762bc_pxiByp8kv8JHgFVrLDD4Z1xlFQ.woff2) format('woff2');
+; unicode-range: U+0100-1FFF, U+2070-FFFF, U+10000-1FFFF, U+20000-2FFFF, U+30000-3FFFF, U+40000-4FFFF, U+50000-5FFFF, U+60000-6FFFF, U+70000-7FFFF, U+80000-8FFFF, U+90000-9FFFF, U+A0000-AFFFF, U+B0000-BFFFF, U+C0000-CFFFF, U+D0000-DFFFF, U+E0000-EFFFF, U+F0000-FFFFF, U+100000-10FFFF;}

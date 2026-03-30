@@ -1,0 +1,10 @@
+.elementor-2220 .elementor-element.elementor-element-79202eb1{--display:flex;--flex-direction:column;--container-widget-width:100%;--container-widget-height:initial;--container-widget-flex-grow:0;--container-widget-align-self:initial;--flex-wrap-mobile:wrap;}.elementor-2220 .elementor-element.elementor-element-6d4aad5c{--e-image-carousel-slides-to-show:4;}.elementor-2220 .elementor-element.elementor-element-6b215415{--e-image-carousel-slides-to-show:4;}.elementor-2220 .elementor-element.elementor-element-3238ab11{--e-image-carousel-slides-to-show:4;}.elementor-2220 .elementor-element.elementor-element-6c7687b7{--e-image-carousel-slides-to-show:4;}@media(max-width:767px){.elementor-2220 .elementor-element.elementor-element-6d4aad5c{--e-image-carousel-slides-to-show:1;}.elementor-2220 .elementor-element.elementor-element-6b215415{--e-image-carousel-slides-to-show:1;}.elementor-2220 .elementor-element.elementor-element-3238ab11{--e-image-carousel-slides-to-show:1;}}/* Start custom CSS */<style>
+.linear-caroussel .swiper-wrapper {
+    -webkit-transition-timing-function: linear!important;
+    transition-timing-function: linear!important;
+}
+
+.linear-caroussel .swiper-slide {
+    width: fit-content!important;
+}
+</style>/* End custom CSS */

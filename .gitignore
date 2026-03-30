@@ -22,3 +22,10 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Wrangler
+.wrangler/
+.dev.vars
+
+# Claude Code — só config local, skills ficam no repo
+.claude/settings.local.json
