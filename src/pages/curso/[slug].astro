@@ -403,13 +403,21 @@ const isKids = d.categoria === 'kids';
   }
 
   .c-sec4__text {
-    padding: 40px var(--container-padding) 40px 30px;
+    padding: 40px var(--container-padding) 40px var(--container-padding);
+  }
+
+  .c-sec4__img {
+    padding-inline: var(--container-padding);
   }
 
   @media (min-width: 768px) {
     .c-sec4__text {
       padding: 40px 0 40px 30px;
       max-width: calc(var(--container-max) / 2);
+    }
+
+    .c-sec4__img {
+      padding-inline: 0;
     }
   }
 

@@ -28,7 +28,7 @@
   --space-2xl: 8rem;
 
   --container-max: 1200px;
-  --container-padding: clamp(10px, 3vw, 2rem);
+  --container-padding: clamp(20px, 5vw, 2rem);
 
   /* Typography scale — from WP Elementor site-settings.json */
   --text-sm: 15px;
