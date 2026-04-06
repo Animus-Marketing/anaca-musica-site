@@ -48,8 +48,8 @@ const isKids = d.categoria === 'kids';
       <section class="c-hero" style="background-image: url('/images/cursos/microfone-hero.webp')">
         <div class="c-hero__overlay"></div>
         <div class="container c-hero__body">
-          <h6 class="c-hero__cat">{d.titulo}</h6>
-          <h2 class="c-hero__title">Crescendo com a música!</h2>
+          <h6 class="c-hero__cat" data-reveal="fade-up">{d.titulo}</h6>
+          <h2 class="c-hero__title" data-reveal="fade-up" data-reveal-delay="150">Crescendo com a música!</h2>
         </div>
       </section>
 
@@ -57,7 +57,7 @@ const isKids = d.categoria === 'kids';
       <section class="kids-quem">
         <div class="kids-quem__inner">
           <div class="kids-quem__spacer"></div>
-          <div class="kids-quem__text">
+          <div class="kids-quem__text" data-reveal="fade-left">
             <h6>Quem somos</h6>
             <h2>Aqui, aprender é uma alegria.</h2>
             <h4>Música, expressão e diversão em um só lugar.</h4>
@@ -73,7 +73,7 @@ const isKids = d.categoria === 'kids';
             <h6>Níveis das aulas</h6>
             <h2>Música para cada fase da infância.</h2>
             <div class="kids-grid">
-              <div class="kids-card">
+              <div class="kids-card" data-reveal="fade-up" data-reveal-delay="0">
                 <img src="/images/cursos/musicalizacao-para-bebes.webp" alt="Musicalização para Bebês" loading="lazy" width="800" height="534" />
                 <div class="kids-card__header">
                   <h4>Musicalização para bebês</h4>
@@ -81,7 +81,7 @@ const isKids = d.categoria === 'kids';
                 </div>
                 <p>As aulas são pensadas para estimular o desenvolvimento cognitivo, motor e emocional, sempre com a participação dos responsáveis.</p>
               </div>
-              <div class="kids-card">
+              <div class="kids-card" data-reveal="fade-up" data-reveal-delay="150">
                 <img src="/images/cursos/instrumentalizacao-infantil.webp" alt="Instrumentalização Infantil" loading="lazy" width="800" height="534" />
                 <div class="kids-card__header">
                   <h4>Instrumentalização infantil</h4>
@@ -89,7 +89,7 @@ const isKids = d.categoria === 'kids';
                 </div>
                 <p>As aulas estimulam coordenação motora, atenção, expressão e socialização, sempre respeitando a fase de desenvolvimento de cada criança.</p>
               </div>
-              <div class="kids-card">
+              <div class="kids-card" data-reveal="fade-up" data-reveal-delay="300">
                 <img src="/images/cursos/area-jovem.webp" alt="Curso de Área" loading="lazy" width="800" height="534" />
                 <div class="kids-card__header">
                   <h4>Curso de área</h4>
@@ -122,8 +122,8 @@ const isKids = d.categoria === 'kids';
       <section class="c-hero" style="background-image: url('/images/cursos/microfone-hero.webp')">
         <div class="c-hero__overlay"></div>
         <div class="container c-hero__body">
-          <h6 class="c-hero__cat">{catLabel}</h6>
-          <h2 class="c-hero__title">{d.titulo}</h2>
+          <h6 class="c-hero__cat" data-reveal="fade-up">{catLabel}</h6>
+          <h2 class="c-hero__title" data-reveal="fade-up" data-reveal-delay="150">{d.titulo}</h2>
         </div>
       </section>
 
@@ -136,7 +136,7 @@ const isKids = d.categoria === 'kids';
                 <div class="c-sec2__gradient"></div>
               </div>
             )}
-            <div class="c-sec2__text-col">
+            <div class="c-sec2__text-col" data-reveal="fade-left">
               <hr class="divider" />
               {d.secao2_h6 && <h6>{d.secao2_h6}</h6>}
               {d.secao2_h2 && <h2>{d.secao2_h2}</h2>}
@@ -150,14 +150,14 @@ const isKids = d.categoria === 'kids';
       <section class="c-sec3">
         <div class="container">
           <div class="c-sec3__grid">
-            <div class="c-sec3__text">
+            <div class="c-sec3__text" data-reveal="fade-right">
               {d.secao3_h6 && <h6>{d.secao3_h6}</h6>}
               {d.secao3_h2 && <h2>{d.secao3_h2}</h2>}
               {d.secao3_h4 && <h4>{d.secao3_h4}</h4>}
               {d.secao3_corpo && d.secao3_corpo.split('\n\n').map(p => <p>{p}</p>)}
             </div>
             {hasSecao2 && (
-              <div class="c-sec3__img">
+              <div class="c-sec3__img" data-reveal="fade-left">
                 <img src={secao2Img} alt={d.titulo} loading="lazy" />
               </div>
             )}
@@ -169,11 +169,11 @@ const isKids = d.categoria === 'kids';
       <section class="c-sec4">
         <div class="c-sec4__grid">
           {hasSecao3 && (
-            <div class="c-sec4__img">
+            <div class="c-sec4__img" data-reveal="fade-right">
               <img src={secao3Img} alt={d.titulo} loading="lazy" />
             </div>
           )}
-          <div class="c-sec4__text">
+          <div class="c-sec4__text" data-reveal="fade-left">
             {d.secao4_h6 && <h6>{d.secao4_h6}</h6>}
             {d.secao4_h2 && <h2>{d.secao4_h2}</h2>}
             {d.secao4_h4 && <h4>{d.secao4_h4}</h4>}
@@ -189,7 +189,7 @@ const isKids = d.categoria === 'kids';
       >
         <div class="c-cta__overlay"></div>
         <div class="container c-cta__body">
-          <div class="c-cta__copy">
+          <div class="c-cta__copy" data-reveal="fade-up">
             {d.cta_h6 && <h6>{d.cta_h6}</h6>}
             <h2>{d.cta_h2 || `tocar ${d.titulo.toLowerCase()} no Anacã é viver a música de forma autêntica`}</h2>
             <p>{d.cta_p || 'respeitando o tempo de cada um e valorizando o prazer de tocar.'}</p>

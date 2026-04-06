@@ -28,12 +28,12 @@ const { Content } = await render(evento);
   />
 
   <div class="container section">
-    <div class="prose evento-prose">
+    <div class="prose evento-prose" data-reveal="fade-up">
       <Content />
     </div>
 
     {evento.data.galeria && evento.data.galeria.length > 0 && (
-      <div class="evento-galeria">
+      <div class="evento-galeria" data-reveal="fade-in">
         {evento.data.galeria.map((src, i) => (
           <a href={src} class="evento-galeria__item" data-lightbox="galeria">
             <img

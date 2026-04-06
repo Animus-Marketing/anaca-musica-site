@@ -363,28 +363,53 @@ const { variant, slides, tabs, id } = Astro.props;
       let startX: number;
       let scrollLeft: number;
       let hasDragged = false;
+      let lastX: number;
+      let lastTime: number;
+      let velocity = 0;
+      let momentumId = 0;
+
+      function momentumScroll() {
+        if (Math.abs(velocity) < 0.5) return;
+        track.scrollLeft += velocity;
+        velocity *= 0.92;
+        momentumId = requestAnimationFrame(momentumScroll);
+      }
 
       track.addEventListener('mousedown', (e) => {
         isDown = true;
         hasDragged = false;
+        cancelAnimationFrame(momentumId);
         track.style.scrollBehavior = 'auto';
+        track.style.scrollSnapType = 'none';
         startX = e.pageX;
+        lastX = e.pageX;
+        lastTime = Date.now();
         scrollLeft = track.scrollLeft;
+        velocity = 0;
       });
 
-      track.addEventListener('mouseleave', () => {
+      function endDrag() {
+        if (!isDown) return;
         isDown = false;
         track.style.scrollBehavior = 'smooth';
-      });
+        track.style.scrollSnapType = '';
+        if (Math.abs(velocity) > 1) {
+          momentumId = requestAnimationFrame(momentumScroll);
+        }
+      }
 
-      track.addEventListener('mouseup', () => {
-        isDown = false;
-        track.style.scrollBehavior = 'smooth';
-      });
+      track.addEventListener('mouseleave', endDrag);
+      track.addEventListener('mouseup', endDrag);
 
       track.addEventListener('mousemove', (e) => {
         if (!isDown) return;
         e.preventDefault();
+        const now = Date.now();
+        const dx = e.pageX - lastX;
+        const dt = now - lastTime || 1;
+        velocity = -dx * (16 / dt);
+        lastX = e.pageX;
+        lastTime = now;
         const walk = e.pageX - startX;
         if (Math.abs(walk) > 5) hasDragged = true;
         track.scrollLeft = scrollLeft - walk;

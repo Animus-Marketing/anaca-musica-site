@@ -15,7 +15,7 @@ const { title, subtitles = [], backgroundImage, compact = false } = Astro.props;
 >
   <div class="hero__content">
     {subtitles.length > 0 && (
-      <div class="hero__subtitles">
+      <div class="hero__subtitles" data-reveal="fade-up">
         {subtitles.map(s => compact
           ? <h6 class="hero__subtitle">{s}</h6>
           : <span class="hero__subtitle">{s}</span>
@@ -23,8 +23,8 @@ const { title, subtitles = [], backgroundImage, compact = false } = Astro.props;
       </div>
     )}
     {compact
-      ? <h2 class="hero__title">{title}</h2>
-      : <h1 class="hero__title">{title}</h1>
+      ? <h2 class="hero__title" data-reveal="fade-up" data-reveal-delay="150">{title}</h2>
+      : <h1 class="hero__title" data-reveal="fade-up" data-reveal-delay="150">{title}</h1>
     }
     <slot />
   </div>

@@ -17,8 +17,8 @@ const eventos = (await getCollection('eventos'))
   />
 
   <div class="container section">
-    {eventos.map(evento => (
-      <div class="evento-item">
+    {eventos.map((evento, i) => (
+      <div class="evento-item" data-reveal="fade-up" data-reveal-delay={String(i * 100)}>
         <div class="evento-item__header">
           <h3 class="evento-item__title">
             <a href={`/evento/${evento.data.slug}/`}>{evento.data.titulo}</a>

@@ -57,7 +57,7 @@ function modalidadeLabel(mod: string): string {
 
   <div class="container section">
     <div class="prof-layout">
-      <div class="prof-layout__photo">
+      <div class="prof-layout__photo" data-reveal="fade-right">
         {prof.data.foto && (
           <img
             src={prof.data.foto}
@@ -69,18 +69,18 @@ function modalidadeLabel(mod: string): string {
         )}
       </div>
       <div class="prof-layout__info">
-        <h2 class="prof-layout__name">{prof.data.nome}</h2>
+        <h2 class="prof-layout__name" data-reveal="fade-up">{prof.data.nome}</h2>
 
         {prof.data.excerpt && (
-          <h4 class="prof-layout__excerpt">{prof.data.excerpt}</h4>
+          <h4 class="prof-layout__excerpt" data-reveal="fade-up" data-reveal-delay="100">{prof.data.excerpt}</h4>
         )}
 
-        <div class="prose prof-layout__bio">
+        <div class="prose prof-layout__bio" data-reveal="fade-up" data-reveal-delay="200">
           <Content />
         </div>
 
         {prof.data.modalidades.length > 0 && (
-          <div class="prof-layout__modalidades">
+          <div class="prof-layout__modalidades" data-reveal="fade-up" data-reveal-delay="300">
             {prof.data.modalidades.map(mod => {
               const slug = modalidadeToSlug(mod);
               const label = modalidadeLabel(mod);

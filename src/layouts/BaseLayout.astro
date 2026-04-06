@@ -40,6 +40,23 @@ const { title, description, image } = Astro.props;
     <slot />
   </main>
   <Footer />
+  <script>
+    const els = document.querySelectorAll('[data-reveal]');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target as HTMLElement;
+        const delay = el.dataset.revealDelay;
+        if (delay) {
+          setTimeout(() => el.classList.add('is-visible'), Number(delay));
+        } else {
+          el.classList.add('is-visible');
+        }
+        io.unobserve(el);
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
 

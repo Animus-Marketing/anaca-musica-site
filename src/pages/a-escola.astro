@@ -44,13 +44,15 @@ const porqueItems = [
     <div class="container">
       <div class="quem-somos-layout">
         <div class="quem-somos-content">
-          <SectionLabel
-            label="QUEM SOMOS"
-            title="Aulas de música de qualidade"
-            center={false}
-          />
-          <h4>Nossa escola reflete a paixão pela arte e pela educação musical.</h4>
-          <p>
+          <div data-reveal="fade-up">
+            <SectionLabel
+              label="QUEM SOMOS"
+              title="Aulas de música de qualidade"
+              center={false}
+            />
+          </div>
+          <h4 data-reveal="fade-up" data-reveal-delay="150">Nossa escola reflete a paixão pela arte e pela educação musical.</h4>
+          <p data-reveal="fade-up" data-reveal-delay="250">
             O Anacã Música, fundado em 2023 e integrado ao renomado Estúdio de Dança Anacã,
             nasceu com o propósito de tornar o aprendizado musical uma experiência divertida,
             acolhedora e transformadora. Aqui, os alunos começam a tocar desde a primeira aula,
@@ -65,8 +67,8 @@ const porqueItems = [
   <section class="section som-section">
     <div class="container som-container">
       <div class="som-text">
-        <h2 class="som-title">Onde o som ganha vida</h2>
-        <h4>Um espaço pensado para transformar cada aula em uma experiência única.</h4>
+        <h2 class="som-title" data-reveal="fade-up">Onde o som ganha vida</h2>
+        <h4 data-reveal="fade-up" data-reveal-delay="100">Um espaço pensado para transformar cada aula em uma experiência única.</h4>
         <p>
           Oferecemos 11 cursos livres – entre eles violão, piano, guitarra, bateria, canto
           e musicalização infantil – que atendem todas as idades e níveis, do iniciante ao
@@ -79,7 +81,7 @@ const porqueItems = [
           o talento individual e o prazer de aprender.
         </p>
       </div>
-      <div class="cursos-list">
+      <div class="cursos-list" data-reveal="fade-left">
         <span class="curso-label">Violão</span>
         <span class="curso-label">Piano</span>
         <span class="curso-label">Canto</span>
@@ -102,7 +104,7 @@ const porqueItems = [
 
       <!-- Álvaro Carolei -->
       <div class="split diretor">
-        <div class="diretor__foto">
+        <div class="diretor__foto" data-reveal="fade-right">
           <img
             src="/images/alvaro.webp"
             alt="Álvaro Carolei — Sócio-Diretor do Anacã Música"
@@ -110,7 +112,7 @@ const porqueItems = [
             height="570"
           />
         </div>
-        <div class="diretor__bio">
+        <div class="diretor__bio" data-reveal="fade-left">
           <h4 class="text-intro">O Anacã Música é liderado pelo Sócio-Diretor Álvaro Carolei.</h4>
           <p>
             Músico profissional formado pela FMU (FAAM), com especialização em Técnica Vocal
@@ -125,7 +127,7 @@ const porqueItems = [
 
       <!-- Ana Maria Diniz -->
       <div class="split split--reverse diretor">
-        <div class="diretor__bio">
+        <div class="diretor__bio" data-reveal="fade-right">
           <h4 class="text-intro">Ao lado de Ana Maria Diniz, também sócia do Anacã Música e fundadora do Estúdio de Dança Anacã.</h4>
           <p>
             É empresária, educadora e cofundadora do Estúdio Anacã, criado com o propósito
@@ -139,7 +141,7 @@ const porqueItems = [
             mente e alma.
           </p>
         </div>
-        <div class="diretor__foto">
+        <div class="diretor__foto" data-reveal="fade-left">
           <img
             src="/images/ana.webp"
             alt="Ana Maria Diniz — Sócia do Anacã Música"
@@ -151,7 +153,7 @@ const porqueItems = [
 
       <!-- Helô Gouvêa -->
       <div class="split diretor">
-        <div class="diretor__foto">
+        <div class="diretor__foto" data-reveal="fade-right">
           <img
             src="/images/helo.webp"
             alt="Helô Gouvêa — Sócia do Anacã Música"
@@ -159,7 +161,7 @@ const porqueItems = [
             height="570"
           />
         </div>
-        <div class="diretor__bio">
+        <div class="diretor__bio" data-reveal="fade-left">
           <h4 class="text-intro">Junto da Helô Gouvêa, também sócia e uma das fundadoras do Estúdio de Dança Anacã.</h4>
           <p>
             É bailarina, professora e uma das fundadoras do Estúdio de Dança Anacã,
@@ -185,8 +187,8 @@ const porqueItems = [
         center={false}
       />
       <div class="porque-grid">
-        {porqueItems.map(item => (
-          <div class="porque-item">
+        {porqueItems.map((item, i) => (
+          <div class="porque-item" data-reveal="fade-up" data-reveal-delay={String(i * 100)}>
             <span class="porque-item__num">{item.num}</span>
             <h6 class="porque-item__title">{item.title}</h6>
             <p class="porque-item__desc">{item.desc}</p>
@@ -255,35 +257,35 @@ const porqueItems = [
     <img src="/images/vector-3.png" alt="" class="salas-vector salas-vector--right" aria-hidden="true" />
     <div class="container">
       <div class="grid grid--3" style="gap: var(--space-lg);">
-        <div class="icon-box">
+        <div class="icon-box" data-reveal="fade-up" data-reveal-delay="0">
           <div class="icon-box__icon">
             <img src="/images/icons/sala-baby.svg" alt="" width="48" height="48" />
           </div>
           <h3 class="icon-box__title">Sala Baby:</h3>
           <p class="icon-box__text">preparada especialmente para acolher bebês a partir de 6 meses em suas primeiras vivências musicais em grupo.</p>
         </div>
-        <div class="icon-box">
+        <div class="icon-box" data-reveal="fade-up" data-reveal-delay="100">
           <div class="icon-box__icon">
             <img src="/images/icons/sala-kids.svg" alt="" width="48" height="48" />
           </div>
           <h3 class="icon-box__title">Salas de Musicalização Kids:</h3>
           <p class="icon-box__text">4 espaços equipados com instrumentos e recursos didáticos que tornam o aprendizado das crianças lúdico e envolvente.</p>
         </div>
-        <div class="icon-box">
+        <div class="icon-box" data-reveal="fade-up" data-reveal-delay="200">
           <div class="icon-box__icon">
             <img src="/images/icons/sala-bateria.svg" alt="" width="48" height="48" />
           </div>
           <h3 class="icon-box__title">Salas de Bateria:</h3>
           <p class="icon-box__text">3 ambientes dedicados exclusivamente ao estudo do instrumento, com isolamento acústico e equipamentos de alta qualidade.</p>
         </div>
-        <div class="icon-box">
+        <div class="icon-box" data-reveal="fade-up" data-reveal-delay="300">
           <div class="icon-box__icon">
             <img src="/images/icons/sala-multiuso.svg" alt="" width="48" height="48" />
           </div>
           <h3 class="icon-box__title">Salas Multiuso:</h3>
           <p class="icon-box__text">flexíveis e versáteis, adaptam-se a diferentes instrumentos e formações. Algumas contam com luz natural, proporcionando bem-estar e conforto durante as aulas.</p>
         </div>
-        <div class="icon-box">
+        <div class="icon-box" data-reveal="fade-up" data-reveal-delay="400">
           <div class="icon-box__icon">
             <img src="/images/icons/sala-studio.svg" alt="" width="48" height="48" />
           </div>
@@ -298,7 +300,7 @@ const porqueItems = [
   <section class="section localizacao-section">
     <div class="container">
       <div class="localizacao-split">
-        <div class="mapa-wrapper">
+        <div class="mapa-wrapper" data-reveal="fade-right">
           <iframe
             src="https://maps.google.com/maps?q=Anac%C3%A3+M%C3%BAsica&t=m&z=15&output=embed&iwloc=near"
             title="Anacã Música"
@@ -308,7 +310,7 @@ const porqueItems = [
             allowfullscreen
           ></iframe>
         </div>
-        <div class="localizacao-content">
+        <div class="localizacao-content" data-reveal="fade-left">
           <div class="section-label" style="margin-bottom: var(--space-lg);">
             <h6 style="color: var(--color-text); margin-bottom: var(--space-xs);">NOSSA LOCALIZAÇÃO</h6>
             <h2 style="margin-bottom: var(--space-sm);">A música é ainda melhor ao vivo.</h2>

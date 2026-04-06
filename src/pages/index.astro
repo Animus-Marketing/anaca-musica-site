@@ -46,11 +46,13 @@ const depoimentos = [
   <!-- 1. Hero (dark, bg image, NO overlay) -->
   <section class="hero" style={`--hero-bg: url(/images/hero-home.webp)`}>
     <div class="hero__content">
-      <h1 class="hero__title">A escola de música<br/>que transforma</h1>
-      <p class="hero__tagline">
+      <h1 class="hero__title" data-reveal="fade-up">A escola de música<br/>que transforma</h1>
+      <p class="hero__tagline" data-reveal="fade-up" data-reveal-delay="200">
         No Anacã Música, som e corpo se encontram<br/>em um espaço feito para inspirar e transformar.
       </p>
-      <Button text="Descubra Mais" variant="outline" />
+      <div data-reveal="fade-up" data-reveal-delay="400">
+        <Button text="Descubra Mais" variant="outline" />
+      </div>
     </div>
   </section>
 
@@ -59,15 +61,15 @@ const depoimentos = [
     <img src="/images/descubra-som-mobile.webp" alt="Alunos tocando música" class="descubra-img-mobile" loading="lazy" />
     <div class="descubra-inner">
       <div class="descubra-text">
-        <h6>Descubra Seu Som</h6>
-        <h2>Apaixonados pela arte de ensinar</h2>
-        <h4>No Anacã, acreditamos que a música é uma poderosa forma de expressão e desenvolvimento.</h4>
-        <p>
+        <h6 data-reveal="fade-up">Descubra Seu Som</h6>
+        <h2 data-reveal="fade-up" data-reveal-delay="100">Apaixonados pela arte de ensinar</h2>
+        <h4 data-reveal="fade-up" data-reveal-delay="200">No Anacã, acreditamos que a música é uma poderosa forma de expressão e desenvolvimento.</h4>
+        <p data-reveal="fade-up" data-reveal-delay="300">
           São 11 opções de cursos, incluindo violão, piano, guitarra, canto, bateria e musicalização infantil,
           com turmas desde bebês até adultos. Aqui, cada aluno aprende seu ritmo, explorando sua criatividade
           e talento com professores experientes e apaixonados pela arte de ensinar.
         </p>
-        <div class="counters">
+        <div class="counters" data-reveal="fade-up" data-reveal-delay="400">
           <Counter target={200} suffix="+" label="Alunos inscritos" />
           <Counter target={10000} suffix="+" label="Aulas praticadas" />
         </div>
@@ -78,9 +80,11 @@ const depoimentos = [
   <!-- 3. CTA (dark bg image with gradient, text LEFT) -->
   <section class="cta-banner">
     <div class="container">
-      <h2>Venha descobrir o mundo da música no anacã</h2>
-      <p>Inscreva-se hoje e comece sua jornada musical!</p>
-      <Button text="Descubra Mais" />
+      <h2 data-reveal="fade-right">Venha descobrir o mundo da música no anacã</h2>
+      <p data-reveal="fade-right" data-reveal-delay="100">Inscreva-se hoje e comece sua jornada musical!</p>
+      <div data-reveal="fade-right" data-reveal-delay="200">
+        <Button text="Descubra Mais" />
+      </div>
     </div>
   </section>
 
@@ -88,9 +92,9 @@ const depoimentos = [
   <section class="section section--light">
     <div class="container">
       <div style="text-align: center; margin-bottom: var(--space-lg);">
-        <h6 style="color: var(--color-accent);">Nosso Time</h6>
-        <h2 style="color: var(--color-text-dark);">Conheça nossos cursos</h2>
-        <h4 style="color: var(--color-text-subtle); max-width: 700px; margin-inline: auto;">
+        <h6 style="color: var(--color-accent);" data-reveal="fade-up">Nosso Time</h6>
+        <h2 style="color: var(--color-text-dark);" data-reveal="fade-up" data-reveal-delay="100">Conheça nossos cursos</h2>
+        <h4 style="color: var(--color-text-subtle); max-width: 700px; margin-inline: auto;" data-reveal="fade-up" data-reveal-delay="200">
           Oferecemos aulas de música para todas as idades, adaptadas às suas necessidades individuais. Nossas aulas de música são envolventes e dinâmicas.
         </h4>
       </div>
@@ -116,8 +120,8 @@ const depoimentos = [
   <!-- 5. Estrutura (DARK bg, auto-scrolling rows) -->
   <section class="section" style="padding: 100px 0; overflow: hidden;">
     <div class="container">
-      <h6 style="color: var(--color-accent);">Estrutura Anacã</h6>
-      <h2>Conheça nosso espaço</h2>
+      <h6 style="color: var(--color-accent);" data-reveal="fade-up">Estrutura Anacã</h6>
+      <h2 data-reveal="fade-up" data-reveal-delay="100">Conheça nosso espaço</h2>
     </div>
     <MarqueeGallery />
   </section>
@@ -125,8 +129,8 @@ const depoimentos = [
   <!-- 6. Professores (DARK bg, tabs + carousel with drag) -->
   <section class="section">
     <div class="container">
-      <h6 style="color: var(--color-accent);">Nosso Time</h6>
-      <h2>Conheça nosso time<br/>de professores</h2>
+      <h6 style="color: var(--color-accent);" data-reveal="fade-up">Nosso Time</h6>
+      <h2 data-reveal="fade-up" data-reveal-delay="100">Conheça nosso time<br/>de professores</h2>
 
       <div style="margin-top: var(--space-lg);">
         <TabsCarousel variant="dark" slides={4} tabs={profCats.map(t => ({ key: t.key, label: t.label }))} id="profs-tabs">
@@ -158,10 +162,10 @@ const depoimentos = [
     <div class="container">
       <div class="depoimentos-split">
         <div class="depoimentos-left">
-          <h6 style="color: var(--color-accent);">Depoimentos</h6>
-          <h2>O que os nossos alunos dizem</h2>
+          <h6 style="color: var(--color-accent);" data-reveal="fade-right">Depoimentos</h6>
+          <h2 data-reveal="fade-right" data-reveal-delay="100">O que os nossos alunos dizem</h2>
         </div>
-        <div class="depoimentos-right">
+        <div class="depoimentos-right" data-reveal="fade-left">
           {depoimentos.map(d => (
             <div class="depoimento">
               <p class="depoimento__text">{d.texto}</p>
@@ -184,9 +188,9 @@ const depoimentos = [
   <!-- 8. CTA Final (WHITE bg, text LEFT, dark text) -->
   <section class="section section--light" style="min-height: 70vh; display: flex; align-items: center;">
     <div class="container">
-      <h6 style="color: var(--color-accent);">Contato</h6>
-      <h2 style="color: var(--color-text-dark);">Venha fazer uma<br/>aula experimental</h2>
-      <div style="margin-top: var(--space-lg);">
+      <h6 style="color: var(--color-accent);" data-reveal="fade-up">Contato</h6>
+      <h2 style="color: var(--color-text-dark);" data-reveal="fade-up" data-reveal-delay="100">Venha fazer uma<br/>aula experimental</h2>
+      <div style="margin-top: var(--space-lg);" data-reveal="fade-up" data-reveal-delay="200">
         <Button text="Agendar minha aula" />
       </div>
     </div>

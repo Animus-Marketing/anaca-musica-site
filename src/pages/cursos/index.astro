@@ -121,7 +121,7 @@ const featureCards = [
   <!-- Conheça nossos cursos — dark bg, tabbed info -->
   <section class="section cursos-section">
     <div class="container">
-      <h2 class="cursos-heading">Conheça nossos cursos</h2>
+      <h2 class="cursos-heading" data-reveal="fade-up">Conheça nossos cursos</h2>
 
       <div class="cursos-info" id="cursos-info">
         <nav class="cursos-info__nav">
@@ -191,9 +191,9 @@ const featureCards = [
   <section class="section">
     <div class="container">
       <div style="text-align: center; margin-bottom: var(--space-lg);">
-        <h6 style="color: var(--color-accent);">Cursos</h6>
-        <h2>Conheça nossos cursos</h2>
-        <h4 style="color: var(--color-text-muted); max-width: 700px; margin-inline: auto;">
+        <h6 style="color: var(--color-accent);" data-reveal="fade-up">Cursos</h6>
+        <h2 data-reveal="fade-up" data-reveal-delay="100">Conheça nossos cursos</h2>
+        <h4 style="color: var(--color-text-muted); max-width: 700px; margin-inline: auto;" data-reveal="fade-up" data-reveal-delay="200">
           Oferecemos aulas de música para todas as idades, adaptadas às suas necessidades individuais. Nossas aulas de música são envolventes e dinâmicas.
         </h4>
       </div>
@@ -219,9 +219,11 @@ const featureCards = [
   <!-- CTA Banner -->
   <section class="cta-banner">
     <div class="container">
-      <h2>Venha descobrir o mundo da música no Anacã</h2>
-      <p>Inscreva-se hoje e comece sua jornada musical!</p>
-      <Button text="Descubra Mais" />
+      <h2 data-reveal="fade-right">Venha descobrir o mundo da música no Anacã</h2>
+      <p data-reveal="fade-right" data-reveal-delay="100">Inscreva-se hoje e comece sua jornada musical!</p>
+      <div data-reveal="fade-right" data-reveal-delay="200">
+        <Button text="Descubra Mais" />
+      </div>
     </div>
   </section>
 
@@ -229,8 +231,8 @@ const featureCards = [
   <section class="section">
     <div class="container">
       <div class="features-grid">
-        {featureCards.map(card => (
-          <div class="feature-card">
+        {featureCards.map((card, i) => (
+          <div class="feature-card" data-reveal="fade-up" data-reveal-delay={String(i * 150)}>
             <div class="feature-card__icon">
               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
