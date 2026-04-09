@@ -6,7 +6,7 @@ modalidades: ["Cordas>Violoncelo"]
 categorias: ["cordas"]
 excerpt: "Violoncista e professor de música, atua há 10 anos como instrumentista. É formado pela Escola Municipal de Música e foi premiado em concursos de jovens solistas."
 ordem: 18
-ativo: true
+ativo: false
 ---
 
 Possui experiência orquestral em formações como a Filarmônica Jovem de Berlim, Sinfônica de Santos e a Bachiana Filarmônica.

@@ -6,7 +6,7 @@ modalidades: ["Canto", "Musicalização infantil"]
 categorias: ["canto", "kids"]
 excerpt: "Cantora, educadora musical e musicoterapeuta, nascida em São Paulo (SP), iniciou seus estudos em canto popular em 2009."
 ordem: 17
-ativo: true
+ativo: false
 ---
 
 Possui sólida formação musical pela EMESP Tom Jobim, com foco em canto popular brasileiro.

@@ -6,7 +6,7 @@ modalidades: ["Cordas>Violino"]
 categorias: ["cordas"]
 excerpt: 'Violinista e professor de música, iniciou seus estudos aos 12 anos no projeto "A Música Venceu", do Maestro João Carlos Martins.'
 ordem: 12
-ativo: true
+ativo: false
 ---
 
 Aperfeiçoou sua formação com renomados professores e instituições, incluindo a Escola Municipal de Música de São Paulo e o Núcleo de Música de Barueri.

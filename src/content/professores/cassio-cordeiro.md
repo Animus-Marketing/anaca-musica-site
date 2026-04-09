@@ -2,8 +2,8 @@
 nome: "Cássio Cordeiro"
 slug: "cassio-cordeiro"
 foto: "/images/professores/cassio-cordeiro.webp"
-modalidades: ["Cordas>Baixo", "Percussão>Bateria", "Cordas>Guitarra", "Musicalização infantil", "Cordas>Violão"]
-categorias: ["cordas", "percussao", "kids"]
+modalidades: ["Canto", "Cordas>Baixo", "Percussão>Bateria", "Cordas>Guitarra", "Musicalização infantil", "Cordas>Ukulele", "Cordas>Violão"]
+categorias: ["canto", "cordas", "percussao", "kids"]
 excerpt: "Músico, professor e produtor musical, atua há mais de 15 anos na área de produção fonográfica e musical."
 ordem: 11
 ativo: true
