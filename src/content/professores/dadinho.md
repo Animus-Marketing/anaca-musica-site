@@ -2,7 +2,7 @@
 nome: "Dadinho"
 slug: "dadinho"
 foto: "/images/professores/dadinho.webp"
-modalidades: ["Canto", "Musicalização infantil", "Teclas>Piano"]
+modalidades: ["Canto", "Instrumentalização infantil", "Teclas>Piano"]
 categorias: ["canto", "kids", "teclas"]
 excerpt: "Pianista e músico profissional, iniciou seus estudos aos 8 anos, tendo como mestres Cláudio Leal e Sílvia Góes."
 ordem: 20

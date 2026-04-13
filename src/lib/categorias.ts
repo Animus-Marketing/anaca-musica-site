@@ -4,7 +4,7 @@ export const categorias = {
   percussao: { label: 'Percussão', slug: 'percussao' },
   sopro: { label: 'Sopro', slug: 'sopro' },
   teclas: { label: 'Teclas', slug: 'teclas' },
-  kids: { label: 'Musicalização Infantil', slug: 'kids' },
+  kids: { label: 'Instrumentalização Infantil', slug: 'kids' },
 } as const;
 
 export type Categoria = keyof typeof categorias;

@@ -2,14 +2,14 @@
 nome: "Guilherme Val"
 slug: "guilherme-val"
 foto: "/images/professores/guilherme-val.webp"
-modalidades: ["Cordas>Guitarra", "Cordas>Violão", "Cordas>Baixo", "Musicalização infantil", "Percussão>Bateria"]
+modalidades: ["Cordas>Guitarra", "Cordas>Violão", "Cordas>Baixo", "Instrumentalização infantil", "Percussão>Bateria"]
 categorias: ["cordas", "kids", "percussao"]
 excerpt: "Guitarrista, multi-instrumentista e professor de música, iniciou seus estudos aos 13 anos e, aos 16, já atuava como professor."
 ordem: 24
 ativo: true
 ---
 
-Construiu sua trajetória como educador, lecionando guitarra, violão, baixo, ukulele, bateria, teclado e musicalização infantil, além de atuar como coordenador de cordas.
+Construiu sua trajetória como educador, lecionando guitarra, violão, baixo, ukulele, bateria, teclado e instrumentalização infantil, além de atuar como coordenador de cordas.
 
 Possui mais de 15 anos de experiência no ensino musical, trabalhando com alunos de diferentes idades e níveis.
 

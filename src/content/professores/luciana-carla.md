@@ -2,7 +2,7 @@
 nome: "Luciana Carla"
 slug: "luciana-carla"
 foto: "/images/professores/luciana-carla.webp"
-modalidades: ["Musicalização baby", "Musicalização infantil"]
+modalidades: ["Musicalização baby", "Instrumentalização infantil"]
 categorias: ["kids"]
 excerpt: "Especialista em musicalização para bebês"
 ordem: 2

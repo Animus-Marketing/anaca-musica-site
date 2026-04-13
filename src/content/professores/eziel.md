@@ -2,9 +2,9 @@
 nome: "Eziel"
 slug: "eziel"
 foto: "/images/professores/eziel.webp"
-modalidades: ["Teclas>Acordeon", "Cordas>Baixo", "Percussão>Bateria", "Cordas>Cavaco", "Sopro>Flauta Doce", "Sopro>Flauta Transversal", "Cordas>Guitarra", "Musicalização infantil", "Teclas>Piano", "Sopro>Saxofone", "Cordas>Ukulele", "Cordas>Violão", "Cordas>Violino"]
+modalidades: ["Teclas>Acordeon", "Cordas>Baixo", "Percussão>Bateria", "Cordas>Cavaco", "Sopro>Flauta Doce", "Sopro>Flauta Transversal", "Cordas>Guitarra", "Instrumentalização infantil", "Teclas>Piano", "Sopro>Saxofone", "Cordas>Ukulele", "Cordas>Violão", "Cordas>Violino"]
 categorias: ["teclas", "cordas", "percussao", "sopro", "kids"]
-excerpt: "Músico multi-instrumentista, com ampla experiência no ensino musical para todas as idades — da musicalização infantil à terceira idade."
+excerpt: "Músico multi-instrumentista, com ampla experiência no ensino musical para todas as idades — da instrumentalização infantil à terceira idade."
 ordem: 13
 ativo: true
 ---

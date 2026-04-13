@@ -2,7 +2,7 @@
 nome: "Marina Lima"
 slug: "marina-lima"
 foto: "/images/professores/marina-lima.webp"
-modalidades: ["Musicalização baby", "Musicalização infantil"]
+modalidades: ["Musicalização baby", "Instrumentalização infantil"]
 categorias: ["kids"]
 excerpt: "Cantora, compositora e artista educadora. Atua como professora de musicalização para bebês no Anacã Música."
 ordem: 5

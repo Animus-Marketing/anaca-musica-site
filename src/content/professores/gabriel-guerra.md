@@ -2,9 +2,9 @@
 nome: "Gabriel Guerra"
 slug: "gabriel-guerra"
 foto: "/images/professores/gabriel-guerra.webp"
-modalidades: ["Percussão>Bateria", "Musicalização infantil", "Cordas>Ukulele", "Cordas>Violão"]
+modalidades: ["Percussão>Bateria", "Instrumentalização infantil", "Cordas>Ukulele", "Cordas>Violão"]
 categorias: ["percussao", "kids", "cordas"]
-excerpt: "Formado em Licenciatura pela Universidade FIAM-FAAM, atua como professor de instrumentos, ministrando aulas de bateria, violão, ukulele, musicalização e prática de banda."
+excerpt: "Formado em Licenciatura pela Universidade FIAM-FAAM, atua como professor de instrumentos, ministrando aulas de bateria, violão, ukulele, instrumentalização e prática de banda."
 ordem: 1
 ativo: true
 ---

@@ -2,7 +2,7 @@
 nome: "Carlos Cjazz"
 slug: "carlos-cjazz"
 foto: "/images/professores/carlos-cjazz.webp"
-modalidades: ["Teclas>Piano", "Musicalização infantil"]
+modalidades: ["Teclas>Piano", "Instrumentalização infantil"]
 categorias: ["teclas", "kids"]
 excerpt: "Pianista, tecladista, professor e produtor musical, iniciou sua trajetória em 2013, vindo de uma família de músicos."
 ordem: 10

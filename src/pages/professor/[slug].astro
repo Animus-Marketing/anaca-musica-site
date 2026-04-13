@@ -18,7 +18,7 @@ const { Content } = await render(prof);
 // Build modalidade → curso slug map for linking
 const cursos = await getCollection('cursos');
 const modalidadeAliases: Record<string, string> = {
-  'musicalização baby': 'musicalização infantil',
+  'musicalização baby': 'instrumentalização infantil',
 };
 
 function modalidadeToSlug(mod: string): string | null {

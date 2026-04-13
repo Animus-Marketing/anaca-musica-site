@@ -15,7 +15,7 @@ const cursos = (await getCollection('cursos'))
 
 const professores = (await getCollection('professores'))
   .filter(p => p.data.ativo)
-  .sort((a, b) => a.data.ordem - b.data.ordem);
+  .sort((a, b) => a.data.nome.localeCompare(b.data.nome, 'pt-BR'));
 
 const cursoTabs = Object.entries(categorias).map(([key, cat]) => ({
   key,
@@ -65,7 +65,7 @@ const depoimentos = [
         <h2 data-reveal="fade-up" data-reveal-delay="100">Apaixonados pela arte de ensinar</h2>
         <h4 data-reveal="fade-up" data-reveal-delay="200">No Anacã, acreditamos que a música é uma poderosa forma de expressão e desenvolvimento.</h4>
         <p data-reveal="fade-up" data-reveal-delay="300">
-          São 11 opções de cursos, incluindo violão, piano, guitarra, canto, bateria e musicalização infantil,
+          São 11 opções de cursos, incluindo violão, piano, guitarra, canto, bateria e instrumentalização infantil,
           com turmas desde bebês até adultos. Aqui, cada aluno aprende seu ritmo, explorando sua criatividade
           e talento com professores experientes e apaixonados pela arte de ensinar.
         </p>

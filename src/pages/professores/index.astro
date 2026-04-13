@@ -7,7 +7,7 @@ import { categorias } from '../../lib/categorias';
 
 const professores = (await getCollection('professores'))
   .filter(p => p.data.ativo)
-  .sort((a, b) => a.data.ordem - b.data.ordem);
+  .sort((a, b) => a.data.nome.localeCompare(b.data.nome, 'pt-BR'));
 
 const tabs = [
   { key: 'todos', label: 'Todos', profs: professores },

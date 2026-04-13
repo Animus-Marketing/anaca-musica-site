@@ -2,7 +2,7 @@
 nome: "Julia Pagano"
 slug: "julia-pagano"
 foto: "/images/professores/julia-pagano.webp"
-modalidades: ["Canto", "Musicalização infantil", "Teclas>Piano", "Cordas>Ukulele", "Cordas>Violão"]
+modalidades: ["Canto", "Cordas>Guitarra", "Instrumentalização infantil", "Teclas>Piano", "Cordas>Ukulele", "Cordas>Violão"]
 categorias: ["canto", "kids", "teclas", "cordas"]
 excerpt: "Cantora e professora de música, é bacharel em Música com habilitação em Canto Popular pela FIAMFAAM (2019)."
 ordem: 14

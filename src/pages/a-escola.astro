@@ -10,7 +10,7 @@ import { categorias } from '../lib/categorias';
 
 const professores = (await getCollection('professores'))
   .filter(p => p.data.ativo)
-  .sort((a, b) => a.data.ordem - b.data.ordem);
+  .sort((a, b) => a.data.nome.localeCompare(b.data.nome, 'pt-BR'));
 
 const profCats = [
   { key: 'todos', label: 'Todos', profs: professores },
@@ -71,7 +71,7 @@ const porqueItems = [
         <h4 data-reveal="fade-up" data-reveal-delay="100">Um espaço pensado para transformar cada aula em uma experiência única.</h4>
         <p>
           Oferecemos 11 cursos livres – entre eles violão, piano, guitarra, bateria, canto
-          e musicalização infantil – que atendem todas as idades e níveis, do iniciante ao
+          e instrumentalização infantil – que atendem todas as idades e níveis, do iniciante ao
           avançado. Nosso compromisso é inspirar e capacitar cada aluno a explorar sua
           criatividade, desenvolvendo técnica e expressão musical em seu próprio ritmo.
         </p>
@@ -87,7 +87,7 @@ const porqueItems = [
         <span class="curso-label">Canto</span>
         <span class="curso-label">Bateria</span>
         <span class="curso-label">Guitarra</span>
-        <span class="curso-label">Musicalização Infantil</span>
+        <span class="curso-label">Instrumentalização Infantil</span>
         <span class="curso-label">E muito mais</span>
       </div>
     </div>
@@ -133,7 +133,7 @@ const porqueItems = [
             É empresária, educadora e cofundadora do Estúdio Anacã, criado com o propósito
             de unir arte, movimento e bem-estar. Apaixonada por música e canto, ela idealizou
             a expansão do espaço com o Anacã Música, dedicado ao ensino de instrumentos,
-            canto e musicalização infantil. Ana acredita profundamente no poder transformador
+            canto e instrumentalização infantil. Ana acredita profundamente no poder transformador
             da arte e da educação — pilares que também inspiram sua atuação em iniciativas
             como o Instituto Península e o POLVO LAB, que promovem o desenvolvimento humano
             e social por meio da criatividade e do conhecimento. Para ela, a arte é um
@@ -268,7 +268,7 @@ const porqueItems = [
           <div class="icon-box__icon">
             <img src="/images/icons/sala-kids.svg" alt="" width="48" height="48" />
           </div>
-          <h3 class="icon-box__title">Salas de Musicalização Kids:</h3>
+          <h3 class="icon-box__title">Sala de Instrumentalização Infantil:</h3>
           <p class="icon-box__text">4 espaços equipados com instrumentos e recursos didáticos que tornam o aprendizado das crianças lúdico e envolvente.</p>
         </div>
         <div class="icon-box" data-reveal="fade-up" data-reveal-delay="200">
