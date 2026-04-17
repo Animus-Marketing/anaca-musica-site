@@ -1,0 +1,125 @@
+---
+interface Props {
+  schemas?: Record<string, unknown>[];
+}
+
+const { schemas = [] } = Astro.props;
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicSchool',
+  '@id': 'https://anacamusica.com.br/#organization',
+  name: 'Anacã Música',
+  alternateName: 'Anacã Música - Escola de Música',
+  url: 'https://anacamusica.com.br',
+  logo: 'https://anacamusica.com.br/favicon.svg',
+  image: 'https://anacamusica.com.br/images/hero-home.webp',
+  description: 'Escola de música no Jardim Paulista, São Paulo. Aulas de canto, bateria, piano, violão, guitarra e mais com professores com formação em Berklee College of Music e USP.',
+  telephone: '(11) 98913-7875',
+  email: 'contato@anacamusica.com.br',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Av. Brasil, 649',
+    addressLocality: 'São Paulo',
+    addressRegion: 'SP',
+    postalCode: '01431-000',
+    addressCountry: 'BR',
+    neighborhood: 'Jardim Paulista',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: -23.5635,
+    longitude: -46.6623,
+  },
+  areaServed: {
+    '@type': 'City',
+    name: 'São Paulo',
+  },
+  sameAs: [
+    'https://www.instagram.com/anacamusica/',
+  ],
+  foundingDate: '2023',
+  numberOfEmployees: {
+    '@type': 'QuantitativeValue',
+    minValue: 25,
+  },
+  priceRange: '$$',
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '09:00',
+      closes: '21:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Saturday',
+      opens: '09:00',
+      closes: '17:00',
+    },
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Cursos de Música',
+    itemListElement: [
+      { '@type': 'OfferCatalog', name: 'Aulas de Canto' },
+      { '@type': 'OfferCatalog', name: 'Aulas de Bateria' },
+      { '@type': 'OfferCatalog', name: 'Aulas de Piano' },
+      { '@type': 'OfferCatalog', name: 'Aulas de Violão' },
+      { '@type': 'OfferCatalog', name: 'Aulas de Guitarra' },
+      { '@type': 'OfferCatalog', name: 'Instrumentalização Infantil' },
+      { '@type': 'OfferCatalog', name: 'Aulas de Baixo' },
+      { '@type': 'OfferCatalog', name: 'Aulas de Saxofone' },
+      { '@type': 'OfferCatalog', name: 'Aulas de Violino' },
+      { '@type': 'OfferCatalog', name: 'Aulas de Flauta' },
+    ],
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: (() => {
+    const pathname = Astro.url.pathname;
+    const parts = pathname.split('/').filter(Boolean);
+    const items = [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://anacamusica.com.br/',
+      },
+    ];
+
+    const labelMap: Record<string, string> = {
+      'cursos': 'Cursos',
+      'curso': 'Cursos',
+      'professores': 'Professores',
+      'professor': 'Professores',
+      'eventos': 'Eventos',
+      'evento': 'Eventos',
+      'a-escola': 'A Escola',
+    };
+
+    let currentPath = '';
+    parts.forEach((part, i) => {
+      currentPath += `/${part}`;
+      const label = labelMap[part] || part.charAt(0).toUpperCase() + part.slice(1).replace(/-/g, ' ');
+      items.push({
+        '@type': 'ListItem',
+        position: i + 2,
+        name: label,
+        item: `https://anacamusica.com.br${currentPath}/`,
+      });
+    });
+
+    return items;
+  })(),
+};
+
+const allSchemas = [organizationSchema, breadcrumbSchema, ...schemas];
+---
+
+{allSchemas.map(schema => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}
