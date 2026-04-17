@@ -7,13 +7,13 @@ interface Props {
 
 const {
   title,
-  description = 'Anacã Música – Escola de música em São Paulo. Aulas de violão, piano, bateria, canto e mais.',
+  description = 'Anacã Música: escola de música no Jardim Paulista, São Paulo. Aulas de canto, bateria, piano, violão e mais com professores formados em Berklee e USP. Agende sua aula experimental.',
   image = '/images/hero-home.webp',
 } = Astro.props;
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const imageUrl = new URL(image, Astro.site);
-const fullTitle = title === 'Home' ? 'Anacã Música' : `${title} | Anacã Música`;
+const fullTitle = title === 'Home' ? 'Escola de Música em São Paulo – Jardins | Anacã Música' : `${title} | Anacã Música`;
 ---
 
 <title>{fullTitle}</title>

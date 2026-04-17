@@ -35,12 +35,55 @@ const hasSecao4 = fs.existsSync(path.join(publicDir, `images/cursos/${slug}-seca
 
 const isKids = d.categoria === 'kids';
 
+const professoresCollection = (await getCollection('professores')).filter(p => p.data.ativo);
+const cursoProfessores = professoresCollection.filter(p =>
+  p.data.modalidades.some(m => m.toLowerCase().includes(d.titulo.toLowerCase()))
+);
+
+const courseSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Course',
+  name: d.titulo,
+  description: d.descricao_curta,
+  provider: {
+    '@type': 'MusicSchool',
+    '@id': 'https://anacamusica.com.br/#organization',
+    name: 'Anacã Música',
+  },
+  url: `https://anacamusica.com.br/curso/${d.slug}/`,
+  image: d.imagem_hero || `/images/cursos/${d.slug}-hero.webp`,
+  educationalLevel: 'Beginner to Advanced',
+  inLanguage: 'pt-BR',
+  courseMode: 'onsite',
+  locationCreated: {
+    '@type': 'Place',
+    name: 'Anacã Música',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Av. Brasil, 649',
+      addressLocality: 'São Paulo',
+      addressRegion: 'SP',
+      addressCountry: 'BR',
+      neighborhood: 'Jardim Paulista',
+    },
+  },
+  ...(cursoProfessores.length > 0 && {
+    instructor: cursoProfessores.map(p => ({
+      '@type': 'Person',
+      name: p.data.nome,
+      url: `https://anacamusica.com.br/professor/${p.data.slug}/`,
+      ...(p.data.foto && { image: `https://anacamusica.com.br${p.data.foto}` }),
+    })),
+  }),
+};
+
 ---
 
 <BaseLayout
-  title={d.titulo}
+  title={`Aulas de ${d.titulo} em São Paulo`}
   description={d.descricao_curta}
   image={d.imagem_hero}
+  schemas={[courseSchema]}
 >
   {isKids ? (
     <Fragment>
@@ -49,7 +92,7 @@ const isKids = d.categoria === 'kids';
         <div class="c-hero__overlay"></div>
         <div class="container c-hero__body">
           <h6 class="c-hero__cat" data-reveal="fade-up">{d.titulo}</h6>
-          <h2 class="c-hero__title" data-reveal="fade-up" data-reveal-delay="150">Crescendo com a música!</h2>
+          <h1 class="c-hero__title" data-reveal="fade-up" data-reveal-delay="150">Crescendo com a música!</h1>
         </div>
       </section>
 
@@ -123,7 +166,7 @@ const isKids = d.categoria === 'kids';
         <div class="c-hero__overlay"></div>
         <div class="container c-hero__body">
           <h6 class="c-hero__cat" data-reveal="fade-up">{catLabel}</h6>
-          <h2 class="c-hero__title" data-reveal="fade-up" data-reveal-delay="150">{d.titulo}</h2>
+          <h1 class="c-hero__title" data-reveal="fade-up" data-reveal-delay="150">{d.titulo}</h1>
         </div>
       </section>
 
