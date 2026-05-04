@@ -9,7 +9,7 @@ interface Props {
 const { variant, slides, tabs, id } = Astro.props;
 ---
 
-<div class="tc" data-variant={variant} data-slides={slides} id={id}>
+<div class:list={['tc', { 'tc--no-tabs': tabs.length <= 1 }]} data-variant={variant} data-slides={slides} id={id}>
   {tabs.map((tab, i) => (
     <div class="tc-item">
       <button
@@ -46,6 +46,11 @@ const { variant, slides, tabs, id } = Astro.props;
   .tc[data-variant="dark"] {
     --card-title-color: #FFFFFF;
     --card-text-color: var(--color-text-muted);
+  }
+
+  /* Hide tabs when single tab */
+  .tc--no-tabs .tc-btn {
+    display: none;
   }
 
   .tc-panel {

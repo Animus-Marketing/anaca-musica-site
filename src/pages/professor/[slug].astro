@@ -15,6 +15,28 @@ export async function getStaticPaths() {
 const { prof } = Astro.props;
 const { Content } = await render(prof);
 
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: prof.data.nome,
+  url: `https://anacamusica.com.br/professor/${prof.data.slug}/`,
+  ...(prof.data.foto && { image: `https://anacamusica.com.br${prof.data.foto}` }),
+  description: prof.data.excerpt || `${prof.data.nome} - Professor(a) no Anacã Música`,
+  jobTitle: 'Professor(a) de Música',
+  worksFor: {
+    '@type': 'MusicSchool',
+    '@id': 'https://anacamusica.com.br/#organization',
+    name: 'Anacã Música',
+  },
+  knowsAbout: prof.data.modalidades.map(m => {
+    const parts = m.split('>');
+    return parts[parts.length - 1].trim();
+  }),
+  ...(prof.data.instagram && {
+    sameAs: [`https://www.instagram.com/${prof.data.instagram.replace('@', '')}/`],
+  }),
+};
+
 // Build modalidade → curso slug map for linking
 const cursos = await getCollection('cursos');
 const modalidadeAliases: Record<string, string> = {
@@ -45,8 +67,9 @@ function modalidadeLabel(mod: string): string {
 
 <BaseLayout
   title={prof.data.nome}
-  description={prof.data.excerpt || `${prof.data.nome} - Professor(a) na Anacã Música`}
+  description={prof.data.excerpt || `${prof.data.nome} - Professor(a) no Anacã Música`}
   image={prof.data.foto}
+  schemas={[personSchema]}
 >
   <Hero
     title="A história por trás da música."

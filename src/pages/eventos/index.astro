@@ -8,7 +8,7 @@ const eventos = (await getCollection('eventos'))
   .sort((a, b) => new Date(b.data.data).getTime() - new Date(a.data.data).getTime());
 ---
 
-<BaseLayout title="Eventos" description="Nossos eventos – Onde o palco vira aprendizado.">
+<BaseLayout title="Eventos e Apresentações" description="Eventos e apresentações do Anacã Música em São Paulo. Shows, recitais e showcase dos alunos. O palco como parte do aprendizado musical.">
   <Hero
     title="Onde o palco vira aprendizado"
     subtitles={["Nossos eventos"]}

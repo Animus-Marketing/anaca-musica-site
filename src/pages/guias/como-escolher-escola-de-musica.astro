@@ -1,0 +1,328 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Button from '../../components/Button.astro';
+
+const faqItems = [
+  {
+    question: "Quanto custa uma escola de música em São Paulo?",
+    answer: "Os valores variam bastante dependendo da localização, estrutura e qualificação dos professores. Em escolas de bairros nobres como Jardins, as mensalidades para aulas individuais costumam começar a partir de R$ 800 por mês (4 aulas), com média em torno de R$ 1.000. Aulas em grupo e musicalização infantil tendem a ser mais acessíveis. O mais importante é avaliar o custo-benefício: a qualidade do ensino, a infraestrutura oferecida e o acompanhamento pedagógico justificam o investimento."
+  },
+  {
+    question: "Qual a diferença entre escola de música e conservatório?",
+    answer: "Conservatórios tradicionais costumam seguir um currículo mais rígido e acadêmico, com foco em música erudita e formação técnica formal. Escolas de música contemporâneas, como o Anacã Música, oferecem uma abordagem mais flexível, trabalhando diversos gêneros musicais (popular, jazz, rock, MPB, erudito) e adaptando a metodologia ao perfil e aos objetivos de cada aluno. Ambos os modelos são válidos — a escolha depende do que você busca."
+  },
+  {
+    question: "Preciso ter instrumento próprio para começar as aulas?",
+    answer: "Na maioria das escolas, os instrumentos estão disponíveis para uso durante as aulas. Porém, para evoluir de verdade, é essencial praticar em casa. Muitos professores recomendam que o aluno adquira seu próprio instrumento após as primeiras semanas, quando já tem mais clareza sobre o compromisso com o aprendizado. Algumas escolas oferecem orientação na compra do primeiro instrumento."
+  },
+  {
+    question: "É possível fazer aula experimental antes de se matricular?",
+    answer: "Sim, a grande maioria das escolas sérias oferece aula experimental gratuita ou com valor simbólico. Essa é uma das melhores formas de avaliar se a escola é adequada para você. Na aula experimental, observe a didática do professor, a qualidade dos equipamentos, o ambiente geral e se você se sentiu confortável. No Anacã Música, a aula experimental é gratuita e sem compromisso."
+  }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title="Como Escolher uma Escola de Música em São Paulo — Guia Completo"
+  description="Guia completo para escolher a melhor escola de música em São Paulo. O que avaliar: professores, metodologia, estrutura, localização e valores. Dicas para adultos e crianças."
+  schemas={[faqSchema]}
+>
+  <Hero
+    title="Como Escolher uma Escola de Música em São Paulo"
+    subtitles={["Guia Completo"]}
+    backgroundImage="/images/hero-home.webp"
+    compact
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="guia-content">
+
+        <p>
+          Escolher uma escola de música é uma decisão que vai muito além do preço ou da proximidade de casa. A escola certa precisa ter professores qualificados e com experiência didática, uma metodologia que respeite seu ritmo de aprendizado, infraestrutura adequada com salas acusticamente tratadas e, acima de tudo, um ambiente onde você se sinta motivado a evoluir. Neste guia, reunimos os critérios mais importantes para ajudar você a tomar essa decisão com segurança.
+        </p>
+
+        <h2>O que avaliar em uma escola de música</h2>
+
+        <p>
+          Antes de visitar qualquer escola, é importante saber exatamente o que observar. Muitas pessoas se deixam levar apenas pelo visual do espaço ou pelo valor da mensalidade, mas existem fatores muito mais relevantes para o seu aprendizado. Veja os principais pontos que merecem atenção.
+        </p>
+
+        <h3>Professores</h3>
+
+        <p>
+          O professor é, sem dúvida, o fator mais determinante na qualidade do ensino. Um bom professor de música não é apenas um instrumentista habilidoso — ele precisa dominar a didática, saber adaptar a linguagem ao nível do aluno e manter a motivação mesmo nos momentos mais desafiadores do aprendizado.
+        </p>
+        <p>
+          Ao avaliar uma escola, verifique a formação dos professores. Músicos com graduação em música, licenciatura ou formação em instituições reconhecidas (como FAAM, UNICAMP, UNESP, Berklee, EM&T) costumam ter uma base pedagógica mais sólida. Mas a experiência prática também conta muito: professores que tocam profissionalmente trazem para a aula uma vivência real do mercado musical.
+        </p>
+        <p>
+          Observe também se a escola mantém um corpo docente estável. Alta rotatividade de professores é um sinal de alerta — indica problemas de gestão ou remuneração, e prejudica diretamente a continuidade do aprendizado do aluno.
+        </p>
+
+        <h3>Metodologia</h3>
+
+        <p>
+          Existem diferentes abordagens para o ensino de música, e nenhuma é universalmente superior. O importante é que a escola tenha uma metodologia clara e estruturada, com objetivos definidos para cada estágio do aprendizado.
+        </p>
+        <p>
+          Algumas escolas seguem métodos tradicionais focados em leitura de partitura e técnica clássica. Outras priorizam a prática musical desde o início, trabalhando repertório e improviso junto com a teoria. Há também abordagens híbridas que combinam o melhor dos dois mundos.
+        </p>
+        <p>
+          Para a maioria dos alunos, especialmente iniciantes, uma metodologia que equilibre teoria e prática tende a ser mais motivadora. Começar a tocar músicas reais desde as primeiras aulas, mesmo que simplificadas, mantém o entusiasmo alto e dá sentido ao estudo técnico.
+        </p>
+        <p>
+          Pergunte à escola como é o planejamento das aulas. Existe um programa semestral? Os alunos recebem materiais didáticos? Há avaliações de progresso? Esses detalhes revelam o grau de profissionalismo da instituição.
+        </p>
+
+        <h3>Estrutura e infraestrutura</h3>
+
+        <p>
+          A qualidade do espaço físico impacta diretamente a experiência de aprendizado. Salas acusticamente tratadas permitem que você ouça com clareza o que está tocando, sem interferência de aulas vizinhas. Instrumentos bem conservados e afinados fazem diferença, especialmente para quem está desenvolvendo a percepção auditiva.
+        </p>
+        <p>
+          Verifique se a escola possui salas individuais e salas para aulas em grupo ou ensaio de bandas. Um espaço para apresentações — mesmo que pequeno — mostra que a escola valoriza a experiência de palco, fundamental para o desenvolvimento musical completo.
+        </p>
+        <p>
+          Detalhes como ar-condicionado, estacionamento, acessibilidade e uma recepção organizada podem parecer secundários, mas contribuem para o conforto e a pontualidade nas aulas.
+        </p>
+
+        <h3>Localização e acessibilidade</h3>
+
+        <p>
+          A localização da escola é mais importante do que parece. Estudos de música exigem regularidade — se a escola for muito longe ou de difícil acesso, a chance de desistência aumenta significativamente. Escolha uma escola que esteja no caminho da sua rotina: perto de casa, do trabalho ou da escola do seu filho.
+        </p>
+        <p>
+          Em São Paulo, considere o trânsito nos horários de pico. Uma escola bem localizada em bairros centrais como Jardins, Pinheiros ou Vila Mariana oferece boas opções de transporte público e alternativas de estacionamento.
+        </p>
+
+        <h3>Aula experimental</h3>
+
+        <p>
+          Nunca se matricule em uma escola sem antes fazer uma aula experimental. Essa é a sua oportunidade de avaliar, na prática, tudo o que discutimos até aqui. Durante a aula, observe:
+        </p>
+        <ul>
+          <li>O professor é paciente e didático? Ele ouviu seus objetivos?</li>
+          <li>A sala é confortável e o instrumento está em bom estado?</li>
+          <li>Você se sentiu acolhido pela equipe da escola?</li>
+          <li>O professor explicou como seria o planejamento das aulas?</li>
+          <li>Você saiu da aula com vontade de voltar?</li>
+        </ul>
+        <p>
+          Essa última pergunta é talvez a mais importante. O aprendizado musical é uma jornada de meses e anos — você precisa se sentir motivado a cada aula.
+        </p>
+
+        <h2>Escola de música vs professor particular vs aulas online</h2>
+
+        <p>
+          Com tantas opções disponíveis, é natural se perguntar qual formato é o mais adequado. Cada modalidade tem vantagens e desvantagens, e a melhor escolha depende do seu perfil, orçamento e objetivos.
+        </p>
+
+        <h3>Escola de música</h3>
+        <ul>
+          <li><strong>Vantagens:</strong> estrutura profissional, variedade de professores e instrumentos, possibilidade de tocar em grupo, eventos e apresentações, ambiente que estimula o convívio com outros músicos, compromisso formal que ajuda na disciplina.</li>
+          <li><strong>Desvantagens:</strong> custo geralmente mais alto, menor flexibilidade de horários, necessidade de deslocamento.</li>
+        </ul>
+
+        <h3>Professor particular (aulas a domicílio)</h3>
+        <ul>
+          <li><strong>Vantagens:</strong> conveniência de estudar em casa, atenção totalmente individualizada, flexibilidade de horários, possibilidade de negociar valores.</li>
+          <li><strong>Desvantagens:</strong> qualidade muito variável (sem supervisão pedagógica), sem infraestrutura profissional, sem convívio com outros alunos, sem experiência de palco.</li>
+        </ul>
+
+        <h3>Aulas online</h3>
+        <ul>
+          <li><strong>Vantagens:</strong> acesso a professores de qualquer lugar, custo frequentemente mais baixo, economia de tempo com deslocamento, flexibilidade total.</li>
+          <li><strong>Desvantagens:</strong> limitações na percepção de som e dinâmica, dificuldade para corrigir postura e técnica presencialmente, exige autodisciplina acima da média, perda da experiência social da música.</li>
+        </ul>
+
+        <p>
+          Para a maioria dos iniciantes, a escola de música oferece a melhor combinação de qualidade, motivação e resultados. A estrutura profissional e o acompanhamento pedagógico fazem uma diferença enorme nos primeiros meses, que são os mais críticos para a continuidade do aprendizado.
+        </p>
+
+        <h2>Escolas de música na região dos Jardins em São Paulo</h2>
+
+        <p>
+          A região dos Jardins, no coração de São Paulo, concentra algumas das melhores opções de ensino musical da cidade. O bairro combina fácil acesso (próximo às estações Trianon-Masp e Consolação do metrô) com uma atmosfera cultural vibrante.
+        </p>
+        <p>
+          Ao buscar uma escola na região, preste atenção aos diferenciais que mencionamos neste guia. Visite os espaços pessoalmente, converse com os professores e faça aulas experimentais antes de decidir.
+        </p>
+        <p>
+          O <strong>Anacã Música</strong>, localizado na Avenida Brasil, 649 — Jardim Paulista, é uma escola que se destaca pela infraestrutura moderna com 14 salas multiuso acusticamente tratadas, estúdio de gravação profissional e um corpo docente formado por mais de 25 músicos profissionais com experiência em ensino e performance. A escola oferece aulas de cordas, teclas, bateria, sopro, canto e musicalização infantil, com turmas para todas as idades.
+        </p>
+
+        <h2>Dicas para pais escolhendo uma escola para filhos</h2>
+
+        <p>
+          Quando a decisão envolve crianças, alguns critérios adicionais entram em jogo. A prioridade deve ser sempre o prazer e a motivação do seu filho — forçar uma criança a estudar música contra a vontade raramente dá bons resultados.
+        </p>
+        <ul>
+          <li><strong>Ambiente acolhedor:</strong> a escola precisa ser um lugar onde a criança se sinta segura e estimulada. Observe como os funcionários e professores interagem com as crianças durante a visita.</li>
+          <li><strong>Metodologia adaptada:</strong> crianças não aprendem da mesma forma que adultos. Para os mais novos (até 6-7 anos), a musicalização infantil com abordagem lúdica é mais indicada do que aulas de instrumento formais.</li>
+          <li><strong>Respeito ao ritmo da criança:</strong> bons professores infantis sabem que cada criança tem seu tempo. Desconfie de escolas que prometem resultados rápidos demais.</li>
+          <li><strong>Experiência de conjunto:</strong> tocar com outras crianças desenvolve habilidades sociais, senso de ritmo coletivo e trabalho em equipe. Busque escolas que ofereçam essa possibilidade.</li>
+          <li><strong>Comunicação com os pais:</strong> a escola deve manter os pais informados sobre o progresso, dificuldades e próximos passos do aprendizado.</li>
+        </ul>
+        <p>
+          Lembre-se: o objetivo inicial não é formar um virtuose, mas criar uma relação positiva e duradoura com a música. Se seu filho sai da aula feliz e pedindo para voltar, a escola está cumprindo seu papel.
+        </p>
+
+        <h2>Dicas para adultos que estão começando</h2>
+
+        <p>
+          Se você é adulto e está pensando em começar a estudar música, saiba que está em excelente companhia. Cada vez mais pessoas acima dos 25, 30, 40 anos descobrem a música como fonte de prazer, desafio intelectual e equilíbrio emocional.
+        </p>
+        <ul>
+          <li><strong>Não se compare com crianças:</strong> adultos e crianças aprendem de formas diferentes. Adultos têm mais capacidade analítica e disciplina, o que compensa a suposta "vantagem" da idade. Com dedicação consistente, os resultados aparecem.</li>
+          <li><strong>Defina seus objetivos:</strong> você quer tocar em uma banda? Compor suas próprias músicas? Tocar para relaxar em casa? Cada objetivo pede uma abordagem diferente. Compartilhe isso com seu professor.</li>
+          <li><strong>Priorize a regularidade:</strong> 20 minutos de prática diária valem mais do que 3 horas no fim de semana. A consistência é o segredo do progresso musical.</li>
+          <li><strong>Escolha um repertório que te motive:</strong> estudar apenas escalas e exercícios técnicos é desmotivador. Peça ao professor para incluir músicas que você gosta no planejamento das aulas.</li>
+          <li><strong>Busque uma escola com experiência em adultos:</strong> nem todas as escolas sabem lidar com o perfil adulto. Procure professores que entendam suas ansiedades, limitações de tempo e expectativas.</li>
+        </ul>
+
+        <div class="guia-faq">
+          <h2>Perguntas frequentes</h2>
+          {faqItems.map(item => (
+            <details>
+              <summary>{item.question}</summary>
+              <div class="faq-answer">
+                <p>{item.answer}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+
+        <div class="guia-cta">
+          <h2>Pronto para começar?</h2>
+          <p>
+            Agende uma aula experimental gratuita no Anacã Música e conheça nossa estrutura, nossos professores e nossa metodologia. Sem compromisso — venha sentir o ambiente e descobrir se somos a escola certa para você.
+          </p>
+          <Button text="Agendar aula experimental" />
+        </div>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .guia-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .guia-content h2 {
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-md);
+    font-size: clamp(28px, 3.5vw, 42px);
+  }
+
+  .guia-content h3 {
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-sm);
+    color: var(--color-accent);
+    font-size: clamp(20px, 2vw, 28px);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .guia-content p {
+    color: var(--color-text-muted);
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: var(--space-md);
+  }
+
+  .guia-content ul, .guia-content ol {
+    color: var(--color-text-muted);
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: var(--space-md);
+    padding-left: 20px;
+  }
+
+  .guia-content li {
+    margin-bottom: var(--space-xs);
+  }
+
+  .guia-content blockquote {
+    border-left: 3px solid var(--color-accent);
+    padding-left: var(--space-lg);
+    margin: var(--space-lg) 0;
+    font-style: normal;
+  }
+
+  .guia-content blockquote p {
+    color: var(--color-text);
+    font-size: 17px;
+  }
+
+  .guia-faq {
+    margin-top: var(--space-xl);
+  }
+
+  .guia-faq details {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .guia-faq summary {
+    cursor: pointer;
+    padding: var(--space-md) 0;
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--color-text);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .guia-faq summary::-webkit-details-marker { display: none; }
+
+  .guia-faq summary::after {
+    content: '+';
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--color-accent);
+  }
+
+  .guia-faq details[open] summary::after {
+    content: '\2212';
+  }
+
+  .guia-faq .faq-answer {
+    padding-bottom: var(--space-md);
+  }
+
+  .guia-cta {
+    text-align: center;
+    padding: var(--space-xl) 0;
+    margin-top: var(--space-xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .guia-cta h2 {
+    margin-bottom: var(--space-md);
+  }
+
+  .guia-cta p {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+  }
+</style>

@@ -31,6 +31,17 @@ const cursos = defineCollection({
     cta_h6: z.string().optional(),
     cta_h2: z.string().optional(),
     cta_p: z.string().optional(),
+    // SEO: FAQ section
+    faq: z.array(z.object({
+      pergunta: z.string(),
+      resposta: z.string(),
+    })).optional(),
+    // SEO: Para quem é (target audience)
+    para_quem: z.string().optional(),
+    // SEO: O que você vai aprender (learning outcomes)
+    o_que_aprende: z.array(z.string()).optional(),
+    // SEO: Bloco citável para AIEO/GEO
+    bloco_citavel: z.string().optional(),
   }),
 });
 

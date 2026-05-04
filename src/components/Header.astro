@@ -17,7 +17,7 @@ const cursosByCategory = Object.entries(categorias).map(([key, cat]) => ({
 
 // Categories with single course go directly, categories with multiple get submenus
 const cursoMenuItems = cursosByCategory.map(cat => {
-  if (cat.courses.length === 1 && (cat.key === 'canto' || cat.key === 'kids')) {
+  if (cat.courses.length === 1) {
     // Direct link (no submenu)
     return { label: cat.label, href: `/curso/${cat.courses[0].data.slug}/`, children: null };
   }

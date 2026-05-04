@@ -2,7 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Button from '../../components/Button.astro';
 import MarqueeGallery from '../../components/MarqueeGallery.astro';
-import { getCollection } from 'astro:content';
+import TabsCarousel from '../../components/TabsCarousel.astro';
+import { getCollection, render } from 'astro:content';
 import { categorias } from '../../lib/categorias';
 
 export async function getStaticPaths() {
@@ -35,12 +36,80 @@ const hasSecao4 = fs.existsSync(path.join(publicDir, `images/cursos/${slug}-seca
 
 const isKids = d.categoria === 'kids';
 
+const professoresCollection = (await getCollection('professores')).filter(p => p.data.ativo);
+const cursoProfessores = professoresCollection.filter(p =>
+  p.data.modalidades.some(m => m.toLowerCase().includes(d.titulo.toLowerCase()))
+);
+
+const courseSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Course',
+  name: d.titulo,
+  description: d.descricao_curta,
+  provider: {
+    '@type': 'MusicSchool',
+    '@id': 'https://anacamusica.com.br/#organization',
+    name: 'Anacã Música',
+  },
+  url: `https://anacamusica.com.br/curso/${d.slug}/`,
+  image: d.imagem_hero || `/images/cursos/${d.slug}-hero.webp`,
+  educationalLevel: 'Beginner to Advanced',
+  inLanguage: 'pt-BR',
+  courseMode: 'onsite',
+  locationCreated: {
+    '@type': 'Place',
+    name: 'Anacã Música',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Av. Brasil, 649',
+      addressLocality: 'São Paulo',
+      addressRegion: 'SP',
+      addressCountry: 'BR',
+      neighborhood: 'Jardim Paulista',
+    },
+  },
+  ...(cursoProfessores.length > 0 && {
+    instructor: cursoProfessores.map(p => ({
+      '@type': 'Person',
+      name: p.data.nome,
+      url: `https://anacamusica.com.br/professor/${p.data.slug}/`,
+      ...(p.data.foto && { image: `https://anacamusica.com.br${p.data.foto}` }),
+    })),
+  }),
+};
+
+const faqSchema = d.faq && d.faq.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: d.faq.map(item => ({
+    '@type': 'Question',
+    name: item.pergunta,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.resposta,
+    },
+  })),
+} : null;
+
+const schemas = [courseSchema, ...(faqSchema ? [faqSchema] : [])];
+
+// Build professor credential strings for display
+const profCredentials: Record<string, string> = {};
+for (const p of cursoProfessores) {
+  const { Content } = await render(p);
+  // Use excerpt as credential summary
+  if (p.data.excerpt) {
+    profCredentials[p.data.slug] = p.data.excerpt;
+  }
+}
+
 ---
 
 <BaseLayout
-  title={d.titulo}
+  title={`Aulas de ${d.titulo} em São Paulo`}
   description={d.descricao_curta}
   image={d.imagem_hero}
+  schemas={schemas}
 >
   {isKids ? (
     <Fragment>
@@ -49,7 +118,7 @@ const isKids = d.categoria === 'kids';
         <div class="c-hero__overlay"></div>
         <div class="container c-hero__body">
           <h6 class="c-hero__cat" data-reveal="fade-up">{d.titulo}</h6>
-          <h2 class="c-hero__title" data-reveal="fade-up" data-reveal-delay="150">Crescendo com a música!</h2>
+          <h1 class="c-hero__title" data-reveal="fade-up" data-reveal-delay="150">Crescendo com a música!</h1>
         </div>
       </section>
 
@@ -61,7 +130,7 @@ const isKids = d.categoria === 'kids';
             <h6>Quem somos</h6>
             <h2>Aqui, aprender é uma alegria.</h2>
             <h4>Música, expressão e diversão em um só lugar.</h4>
-            <p>Na Anacã Música, as crianças aprendem de forma leve e envolvente. Além do aprendizado musical, desenvolvem coordenação, concentração e criatividade em um ambiente acolhedor. As aulas unem técnica, expressão e emoção, trazendo a música para o dia a dia de forma divertida e significativa.</p>
+            <p>No Anacã Música, as crianças aprendem de forma leve e envolvente. Além do aprendizado musical, desenvolvem coordenação, concentração e criatividade em um ambiente acolhedor. As aulas unem técnica, expressão e emoção, trazendo a música para o dia a dia de forma divertida e significativa.</p>
           </div>
         </div>
       </section>
@@ -115,6 +184,65 @@ const isKids = d.categoria === 'kids';
         </div>
         <MarqueeGallery />
       </section>
+
+      <!-- PARA QUEM + O QUE APRENDE (kids) -->
+      {(d.para_quem || (d.o_que_aprende && d.o_que_aprende.length > 0)) && (
+        <section class="c-para-quem section">
+          <div class="container">
+            <div class="c-para-quem__grid">
+              {d.para_quem && (
+                <div class="c-para-quem__col" data-reveal="fade-right">
+                  <h6>Para quem é</h6>
+                  <h2>Quem pode fazer aulas de música infantil?</h2>
+                  {d.para_quem.split('\n\n').map(p => <p>{p}</p>)}
+                </div>
+              )}
+              {d.o_que_aprende && d.o_que_aprende.length > 0 && (
+                <div class="c-para-quem__col" data-reveal="fade-left">
+                  <h6>Conteúdo programático</h6>
+                  <h2>O que seu filho vai aprender</h2>
+                  <ul class="c-aprende-list">
+                    {d.o_que_aprende.map(item => <li>{item}</li>)}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <!-- BLOCO CITÁVEL (kids) -->
+      {d.bloco_citavel && (
+        <section class="c-citavel section">
+          <div class="container">
+            <div class="c-citavel__inner" data-reveal="fade-up">
+              <blockquote class="c-citavel__block">
+                {d.bloco_citavel}
+              </blockquote>
+            </div>
+          </div>
+        </section>
+      )}
+
+      <!-- FAQ (kids) -->
+      {d.faq && d.faq.length > 0 && (
+        <section class="c-faq section">
+          <div class="container">
+            <h6 style="color: var(--color-accent);" data-reveal="fade-up">Perguntas frequentes</h6>
+            <h2 data-reveal="fade-up" data-reveal-delay="100">Dúvidas sobre aulas de música infantil</h2>
+            <div class="c-faq__list">
+              {d.faq.map((item, i) => (
+                <details class="c-faq__item" data-reveal="fade-up" data-reveal-delay={String(i * 80)}>
+                  <summary class="c-faq__question">{item.pergunta}</summary>
+                  <div class="c-faq__answer">
+                    <p>{item.resposta}</p>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </Fragment>
   ) : (
     <Fragment>
@@ -123,7 +251,7 @@ const isKids = d.categoria === 'kids';
         <div class="c-hero__overlay"></div>
         <div class="container c-hero__body">
           <h6 class="c-hero__cat" data-reveal="fade-up">{catLabel}</h6>
-          <h2 class="c-hero__title" data-reveal="fade-up" data-reveal-delay="150">{d.titulo}</h2>
+          <h1 class="c-hero__title" data-reveal="fade-up" data-reveal-delay="150">{d.titulo}</h1>
         </div>
       </section>
 
@@ -181,6 +309,95 @@ const isKids = d.categoria === 'kids';
           </div>
         </div>
       </section>
+
+      <!-- PARA QUEM + O QUE APRENDE -->
+      {(d.para_quem || (d.o_que_aprende && d.o_que_aprende.length > 0)) && (
+        <section class="c-para-quem section">
+          <div class="container">
+            <div class="c-para-quem__grid">
+              {d.para_quem && (
+                <div class="c-para-quem__col" data-reveal="fade-right">
+                  <h6>Para quem é</h6>
+                  <h2>Quem pode fazer aulas de {d.titulo.toLowerCase()}?</h2>
+                  {d.para_quem.split('\n\n').map(p => <p>{p}</p>)}
+                </div>
+              )}
+              {d.o_que_aprende && d.o_que_aprende.length > 0 && (
+                <div class="c-para-quem__col" data-reveal="fade-left">
+                  <h6>Conteúdo programático</h6>
+                  <h2>O que você vai aprender</h2>
+                  <ul class="c-aprende-list">
+                    {d.o_que_aprende.map(item => <li>{item}</li>)}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <!-- BLOCO CITÁVEL (SEO/AIEO) -->
+      {d.bloco_citavel && (
+        <section class="c-citavel section">
+          <div class="container">
+            <div class="c-citavel__inner" data-reveal="fade-up">
+              <blockquote class="c-citavel__block">
+                {d.bloco_citavel}
+              </blockquote>
+            </div>
+          </div>
+        </section>
+      )}
+
+      <!-- PROFESSORES DO CURSO -->
+      {cursoProfessores.length > 0 && (
+        <section class="c-profs section">
+          <div class="container">
+            <h6 style="color: var(--color-accent);" data-reveal="fade-up">Nosso time</h6>
+            <h2 data-reveal="fade-up" data-reveal-delay="100">Quem são os professores de {d.titulo.toLowerCase()}</h2>
+            <div style="margin-top: var(--space-lg);">
+              <TabsCarousel variant="dark" slides={4} tabs={[{ key: 'profs', label: 'Professores' }]} id={`profs-${d.slug}`}>
+                <div data-tab-content="profs">
+                  {cursoProfessores.map(prof => (
+                    <a href={`/professor/${prof.data.slug}/`} class="prof-card">
+                      {prof.data.foto && (
+                        <img src={prof.data.foto} alt={prof.data.nome} class="prof-card__img" loading="lazy" width="300" height="300" />
+                      )}
+                      <div class="prof-card__body">
+                        <h4 class="prof-card__name">{prof.data.nome}</h4>
+                        {prof.data.excerpt && (
+                          <p class="prof-card__bio">{prof.data.excerpt}</p>
+                        )}
+                        <span class="prof-card__link">Saiba Mais</span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </TabsCarousel>
+            </div>
+          </div>
+        </section>
+      )}
+
+      <!-- FAQ -->
+      {d.faq && d.faq.length > 0 && (
+        <section class="c-faq section">
+          <div class="container">
+            <h6 style="color: var(--color-accent);" data-reveal="fade-up">Perguntas frequentes</h6>
+            <h2 data-reveal="fade-up" data-reveal-delay="100">Dúvidas sobre aulas de {d.titulo.toLowerCase()}</h2>
+            <div class="c-faq__list">
+              {d.faq.map((item, i) => (
+                <details class="c-faq__item" data-reveal="fade-up" data-reveal-delay={String(i * 80)}>
+                  <summary class="c-faq__question">{item.pergunta}</summary>
+                  <div class="c-faq__answer">
+                    <p>{item.resposta}</p>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <!-- CTA -->
       <section
@@ -588,5 +805,179 @@ const isKids = d.categoria === 'kids';
   .kids-estrutura__header h6 { color: var(--color-accent); margin-bottom: var(--space-xs); }
   .kids-estrutura__header h2 { margin-bottom: 0; }
   .kids-estrutura__header p { color: var(--color-text-muted); font-size: 15px; line-height: 1.7; }
+
+  /* ── PARA QUEM + O QUE APRENDE ── */
+  .c-para-quem__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .c-para-quem__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .c-para-quem__col h6 { color: var(--color-accent); margin-bottom: var(--space-xs); }
+  .c-para-quem__col h2 { margin-bottom: var(--space-md); font-size: clamp(28px, 3.5vw, 42px); }
+  .c-para-quem__col p { color: var(--color-text-muted); line-height: 1.7; font-size: 15px; margin-bottom: var(--space-sm); }
+
+  .c-aprende-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .c-aprende-list li {
+    color: var(--color-text-muted);
+    font-size: 15px;
+    line-height: 1.7;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--color-border);
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .c-aprende-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: var(--color-accent);
+    border-radius: 50%;
+  }
+
+  /* ── BLOCO CITÁVEL ── */
+  .c-citavel__inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .c-citavel__block {
+    color: var(--color-text);
+    font-size: 17px;
+    line-height: 1.8;
+    font-weight: 300;
+    border-left: 3px solid var(--color-accent);
+    padding-left: var(--space-lg);
+    margin: 0;
+    font-style: normal;
+  }
+
+  /* ── PROFESSORES DO CURSO (usa TabsCarousel + prof-card) ── */
+  .prof-card {
+    display: block;
+    color: inherit;
+    transition: transform var(--transition);
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .prof-card:hover {
+    transform: translateY(-4px);
+    color: inherit;
+  }
+
+  .prof-card__img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
+  .prof-card__body { padding: 10px 0; }
+
+  .prof-card__name {
+    font-family: var(--font-body);
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.7em;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--color-text);
+    margin-bottom: 4px;
+  }
+
+  .prof-card__bio {
+    color: #CCCCCC;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: var(--space-sm);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .prof-card__link {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text);
+    border: 1px solid var(--color-accent);
+    padding: 8px 20px;
+    transition: all var(--transition);
+  }
+
+  .prof-card:hover .prof-card__link {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  /* ── FAQ ── */
+  .c-faq__list {
+    margin-top: var(--space-lg);
+    max-width: 800px;
+  }
+
+  .c-faq__item {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .c-faq__question {
+    cursor: pointer;
+    padding: var(--space-md) 0;
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--color-text);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .c-faq__question::-webkit-details-marker { display: none; }
+
+  .c-faq__question::after {
+    content: '+';
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--color-accent);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+
+  .c-faq__item[open] .c-faq__question::after {
+    content: '−';
+  }
+
+  .c-faq__answer {
+    padding-bottom: var(--space-md);
+  }
+
+  .c-faq__answer p {
+    color: var(--color-text-muted);
+    font-size: 15px;
+    line-height: 1.7;
+  }
 
 </style>

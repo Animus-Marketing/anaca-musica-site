@@ -22,10 +22,7 @@ const { title, subtitles = [], backgroundImage, compact = false } = Astro.props;
         )}
       </div>
     )}
-    {compact
-      ? <h2 class="hero__title" data-reveal="fade-up" data-reveal-delay="150">{title}</h2>
-      : <h1 class="hero__title" data-reveal="fade-up" data-reveal-delay="150">{title}</h1>
-    }
+    <h1 class="hero__title" data-reveal="fade-up" data-reveal-delay="150">{title}</h1>
     <slot />
   </div>
 </section>

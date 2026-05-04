@@ -1,7 +1,7 @@
 export const categorias = {
   cordas: { label: 'Cordas', slug: 'cordas' },
   canto: { label: 'Canto', slug: 'canto' },
-  percussao: { label: 'Percussão', slug: 'percussao' },
+  percussao: { label: 'Bateria', slug: 'percussao' },
   sopro: { label: 'Sopro', slug: 'sopro' },
   teclas: { label: 'Teclas', slug: 'teclas' },
   kids: { label: 'Instrumentalização Infantil', slug: 'kids' },
