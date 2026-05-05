@@ -1,11 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
-import SectionLabel from '../components/SectionLabel.astro';
 import Counter from '../components/Counter.astro';
 import CursoCard from '../components/CursoCard.astro';
 import TabsCarousel from '../components/TabsCarousel.astro';
-import MarqueeGallery from '../components/MarqueeGallery.astro';
+import EstruturaSection from '../components/EstruturaSection.astro';
 import { getCollection } from 'astro:content';
 import { categorias } from '../lib/categorias';
 
@@ -118,13 +117,7 @@ const depoimentos = [
   </section>
 
   <!-- 5. Estrutura (DARK bg, auto-scrolling rows) -->
-  <section class="section section--lg section--overflow">
-    <div class="container">
-      <h6 style="color: var(--color-accent);" data-reveal="fade-up">Estrutura Anacã</h6>
-      <h2 data-reveal="fade-up" data-reveal-delay="100">Conheça nosso espaço</h2>
-    </div>
-    <MarqueeGallery />
-  </section>
+  <EstruturaSection />
 
   <!-- 6. Professores (DARK bg, tabs + carousel with drag) -->
   <section class="section">

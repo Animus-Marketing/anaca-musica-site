@@ -4,7 +4,7 @@ import Hero from '../components/Hero.astro';
 import Button from '../components/Button.astro';
 import SectionLabel from '../components/SectionLabel.astro';
 import TabsCarousel from '../components/TabsCarousel.astro';
-import MarqueeGallery from '../components/MarqueeGallery.astro';
+import EstruturaSection from '../components/EstruturaSection.astro';
 import { getCollection } from 'astro:content';
 import { categorias } from '../lib/categorias';
 
@@ -204,24 +204,7 @@ const porqueItems = [
   </section>
 
   <!-- 6. Nossa Estrutura (marquee gallery) -->
-  <section class="section section--lg section--overflow">
-    <div class="container">
-      <div class="estrutura-header">
-        <SectionLabel
-          label="NOSSA ESTRUTURA"
-          title="Descubra o Anacã"
-          center={false}
-        />
-        <p class="estrutura-intro">
-          O Anacã Música foi pensado para que cada aluno se sinta em casa enquanto descobre
-          e desenvolve sua relação com a música. Nossa escola conta com 14 salas multiuso e
-          uma programação com mais de 11 cursos livres, atendendo todas as idades e níveis
-          de experiência.
-        </p>
-      </div>
-    </div>
-    <MarqueeGallery />
-  </section>
+  <EstruturaSection />
 
   <!-- 7. Nosso Time (professor carousel with tabs) -->
   <section class="section nosso-time-section">
@@ -544,26 +527,6 @@ const porqueItems = [
   @media (max-width: 640px) {
     .porque-grid {
       grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  /* Estrutura header — split: title left, text right */
-  .estrutura-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-lg);
-    align-items: end;
-    margin-bottom: var(--space-lg);
-  }
-
-  .estrutura-intro {
-    color: var(--color-text-muted);
-    line-height: 1.8;
-  }
-
-  @media (max-width: 768px) {
-    .estrutura-header {
-      grid-template-columns: 1fr;
     }
   }
 
