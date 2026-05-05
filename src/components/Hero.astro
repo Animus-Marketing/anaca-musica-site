@@ -3,16 +3,32 @@ interface Props {
   title: string;
   subtitles?: string[];
   backgroundImage?: string;
+  backgroundVideoId?: string;
   compact?: boolean;
 }
 
-const { title, subtitles = [], backgroundImage, compact = false } = Astro.props;
+const { title, subtitles = [], backgroundImage, backgroundVideoId, compact = false } = Astro.props;
+const videoSrc = backgroundVideoId
+  ? `https://www.youtube.com/embed/${backgroundVideoId}?autoplay=1&mute=1&loop=1&playlist=${backgroundVideoId}&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3`
+  : null;
 ---
 
 <section
-  class:list={['hero', { 'hero--compact': compact }]}
+  class:list={['hero', { 'hero--compact': compact, 'hero--video': !!videoSrc }]}
   style={backgroundImage ? `--hero-bg: url(${backgroundImage})` : ''}
 >
+  {videoSrc && (
+    <div class="hero__video" aria-hidden="true">
+      <iframe
+        src={videoSrc}
+        title="Tour virtual Anacã Música"
+        frameborder="0"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen
+        loading="eager"
+      ></iframe>
+    </div>
+  )}
   <div class="hero__content">
     {subtitles.length > 0 && (
       <div class="hero__subtitles" data-reveal="fade-up">
@@ -26,3 +42,30 @@ const { title, subtitles = [], backgroundImage, compact = false } = Astro.props;
     <slot />
   </div>
 </section>
+
+<style>
+  .hero__video {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero__video iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 56.25vw; /* 16:9 */
+    min-height: 100%;
+    min-width: 177.77vh; /* 16:9 */
+    transform: translate(-50%, -50%);
+    border: 0;
+  }
+
+  /* Slightly stronger overlay so text remains legible over video */
+  :global(.hero--video::after) {
+    background: rgba(0, 0, 0, 0.55) !important;
+  }
+</style>

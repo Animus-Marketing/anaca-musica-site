@@ -36,8 +36,13 @@ const porqueItems = [
     title="Seja bem vindo ao Anacã Música"
     subtitles={["A Escola"]}
     backgroundImage="/images/escola-hero.webp"
+    backgroundVideoId="UMlXU4t2SIc"
     compact
-  />
+  >
+    <div class="hero-cta" data-reveal="fade-up" data-reveal-delay="300">
+      <Button text="Tour Virtual" href="https://tourmkr.com/F1YAhPLqMn" variant="primary" />
+    </div>
+  </Hero>
 
   <!-- 2. Quem Somos -->
   <section class="section section--light quem-somos-section">
@@ -334,6 +339,12 @@ const porqueItems = [
   /* Hero title centering fix */
   :global(.hero--compact .hero__title) {
     margin-inline: auto;
+  }
+
+  .hero-cta {
+    margin-top: var(--space-md);
+    display: flex;
+    justify-content: center;
   }
 
   /* Quem Somos (light section with bg image) */
