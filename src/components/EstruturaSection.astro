@@ -1,0 +1,61 @@
+---
+import SectionLabel from './SectionLabel.astro';
+import Button from './Button.astro';
+import MarqueeGallery from './MarqueeGallery.astro';
+
+interface Props {
+  label?: string;
+  title?: string;
+  intro?: string;
+  showTourButton?: boolean;
+}
+
+const {
+  label = 'NOSSA ESTRUTURA',
+  title = 'Descubra o Anacã',
+  intro = 'O Anacã Música foi pensado para que cada aluno se sinta em casa enquanto descobre e desenvolve sua relação com a música. Nossa escola conta com 14 salas multiuso e uma programação com mais de 11 cursos livres, atendendo todas as idades e níveis de experiência.',
+  showTourButton = true,
+} = Astro.props;
+---
+
+<section class="section section--lg section--overflow">
+  <div class="container">
+    <div class="estrutura-header">
+      <div class="estrutura-header__left">
+        <SectionLabel label={label} title={title} center={false} />
+        {showTourButton && (
+          <div class="estrutura-cta" data-reveal="fade-up" data-reveal-delay="200">
+            <Button text="Tour Virtual" href="https://tourmkr.com/F1YAhPLqMn" variant="primary" />
+          </div>
+        )}
+      </div>
+      <p class="estrutura-intro">{intro}</p>
+    </div>
+  </div>
+  <MarqueeGallery />
+</section>
+
+<style>
+  .estrutura-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    align-items: end;
+    margin-bottom: var(--space-lg);
+  }
+
+  .estrutura-intro {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  .estrutura-cta {
+    margin-top: var(--space-md);
+  }
+
+  @media (max-width: 768px) {
+    .estrutura-header {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
