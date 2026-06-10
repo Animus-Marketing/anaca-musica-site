@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.0",
-    "astro": "^5.17.1"
+    "astro": "^5.17.1",
+    "intl-tel-input": "^29.0.5"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
