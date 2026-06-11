@@ -194,7 +194,7 @@ const passos = [
           <svg viewBox="0 0 24 24" fill="none" stroke="#FF6530" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="10" /><path d="m8 12.5 2.5 2.5L16 9.5" />
           </svg>
-          <h3>Indicação enviada!</h3>
+          <h3>Sua indicação foi enviada com sucesso!</h3>
           <p>
             Obrigado por indicar! Vamos entrar em contato com seu amigo e, assim que a matrícula
             for efetivada, seu mês grátis é garantido. 🎶
@@ -328,7 +328,7 @@ const passos = [
       success.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } catch (err) {
       console.error('[indique-e-ganhe] erro no envio:', err);
-      status.textContent = 'Não conseguimos enviar agora. Tente novamente em instantes.';
+      status.textContent = 'Estamos enfrentando problemas técnicos, tente novamente mais tarde.';
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Enviar indicação';
