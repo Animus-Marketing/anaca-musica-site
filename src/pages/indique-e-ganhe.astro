@@ -214,8 +214,7 @@ const passos = [
   import intlTelInput from 'intl-tel-input/intlTelInputWithUtils';
   import pt from 'intl-tel-input/locale/pt';
 
-  // TODO: colar aqui a URL do webhook (Google Sheets) quando estiver pronta
-  const WEBHOOK_URL = '';
+  const WEBHOOK_URL = 'https://n8n.ricardotocha.com.br/webhook/anaca-musica-indique-ganhe';
 
   const itiOptions = {
     initialCountry: 'br',
@@ -311,10 +310,9 @@ const passos = [
 
     try {
       if (WEBHOOK_URL) {
-        // text/plain evita preflight CORS (funciona com Apps Script, Make, Zapier)
         const res = await fetch(WEBHOOK_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         });
         if (!res.ok && res.type !== 'opaque') throw new Error(`Webhook respondeu ${res.status}`);
