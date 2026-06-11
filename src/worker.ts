@@ -1,6 +1,14 @@
 export default {
   async fetch(request: Request, env: { ASSETS: { fetch: typeof fetch } }) {
-    const response = await env.ASSETS.fetch(request);
+    // ASSETS.fetch pode lançar exceção em requests fora do padrão
+    // (ex.: bots pedindo /.well-known/traffic-advice) — devolve 404 em vez de 500
+    let response: Response;
+    try {
+      response = await env.ASSETS.fetch(request);
+    } catch {
+      return new Response('Not Found', { status: 404 });
+    }
+
     const url = new URL(request.url);
 
     if (url.hostname !== 'anacamusica.com.br') {
