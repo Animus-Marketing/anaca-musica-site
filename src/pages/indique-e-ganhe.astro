@@ -221,7 +221,8 @@ const passos = [
     countryOrder: ['br', 'pt', 'us', 'es', 'ar', 'uy'],
     separateDialCode: true,
     strictMode: true,
-    i18n: pt,
+    uiTranslations: pt,
+    countryNameLocale: 'pt-BR',
   };
 
   const form = document.getElementById('ig-form') as HTMLFormElement;
@@ -297,10 +298,10 @@ const passos = [
       nome: (document.getElementById('nome') as HTMLInputElement).value.trim(),
       email: (document.getElementById('email') as HTMLInputElement).value.trim(),
       whatsapp: itis.whatsapp.getNumber(),
-      whatsapp_pais: itis.whatsapp.getSelectedCountryData().iso2?.toUpperCase() ?? '',
+      whatsapp_pais: itis.whatsapp.getSelectedCountry()?.iso2?.toUpperCase() ?? '',
       indicado_nome: (document.getElementById('indicado_nome') as HTMLInputElement).value.trim(),
       indicado_whatsapp: itis.indicado_whatsapp.getNumber(),
-      indicado_whatsapp_pais: itis.indicado_whatsapp.getSelectedCountryData().iso2?.toUpperCase() ?? '',
+      indicado_whatsapp_pais: itis.indicado_whatsapp.getSelectedCountry()?.iso2?.toUpperCase() ?? '',
       pagina: window.location.href,
       data_envio: new Date().toISOString(),
     };
@@ -337,8 +338,8 @@ const passos = [
 
   document.getElementById('ig-again')?.addEventListener('click', () => {
     form.reset();
-    itis.whatsapp.setCountry('br');
-    itis.indicado_whatsapp.setCountry('br');
+    itis.whatsapp.setSelectedCountry('br');
+    itis.indicado_whatsapp.setSelectedCountry('br');
     success.hidden = true;
     form.hidden = false;
     form.scrollIntoView({ behavior: 'smooth', block: 'start' });
