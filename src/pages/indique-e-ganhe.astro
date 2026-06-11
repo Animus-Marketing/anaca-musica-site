@@ -1,0 +1,896 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import 'intl-tel-input/styles';
+
+const passos = [
+  {
+    icon: 'user-plus',
+    texto: 'Você indica um amigo para fazer aulas no <strong>Anacã Música</strong>.',
+  },
+  {
+    icon: 'doc-check',
+    texto: 'Seu amigo efetiva matrícula em um plano <strong>semestral ou anual</strong> de cursos individuais.',
+  },
+  {
+    icon: 'gift',
+    texto: 'Você ganha <strong class="accent">1 mês de Anacã Música!</strong>',
+  },
+];
+---
+
+<BaseLayout
+  title="Indique e Ganhe — até 1 ano de Anacã Música"
+  description="Indique um amigo para o Anacã Música e ganhe até 1 ano de mensalidades. Promoção para alunos ativos: a cada matrícula efetivada, você ganha 1 mês grátis."
+>
+  <!-- 1. Hero -->
+  <section class="ig-hero">
+    <div class="container ig-hero__grid">
+      <div class="ig-hero__content">
+        <h6 class="section-label-tag" data-reveal="fade-up">Promoção para alunos Anacã</h6>
+        <h1 class="ig-hero__title" data-reveal="fade-up" data-reveal-delay="100">
+          <span class="ig-hero__line">Indique</span>
+          <span class="ig-hero__line"><span class="ig-hero__amp">&amp;</span><span class="ig-hero__outline">Ganhe</span></span>
+          <svg class="ig-spark" viewBox="0 0 64 64" fill="none" stroke="#FF6530" stroke-width="5" stroke-linecap="round" aria-hidden="true">
+            <path d="M32 6v18" />
+            <path d="M10 16l12 14" />
+            <path d="M54 16L42 30" />
+          </svg>
+        </h1>
+        <h4 class="ig-hero__sub" data-reveal="fade-up" data-reveal-delay="200">
+          Traga um amigo pra fazer música com a gente e ganhe mensalidades grátis no Anacã Música.
+        </h4>
+        <div class="ig-hero__cta" data-reveal="fade-up" data-reveal-delay="300">
+          <a href="#indicar" class="btn btn--primary">Quero indicar</a>
+        </div>
+      </div>
+
+      <div class="ig-hero__visual" data-reveal="fade-in" data-reveal-delay="200" aria-hidden="true">
+        <svg class="ig-blob" viewBox="0 0 520 520" fill="none">
+          <path
+            d="M262 28c92-18 198 38 220 132 20 88-26 158-62 210-40 58-128 122-216 100C112 447 32 368 26 272 20 170 88 62 262 28Z"
+            fill="#FF6530"
+          />
+        </svg>
+        <div class="ig-prize">
+          <span class="ig-prize__pre">Ganhe até</span>
+          <span class="ig-prize__num">1</span>
+          <span class="ig-prize__pos">ano de música</span>
+        </div>
+        <svg class="ig-note ig-note--1" viewBox="0 0 24 24" fill="none" stroke="#FF6530" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />
+        </svg>
+        <svg class="ig-note ig-note--2" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Como funciona -->
+  <section class="section ig-como">
+    <div class="container">
+      <div class="ig-como__head" data-reveal="fade-up">
+        <svg class="ig-mega" viewBox="0 0 64 64" fill="none" stroke="#FF6530" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 26v12l8 2 6 14 6-2-5-12 23 9V12L16 24l-8 2Z" />
+          <path d="M52 24a10 10 0 0 1 0 16" />
+        </svg>
+        <h6 class="section-label-tag">Como funciona</h6>
+        <h2>Simples assim, em 3 passos</h2>
+      </div>
+
+      <ol class="ig-passos">
+        {passos.map((passo, i) => (
+          <li class="ig-passo" data-reveal="fade-up" data-reveal-delay={String(i * 150)}>
+            <div class="ig-passo__icon">
+              {passo.icon === 'user-plus' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M19 8v6" /><path d="M16 11h6" />
+                </svg>
+              )}
+              {passo.icon === 'doc-check' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" /><path d="M14 2v6h6" /><path d="m9 15 2 2 4-4" />
+                </svg>
+              )}
+              {passo.icon === 'gift' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="8" width="18" height="4" /><path d="M12 8v13" /><path d="M5 12v9h14v-9" />
+                  <path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5" />
+                </svg>
+              )}
+            </div>
+            <span class="ig-passo__num">{String(i + 1).padStart(2, '0')}</span>
+            <p class="ig-passo__texto" set:html={passo.texto} />
+          </li>
+        ))}
+      </ol>
+
+      <p class="ig-como__nota" data-reveal="fade-up">
+        Indicou mais de um amigo? Cada matrícula efetivada vale 1 mês grátis — acumule até <strong>1 ano de Anacã Música</strong>.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. Formulário -->
+  <section class="section ig-form-section" id="indicar">
+    <img src="/images/vector-2.png" alt="" class="ig-vector" aria-hidden="true" />
+    <div class="container">
+      <div class="ig-form-head" data-reveal="fade-up">
+        <h6 class="section-label-tag">Faça sua indicação</h6>
+        <h2>Quem você vai trazer pra música?</h2>
+        <h4>Preencha seus dados e os do seu amigo. A gente cuida do resto.</h4>
+      </div>
+
+      <div class="ig-card" data-reveal="fade-up" data-reveal-delay="150">
+        <form id="ig-form" novalidate>
+          <div class="ig-blocks">
+            <!-- Bloco 1: quem indica -->
+            <fieldset class="ig-block">
+              <div class="ig-block__head">
+                <span class="ig-block__num">01</span>
+                <div>
+                  <h3 class="ig-block__title">Seus dados</h3>
+                  <p class="ig-block__sub">Você, aluno(a) do Anacã</p>
+                </div>
+              </div>
+
+              <div class="ig-field">
+                <label for="nome">Nome completo</label>
+                <input class="ig-input" type="text" id="nome" name="nome" autocomplete="name" placeholder="Seu nome completo" required />
+                <span class="ig-field__error" data-error-for="nome"></span>
+              </div>
+
+              <div class="ig-field">
+                <label for="email">E-mail</label>
+                <input class="ig-input" type="email" id="email" name="email" autocomplete="email" placeholder="voce@email.com" required />
+                <span class="ig-field__error" data-error-for="email"></span>
+              </div>
+
+              <div class="ig-field">
+                <label for="whatsapp">WhatsApp</label>
+                <input class="ig-input" type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" required />
+                <span class="ig-field__error" data-error-for="whatsapp"></span>
+              </div>
+            </fieldset>
+
+            <div class="ig-divider" aria-hidden="true"></div>
+
+            <!-- Bloco 2: indicado -->
+            <fieldset class="ig-block ig-block--indicado">
+              <div class="ig-block__head">
+                <span class="ig-block__num">02</span>
+                <div>
+                  <h3 class="ig-block__title">Dados do indicado</h3>
+                  <p class="ig-block__sub">O amigo que vai começar nas aulas</p>
+                </div>
+              </div>
+
+              <div class="ig-field">
+                <label for="indicado_nome">Nome do indicado</label>
+                <input class="ig-input" type="text" id="indicado_nome" name="indicado_nome" placeholder="Nome do seu amigo" required />
+                <span class="ig-field__error" data-error-for="indicado_nome"></span>
+              </div>
+
+              <div class="ig-field">
+                <label for="indicado_whatsapp">WhatsApp do indicado</label>
+                <input class="ig-input" type="tel" id="indicado_whatsapp" name="indicado_whatsapp" required />
+                <span class="ig-field__error" data-error-for="indicado_whatsapp"></span>
+              </div>
+
+              <p class="ig-block__hint">
+                Vamos entrar em contato com seu amigo pelo WhatsApp para agendar uma aula experimental.
+              </p>
+            </fieldset>
+          </div>
+
+          <div class="ig-form-footer">
+            <button type="submit" class="btn btn--primary ig-submit">Enviar indicação</button>
+            <p class="ig-form-status" id="ig-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <!-- Sucesso -->
+        <div class="ig-success" id="ig-success" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FF6530" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" /><path d="m8 12.5 2.5 2.5L16 9.5" />
+          </svg>
+          <h3>Sua indicação foi enviada com sucesso!</h3>
+          <p>
+            Obrigado por indicar! Vamos entrar em contato com seu amigo e, assim que a matrícula
+            for efetivada, seu mês grátis é garantido. 🎶
+          </p>
+          <button type="button" class="btn btn--outline" id="ig-again">Indicar outro amigo</button>
+        </div>
+      </div>
+
+      <p class="ig-legal" data-reveal="fade-up">
+        *Promoção válida apenas para alunos ativos do Anacã Música, nos meses de junho e julho de 2026.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import intlTelInput from 'intl-tel-input/intlTelInputWithUtils';
+  import pt from 'intl-tel-input/locale/pt';
+
+  const WEBHOOK_URL = 'https://n8n.ricardotocha.com.br/webhook/anaca-musica-indique-ganhe';
+
+  const itiOptions = {
+    initialCountry: 'br',
+    countryOrder: ['br', 'pt', 'us', 'es', 'ar', 'uy'],
+    separateDialCode: true,
+    strictMode: true,
+    uiTranslations: pt,
+    countryNameLocale: 'pt-BR',
+  };
+
+  const form = document.getElementById('ig-form') as HTMLFormElement;
+  const success = document.getElementById('ig-success') as HTMLElement;
+  const status = document.getElementById('ig-status') as HTMLElement;
+  const submitBtn = form.querySelector('.ig-submit') as HTMLButtonElement;
+
+  const phoneInputs = {
+    whatsapp: document.getElementById('whatsapp') as HTMLInputElement,
+    indicado_whatsapp: document.getElementById('indicado_whatsapp') as HTMLInputElement,
+  };
+
+  const itis = {
+    whatsapp: intlTelInput(phoneInputs.whatsapp, itiOptions),
+    indicado_whatsapp: intlTelInput(phoneInputs.indicado_whatsapp, itiOptions),
+  };
+
+  function setError(id: string, message: string) {
+    const el = document.querySelector(`[data-error-for="${id}"]`) as HTMLElement | null;
+    const input = document.getElementById(id);
+    if (el) el.textContent = message;
+    input?.closest('.ig-field')?.classList.toggle('has-error', Boolean(message));
+  }
+
+  // Limpa o erro do campo assim que o usuário volta a digitar
+  form.querySelectorAll('input').forEach((input) => {
+    input.addEventListener('input', () => setError(input.id, ''));
+  });
+
+  function validate(): boolean {
+    let ok = true;
+
+    const nome = (document.getElementById('nome') as HTMLInputElement).value.trim();
+    if (nome.length < 3) {
+      setError('nome', 'Informe seu nome completo.');
+      ok = false;
+    }
+
+    const email = (document.getElementById('email') as HTMLInputElement).value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      setError('email', 'Informe um e-mail válido.');
+      ok = false;
+    }
+
+    const indicadoNome = (document.getElementById('indicado_nome') as HTMLInputElement).value.trim();
+    if (indicadoNome.length < 3) {
+      setError('indicado_nome', 'Informe o nome do seu amigo.');
+      ok = false;
+    }
+
+    for (const [id, iti] of Object.entries(itis)) {
+      if (!phoneInputs[id as keyof typeof phoneInputs].value.trim()) {
+        setError(id, 'Informe o número de WhatsApp.');
+        ok = false;
+      } else if (!iti.isValidNumber()) {
+        setError(id, 'Número de WhatsApp inválido.');
+        ok = false;
+      }
+    }
+
+    return ok;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.textContent = '';
+    if (!validate()) {
+      status.textContent = 'Confira os campos destacados acima.';
+      return;
+    }
+
+    const payload = {
+      nome: (document.getElementById('nome') as HTMLInputElement).value.trim(),
+      email: (document.getElementById('email') as HTMLInputElement).value.trim(),
+      whatsapp: itis.whatsapp.getNumber(),
+      whatsapp_pais: itis.whatsapp.getSelectedCountry()?.iso2?.toUpperCase() ?? '',
+      indicado_nome: (document.getElementById('indicado_nome') as HTMLInputElement).value.trim(),
+      indicado_whatsapp: itis.indicado_whatsapp.getNumber(),
+      indicado_whatsapp_pais: itis.indicado_whatsapp.getSelectedCountry()?.iso2?.toUpperCase() ?? '',
+      pagina: window.location.href,
+      data_envio: new Date().toISOString(),
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+
+    try {
+      if (WEBHOOK_URL) {
+        const res = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok && res.type !== 'opaque') throw new Error(`Webhook respondeu ${res.status}`);
+      } else {
+        console.warn('[indique-e-ganhe] WEBHOOK_URL não configurada — envio simulado:', payload);
+      }
+
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({ event: 'indique_ganhe_submit' });
+
+      form.hidden = true;
+      success.hidden = false;
+      success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch (err) {
+      console.error('[indique-e-ganhe] erro no envio:', err);
+      status.textContent = 'Estamos enfrentando problemas técnicos, tente novamente mais tarde.';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar indicação';
+    }
+  });
+
+  document.getElementById('ig-again')?.addEventListener('click', () => {
+    form.reset();
+    itis.whatsapp.setSelectedCountry('br');
+    itis.indicado_whatsapp.setSelectedCountry('br');
+    success.hidden = true;
+    form.hidden = false;
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>
+
+<style>
+  /* ============ Hero ============ */
+  .ig-hero {
+    min-height: 78vh;
+    display: flex;
+    align-items: center;
+    padding-block: calc(var(--section-padding) * 1.2) var(--section-padding);
+    overflow: hidden;
+  }
+
+  .ig-hero__grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  .ig-hero__title {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    font-size: clamp(64px, 9vw, 120px);
+    margin-block: var(--space-sm) var(--space-md);
+  }
+
+  .ig-hero__line {
+    display: block;
+  }
+
+  .ig-hero__amp {
+    color: var(--color-accent);
+    margin-right: 0.08em;
+  }
+
+  /* "GANHE" com sombra laranja deslocada, estilo sticker do KV */
+  .ig-hero__outline {
+    color: var(--color-text);
+    text-shadow: 0.05em 0.05em 0 var(--color-accent);
+  }
+
+  .ig-spark {
+    position: absolute;
+    top: -0.28em;
+    right: -0.55em;
+    width: clamp(36px, 4vw, 56px);
+    height: auto;
+  }
+
+  .ig-hero__sub {
+    color: var(--color-text-muted);
+    max-width: 440px;
+    margin-bottom: var(--space-md);
+  }
+
+  /* Visual: blob laranja com o "1 ano" */
+  .ig-hero__visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 440px;
+    padding: var(--space-lg);
+  }
+
+  .ig-blob {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ig-prize {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    line-height: 0.9;
+    color: var(--color-bg);
+  }
+
+  .ig-prize__pre,
+  .ig-prize__pos {
+    font-size: clamp(22px, 2.4vw, 32px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .ig-prize__num {
+    font-size: clamp(110px, 13vw, 175px);
+    font-weight: 900;
+    line-height: 0.9;
+    margin-block: 2px;
+    text-shadow: 5px 5px 0 rgba(255, 255, 255, 0.85);
+  }
+
+  .ig-note {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    opacity: 0.8;
+  }
+
+  .ig-note--1 {
+    top: 6%;
+    left: 2%;
+    transform: rotate(-12deg);
+  }
+
+  .ig-note--2 {
+    bottom: 4%;
+    right: 4%;
+    transform: rotate(10deg);
+    z-index: 1;
+  }
+
+  @media (max-width: 860px) {
+    .ig-hero {
+      min-height: auto;
+      text-align: center;
+    }
+
+    .ig-hero__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ig-hero__sub {
+      margin-inline: auto;
+    }
+
+    .ig-hero__visual {
+      min-height: 340px;
+      max-width: 420px;
+      margin-inline: auto;
+    }
+
+    .ig-prize {
+      transform: translate(-10px, -8px);
+    }
+
+    .ig-prize__num {
+      font-size: 84px;
+    }
+
+    .ig-prize__pre,
+    .ig-prize__pos {
+      font-size: 19px;
+    }
+  }
+
+  /* ============ Como funciona ============ */
+  .ig-como {
+    background: #0a0a0a;
+  }
+
+  .ig-como__head {
+    position: relative;
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .ig-como__head h2 {
+    margin-top: var(--space-xs);
+  }
+
+  .ig-mega {
+    width: 52px;
+    height: 52px;
+    margin-bottom: var(--space-sm);
+    display: inline-block;
+    transform: rotate(-8deg);
+  }
+
+  .ig-passos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    counter-reset: passo;
+    max-width: 1040px;
+    margin-inline: auto;
+  }
+
+  .ig-passo {
+    position: relative;
+    text-align: center;
+    padding-top: var(--space-sm);
+  }
+
+  /* Linha tracejada conectando os passos, como no KV */
+  .ig-passo:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 44px;
+    left: calc(50% + 56px);
+    width: calc(100% - 112px + var(--space-lg));
+    border-top: 2px dashed var(--color-accent-dark);
+  }
+
+  .ig-passo__icon {
+    width: 88px;
+    height: 88px;
+    margin: 0 auto var(--space-sm);
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: 1.5px solid var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent);
+    position: relative;
+    z-index: 1;
+  }
+
+  .ig-passo__icon svg {
+    width: 38px;
+    height: 38px;
+  }
+
+  .ig-passo__num {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--color-accent);
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .ig-passo__texto {
+    color: var(--color-text-muted);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    max-width: 280px;
+    margin-inline: auto;
+  }
+
+  .ig-passo__texto :global(strong) {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .ig-passo__texto :global(strong.accent) {
+    color: var(--color-accent);
+  }
+
+  .ig-como__nota {
+    text-align: center;
+    color: var(--color-text-muted);
+    max-width: 560px;
+    margin: var(--space-xl) auto 0;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px dashed var(--color-accent-dark);
+    border-radius: var(--radius-md);
+  }
+
+  .ig-como__nota strong {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  @media (max-width: 860px) {
+    .ig-passos {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+      max-width: 360px;
+    }
+
+    .ig-passo:not(:last-child)::after {
+      top: calc(88px + var(--space-sm));
+      left: 50%;
+      width: 0;
+      height: var(--space-lg);
+      border-top: none;
+      border-left: 2px dashed var(--color-accent-dark);
+    }
+  }
+
+  /* ============ Formulário ============ */
+  .ig-form-section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ig-vector {
+    position: absolute;
+    right: 0;
+    top: -60px;
+    max-width: 18vh;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .ig-form-head {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+  }
+
+  .ig-form-head h2 {
+    margin-block: var(--space-xs) var(--space-sm);
+  }
+
+  .ig-form-head h4 {
+    color: var(--color-text-muted);
+  }
+
+  .ig-card {
+    position: relative;
+    z-index: 1;
+    max-width: 980px;
+    margin-inline: auto;
+    background: #0a0a0a;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: clamp(24px, 4vw, 48px);
+  }
+
+  .ig-blocks {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: var(--space-lg);
+  }
+
+  .ig-divider {
+    border-left: 1px dashed var(--color-border);
+  }
+
+  .ig-block {
+    border: none;
+    min-width: 0;
+  }
+
+  .ig-block__head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .ig-block__num {
+    font-family: var(--font-heading);
+    font-size: 44px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--color-accent);
+  }
+
+  .ig-block--indicado .ig-block__num {
+    color: var(--color-accent-light);
+  }
+
+  .ig-block__title {
+    font-size: 26px;
+    letter-spacing: 0;
+    line-height: 1.1;
+  }
+
+  .ig-block__sub {
+    color: var(--color-text-subtle);
+    font-size: 13px;
+    margin-top: 2px;
+  }
+
+  .ig-block__hint {
+    color: var(--color-text-subtle);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: var(--space-sm);
+  }
+
+  .ig-field {
+    margin-bottom: var(--space-sm);
+  }
+
+  .ig-field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    margin-bottom: 6px;
+  }
+
+  .ig-input {
+    width: 100%;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    padding: 13px 14px;
+    transition: border-color var(--transition);
+  }
+
+  .ig-input::placeholder {
+    color: var(--color-text-subtle);
+  }
+
+  .ig-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+
+  .ig-field.has-error .ig-input {
+    border-color: #e23d3d;
+  }
+
+  .ig-field__error {
+    display: block;
+    color: #ff7b7b;
+    font-size: 12.5px;
+    margin-top: 5px;
+  }
+
+  .ig-field__error:empty {
+    display: none;
+  }
+
+  .ig-form-footer {
+    margin-top: var(--space-md);
+    text-align: center;
+  }
+
+  .ig-submit {
+    border: none;
+    min-width: 260px;
+    padding-block: 16px;
+  }
+
+  .ig-submit:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+
+  .ig-form-status {
+    color: #ff7b7b;
+    font-size: 14px;
+    margin-top: var(--space-sm);
+    min-height: 1.4em;
+  }
+
+  /* Sucesso */
+  .ig-success {
+    text-align: center;
+    padding: var(--space-lg) var(--space-sm);
+  }
+
+  .ig-success svg {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto var(--space-sm);
+  }
+
+  .ig-success h3 {
+    margin-bottom: var(--space-sm);
+  }
+
+  .ig-success p {
+    color: var(--color-text-muted);
+    max-width: 460px;
+    margin: 0 auto var(--space-md);
+  }
+
+  .ig-legal {
+    text-align: center;
+    color: var(--color-text-subtle);
+    font-size: 13px;
+    margin-top: var(--space-lg);
+  }
+
+  @media (max-width: 860px) {
+    .ig-blocks {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+
+    .ig-divider {
+      border-left: none;
+      border-top: 1px dashed var(--color-border);
+    }
+
+    .ig-vector {
+      display: none;
+    }
+  }
+</style>
+
+<style is:global>
+  /* intl-tel-input — adaptação ao tema dark */
+  .iti {
+    width: 100%;
+  }
+
+  .iti__tel-input {
+    width: 100%;
+  }
+
+  .iti--inline-dropdown .iti__dropdown-content {
+    background: #0a0a0a;
+    border: 1px solid #222222;
+    border-radius: 8px;
+    color: #ffffff;
+  }
+
+  .iti__country-list .iti__country.iti__highlight,
+  .iti__country-list .iti__country:hover {
+    background: #1a1a1a;
+  }
+
+  .iti__search-input {
+    background: #000000;
+    color: #ffffff;
+    border-bottom: 1px solid #222222;
+  }
+
+  .iti__search-input::placeholder {
+    color: #666666;
+  }
+
+  .iti__dial-code {
+    color: #999999;
+  }
+
+  .iti__selected-dial-code {
+    color: #ffffff;
+    font-size: 15px;
+  }
+
+  .iti__arrow {
+    border-top-color: #cccccc;
+  }
+
+  .iti__arrow--up {
+    border-bottom-color: #cccccc;
+  }
+
+  .iti__country-container button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+</style>
