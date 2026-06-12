@@ -441,7 +441,10 @@ const passos = [
     font-size: clamp(110px, 13vw, 175px);
     font-weight: 900;
     line-height: 0.9;
-    margin-block: 2px;
+    /* compensa o vão interno acima do dígito na Darker Grotesque,
+       equilibrando o espaço entre "ganhe até" / 1 / "ano de música" */
+    margin-top: -0.16em;
+    margin-bottom: 0.04em;
     text-shadow: 5px 5px 0 rgba(255, 255, 255, 0.85);
   }
 
