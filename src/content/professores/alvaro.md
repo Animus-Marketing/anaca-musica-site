@@ -9,7 +9,7 @@ ordem: 0
 ativo: true
 ---
 
-Músico, educador musical, produtor e fundador do Anacã Música, possui mais de 30 anos de trajetória na música. Iniciou seus estudos aos 11 anos e é formado em Música pela FMU, construindo desde cedo uma carreira que une palco, ensino e produção musical.
+Iniciou seus estudos aos 11 anos e é formado em Música pela FMU, construindo desde cedo uma carreira que une palco, ensino e produção musical.
 
 Como músico e produtor, integrou bandas e desenvolveu projetos próprios no segmento de eventos e cerimônias, entre eles a Love Hits e o Trio Musical Artes Cantadas, com apresentações em diversas regiões do país.
 
