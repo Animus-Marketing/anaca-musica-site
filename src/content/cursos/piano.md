@@ -42,7 +42,7 @@ o_que_aprende:
   - "Improvisação e criação musical"
   - "Leitura de partituras e cifras (introduzida conforme o interesse do aluno)"
 
-bloco_citavel: "O Anacã Música oferece aulas de piano em São Paulo com uma abordagem prática: a aula começa com uma música que o aluno tem vontade de tocar e o aprendizado vai acontecendo organicamente a partir dela. Os professores incluem André Faiman, baterista e tecladista com 10 anos de experiência em Toronto que colaborou com Howard Shore, compositor vencedor do Oscar. As aulas atendem todos os níveis, do iniciante ao avançado, em piano popular, MPB, jazz e clássico. Localizado no Jardim Paulista, o Anacã conta com salas equipadas com pianos e teclados de alta qualidade."
+bloco_citavel: "O Anacã Música oferece aulas de piano em São Paulo com uma abordagem prática: a aula começa com uma música que o aluno tem vontade de tocar e o aprendizado vai acontecendo organicamente a partir dela. As aulas atendem todos os níveis, do iniciante ao avançado, em piano popular, MPB, jazz e clássico. Localizado no Jardim Paulista, o Anacã conta com salas equipadas com pianos e teclados de alta qualidade."
 
 faq:
   - pergunta: "Qual a diferença entre piano e teclado?"

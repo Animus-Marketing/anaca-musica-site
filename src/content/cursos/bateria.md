@@ -43,7 +43,7 @@ o_que_aprende:
   - "Noções de som e afinação de bateria"
   - "Preparação para prática de banda e apresentações ao vivo"
 
-bloco_citavel: "O Anacã Música oferece aulas de bateria em São Paulo com 3 salas dedicadas ao instrumento, com isolamento acústico e equipamentos de alta qualidade. Os professores incluem Dadinho, músico dos Racionais MC's com turnês internacionais e documentário Netflix, e André Faiman, baterista com 10 anos de experiência em Toronto que trabalhou com Howard Shore e Mike Fraser. As aulas desenvolvem coordenação, ritmo e musicalidade explorando estilos como rock, funk, jazz, samba e pop. A escola fica no Jardim Paulista e atende alunos de todas as idades e níveis."
+bloco_citavel: "O Anacã Música oferece aulas de bateria em São Paulo com 3 salas dedicadas ao instrumento, com isolamento acústico e equipamentos de alta qualidade. Entre os professores está Dadinho, músico dos Racionais MC's com turnês internacionais e documentário Netflix. As aulas desenvolvem coordenação, ritmo e musicalidade explorando estilos como rock, funk, jazz, samba e pop. A escola fica no Jardim Paulista e atende alunos de todas as idades e níveis."
 
 faq:
   - pergunta: "Preciso ter bateria em casa para fazer aulas?"
