@@ -1,0 +1,94 @@
+---
+/**
+ * Selo "Black November" flutuando no canto superior direito do hero da home.
+ * Só decorativo: sem oferta, sem preço, sem link.
+ * O pai precisa ter position: relative (.hero já tem).
+ * Some sozinho em FIM (horário de Brasília): o site é estático, então o
+ * script inline remove o selo na tela do visitante; build feito depois de FIM nem o inclui.
+ * SVG inline de propósito: via <img> ele não enxerga a Darker Grotesque da página.
+ *
+ * Limpeza depois de 30/11/2026: apagar este arquivo e, em src/pages/index.astro,
+ * o import e o <SeloBlackNovember /> dentro da <section class="hero">.
+ */
+const FIM = '2026-11-30T23:59:00-03:00';
+const ativo = Date.now() < Date.parse(FIM);
+---
+
+{ativo && (
+  <>
+    <svg class="selo-bn" viewBox="0 0 200 200" role="img" aria-label="Black November Anacã Música">
+      <title>Black November Anacã Música</title>
+      <defs>
+        <path id="selo-bn-arco" d="M100 100 m-76 0 a76 76 0 1 1 152 0 a76 76 0 1 1 -152 0" />
+      </defs>
+      <circle class="selo-bn__base" cx="100" cy="100" r="97" />
+      <circle class="selo-bn__anel" cx="100" cy="100" r="60" />
+      <text class="selo-bn__borda" aria-hidden="true">
+        <textPath href="#selo-bn-arco" textLength="472" lengthAdjust="spacing">ANACÃ MÚSICA ✦ ANACÃ MÚSICA ✦ ANACÃ MÚSICA ✦</textPath>
+      </text>
+      <g class="selo-bn__centro" aria-hidden="true">
+        <text x="100" y="99" font-size="40" textLength="92" lengthAdjust="spacingAndGlyphs">BLACK</text>
+        <text class="selo-bn__nov" x="100" y="122" font-size="23" textLength="92" lengthAdjust="spacingAndGlyphs">NOVEMBER</text>
+      </g>
+    </svg>
+    <script is:inline define:vars={{ FIM }}>
+      if (Date.now() >= Date.parse(FIM)) document.querySelector(".selo-bn")?.remove();
+    </script>
+  </>
+)}
+
+<style>
+  .selo-bn {
+    position: absolute;
+    top: 40px;
+    right: 5%;
+    z-index: 2; /* acima do conteúdo do hero (1), abaixo do header (100) */
+    width: 168px;
+    height: auto;
+    pointer-events: none;
+    font-family: var(--font-heading);
+    filter: drop-shadow(0 8px 20px rgb(0 0 0 / 0.45));
+    animation: selo-bn-float 4s ease-in-out infinite;
+  }
+  .selo-bn__base {
+    fill: #0a0a0a;
+    stroke: var(--color-accent);
+    stroke-width: 4;
+  }
+  .selo-bn__anel {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 1.5;
+    stroke-dasharray: 2 5;
+  }
+  .selo-bn__borda {
+    fill: var(--color-accent);
+    font-size: 17px;
+    font-weight: 800;
+  }
+  .selo-bn__centro {
+    fill: #fff;
+    font-weight: 900;
+    text-anchor: middle;
+  }
+  .selo-bn__nov {
+    fill: var(--color-accent);
+  }
+  @keyframes selo-bn-float {
+    0%, 100% { transform: translateY(0) rotate(-8deg); }
+    50% { transform: translateY(-10px) rotate(-4deg); }
+  }
+  @media (max-width: 767px) {
+    .selo-bn {
+      top: 12px;
+      right: 12px;
+      width: 84px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .selo-bn {
+      animation: none;
+      transform: rotate(-8deg);
+    }
+  }
+</style>

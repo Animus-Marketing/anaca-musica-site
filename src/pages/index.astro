@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
+import SeloBlackNovember from '../components/SeloBlackNovember.astro';
 import Counter from '../components/Counter.astro';
 import CursoCard from '../components/CursoCard.astro';
 import TabsCarousel from '../components/TabsCarousel.astro';
@@ -44,6 +45,7 @@ const depoimentos = [
 
   <!-- 1. Hero (dark, bg image, NO overlay) -->
   <section class="hero" style={`--hero-bg: url(/images/hero-home.webp)`}>
+    <SeloBlackNovember />
     <div class="hero__content">
       <h1 class="hero__title" data-reveal="fade-up">A escola de música<br/>que transforma</h1>
       <p class="hero__tagline" data-reveal="fade-up" data-reveal-delay="200">
