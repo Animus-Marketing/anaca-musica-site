@@ -1,128 +1,88 @@
 ---
 /**
- * Sinalização "Black November" na home. Só decorativa: sem oferta, sem preço, sem link.
- * Dois modos (prop `modo`):
- *  - "selo":  carimbo redondo flutuando no canto do hero (o pai precisa de position: relative).
- *             Some no celular, onde não há canto livre.
- *  - "tag":   etiqueta em cima do título, só no celular. Vai dentro de .hero__content.
- * Some sozinho em FIM (horário de Brasília): o site é estático, então o
+ * Etiqueta "✦ BLACK NOVEMBER" em cima do título do hero da home.
+ * Só decorativa: sem oferta, sem preço, sem link. Vai dentro de .hero__content.
+ * Some sozinha em FIM (horário de Brasília): o site é estático, então o
  * script inline remove na tela do visitante; build feito depois de FIM nem inclui.
- * SVG inline de propósito: via <img> ele não enxerga a Darker Grotesque da página.
  *
  * Limpeza depois de 30/11/2026: apagar este arquivo e, em src/pages/index.astro,
- * o import e todo <SeloBlackNovember ... />.
+ * o import e o <SeloBlackNovember />.
  */
-interface Props { modo?: 'selo' | 'tag' }
-const { modo = 'selo' } = Astro.props;
 const FIM = '2026-11-30T23:59:00-03:00';
 const ativo = Date.now() < Date.parse(FIM);
-const ROTULO = 'Black November Anacã Música';
 ---
 
-{ativo && modo === 'selo' && (
-  <svg class="selo-bn" data-bn viewBox="0 0 200 200" role="img" aria-label={ROTULO}>
-    <title>{ROTULO}</title>
-    <defs>
-      <path id="selo-bn-arco" d="M100 100 m-76 0 a76 76 0 1 1 152 0 a76 76 0 1 1 -152 0" />
-    </defs>
-    <circle class="selo-bn__base" cx="100" cy="100" r="97" />
-    <circle class="selo-bn__anel" cx="100" cy="100" r="60" />
-    <text class="selo-bn__borda" aria-hidden="true">
-      <textPath href="#selo-bn-arco" textLength="472" lengthAdjust="spacing">ANACÃ MÚSICA ✦ ANACÃ MÚSICA ✦ ANACÃ MÚSICA ✦</textPath>
-    </text>
-    <g class="selo-bn__centro" aria-hidden="true">
-      <text x="100" y="99" font-size="40" textLength="92" lengthAdjust="spacingAndGlyphs">BLACK</text>
-      <text class="selo-bn__nov" x="100" y="122" font-size="23" textLength="92" lengthAdjust="spacingAndGlyphs">NOVEMBER</text>
-    </g>
-  </svg>
-)}
-
-{ativo && modo === 'tag' && (
-  <p class="bn-tag" data-bn><span aria-hidden="true">✦</span> Black <b>November</b></p>
-)}
-
 {ativo && (
-  <script is:inline define:vars={{ FIM }}>
-    if (Date.now() >= Date.parse(FIM)) document.querySelectorAll("[data-bn]").forEach((el) => el.remove());
-  </script>
+  <>
+    <p class="bn-tag"><span aria-hidden="true">✦</span> Black <b>November</b></p>
+    <script is:inline define:vars={{ FIM }}>
+      if (Date.now() >= Date.parse(FIM)) document.querySelector(".bn-tag")?.remove();
+    </script>
+  </>
 )}
 
 <style>
-  /* ---------- selo ---------- */
-  .selo-bn {
-    position: absolute;
-    top: 40px;
-    right: 5%;
-    z-index: 0; /* atrás do conteúdo do hero (1): se encostar, o texto fica por cima */
-    width: 168px;
-    height: auto;
-    pointer-events: none;
-    font-family: var(--font-heading);
-    filter: drop-shadow(0 8px 20px rgb(0 0 0 / 0.45));
-    animation: selo-bn-float 4s ease-in-out infinite;
-  }
-  .selo-bn__base {
-    fill: #0a0a0a;
-    stroke: var(--color-accent);
-    stroke-width: 4;
-  }
-  .selo-bn__anel {
-    fill: none;
-    stroke: var(--color-accent);
-    stroke-width: 1.5;
-    stroke-dasharray: 2 5;
-  }
-  .selo-bn__borda {
-    fill: var(--color-accent);
-    font-size: 17px;
-    font-weight: 800;
-  }
-  .selo-bn__centro {
-    fill: #fff;
-    font-weight: 900;
-    text-anchor: middle;
-  }
-  .selo-bn__nov {
-    fill: var(--color-accent);
-  }
-  @keyframes selo-bn-float {
-    0%, 100% { transform: translateY(0) rotate(-8deg); }
-    50% { transform: translateY(-10px) rotate(-4deg); }
-  }
-
-  /* ---------- tag (só celular) ---------- */
   .bn-tag {
-    display: none;
+    position: relative;
+    overflow: hidden;
     width: fit-content;
-    margin: 0 0 16px;
-    padding: 4px 14px 6px;
+    margin: 0 0 20px;
+    padding: 5px 18px 8px;
     border: 1px solid var(--color-accent);
     border-radius: 999px;
     background: #0a0a0a;
     color: #fff;
     font-family: var(--font-heading);
-    font-size: 17px;
+    font-size: 21px;
     font-weight: 800;
     line-height: 1.2;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     pointer-events: none;
+    animation: bn-tag-brilho 3s ease-in-out infinite;
   }
   .bn-tag b,
   .bn-tag span {
     color: var(--color-accent);
     font-weight: inherit;
   }
-
-  @media (max-width: 767px) {
-    .selo-bn { display: none; }
-    .bn-tag { display: block; }
+  /* estrela girando */
+  .bn-tag span {
+    display: inline-block;
+    animation: bn-tag-gira 6s linear infinite;
   }
-
+  /* reflexo de luz passando por cima */
+  .bn-tag::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.28) 50%, transparent 65%);
+    transform: translateX(-120%);
+    animation: bn-tag-reflexo 3s ease-in-out infinite;
+  }
+  @keyframes bn-tag-brilho {
+    0%, 100% { box-shadow: 0 0 0 0 rgb(255 101 48 / 0); }
+    50% { box-shadow: 0 0 18px 2px rgb(255 101 48 / 0.55); }
+  }
+  @keyframes bn-tag-gira {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes bn-tag-reflexo {
+    0%, 55% { transform: translateX(-120%); }
+    100% { transform: translateX(120%); }
+  }
+  @media (max-width: 767px) {
+    .bn-tag {
+      margin-bottom: 16px;
+      padding: 4px 14px 6px;
+      font-size: 17px;
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
-    .selo-bn {
+    .bn-tag,
+    .bn-tag span,
+    .bn-tag::after {
       animation: none;
-      transform: rotate(-8deg);
     }
   }
 </style>
