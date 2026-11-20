@@ -1,43 +1,54 @@
 ---
 /**
- * Selo "Black November" flutuando no canto superior direito do hero da home.
- * Só decorativo: sem oferta, sem preço, sem link.
- * O pai precisa ter position: relative (.hero já tem).
+ * Sinalização "Black November" na home. Só decorativa: sem oferta, sem preço, sem link.
+ * Dois modos (prop `modo`):
+ *  - "selo":  carimbo redondo flutuando no canto do hero (o pai precisa de position: relative).
+ *             Some no celular, onde não há canto livre.
+ *  - "tag":   etiqueta em cima do título, só no celular. Vai dentro de .hero__content.
  * Some sozinho em FIM (horário de Brasília): o site é estático, então o
- * script inline remove o selo na tela do visitante; build feito depois de FIM nem o inclui.
+ * script inline remove na tela do visitante; build feito depois de FIM nem inclui.
  * SVG inline de propósito: via <img> ele não enxerga a Darker Grotesque da página.
  *
  * Limpeza depois de 30/11/2026: apagar este arquivo e, em src/pages/index.astro,
- * o import e o <SeloBlackNovember /> dentro da <section class="hero">.
+ * o import e todo <SeloBlackNovember ... />.
  */
+interface Props { modo?: 'selo' | 'tag' }
+const { modo = 'selo' } = Astro.props;
 const FIM = '2026-11-30T23:59:00-03:00';
 const ativo = Date.now() < Date.parse(FIM);
+const ROTULO = 'Black November Anacã Música';
 ---
 
+{ativo && modo === 'selo' && (
+  <svg class="selo-bn" data-bn viewBox="0 0 200 200" role="img" aria-label={ROTULO}>
+    <title>{ROTULO}</title>
+    <defs>
+      <path id="selo-bn-arco" d="M100 100 m-76 0 a76 76 0 1 1 152 0 a76 76 0 1 1 -152 0" />
+    </defs>
+    <circle class="selo-bn__base" cx="100" cy="100" r="97" />
+    <circle class="selo-bn__anel" cx="100" cy="100" r="60" />
+    <text class="selo-bn__borda" aria-hidden="true">
+      <textPath href="#selo-bn-arco" textLength="472" lengthAdjust="spacing">ANACÃ MÚSICA ✦ ANACÃ MÚSICA ✦ ANACÃ MÚSICA ✦</textPath>
+    </text>
+    <g class="selo-bn__centro" aria-hidden="true">
+      <text x="100" y="99" font-size="40" textLength="92" lengthAdjust="spacingAndGlyphs">BLACK</text>
+      <text class="selo-bn__nov" x="100" y="122" font-size="23" textLength="92" lengthAdjust="spacingAndGlyphs">NOVEMBER</text>
+    </g>
+  </svg>
+)}
+
+{ativo && modo === 'tag' && (
+  <p class="bn-tag" data-bn><span aria-hidden="true">✦</span> Black <b>November</b></p>
+)}
+
 {ativo && (
-  <>
-    <svg class="selo-bn" viewBox="0 0 200 200" role="img" aria-label="Black November Anacã Música">
-      <title>Black November Anacã Música</title>
-      <defs>
-        <path id="selo-bn-arco" d="M100 100 m-76 0 a76 76 0 1 1 152 0 a76 76 0 1 1 -152 0" />
-      </defs>
-      <circle class="selo-bn__base" cx="100" cy="100" r="97" />
-      <circle class="selo-bn__anel" cx="100" cy="100" r="60" />
-      <text class="selo-bn__borda" aria-hidden="true">
-        <textPath href="#selo-bn-arco" textLength="472" lengthAdjust="spacing">ANACÃ MÚSICA ✦ ANACÃ MÚSICA ✦ ANACÃ MÚSICA ✦</textPath>
-      </text>
-      <g class="selo-bn__centro" aria-hidden="true">
-        <text x="100" y="99" font-size="40" textLength="92" lengthAdjust="spacingAndGlyphs">BLACK</text>
-        <text class="selo-bn__nov" x="100" y="122" font-size="23" textLength="92" lengthAdjust="spacingAndGlyphs">NOVEMBER</text>
-      </g>
-    </svg>
-    <script is:inline define:vars={{ FIM }}>
-      if (Date.now() >= Date.parse(FIM)) document.querySelector(".selo-bn")?.remove();
-    </script>
-  </>
+  <script is:inline define:vars={{ FIM }}>
+    if (Date.now() >= Date.parse(FIM)) document.querySelectorAll("[data-bn]").forEach((el) => el.remove());
+  </script>
 )}
 
 <style>
+  /* ---------- selo ---------- */
   .selo-bn {
     position: absolute;
     top: 40px;
@@ -78,18 +89,36 @@ const ativo = Date.now() < Date.parse(FIM);
     0%, 100% { transform: translateY(0) rotate(-8deg); }
     50% { transform: translateY(-10px) rotate(-4deg); }
   }
-  @media (max-width: 767px) {
-    .selo-bn {
-      top: 20px;
-      right: auto;
-      left: var(--container-padding);
-      width: 84px;
-    }
-    /* Abre espaço em cima do título para o selo caber à esquerda. */
-    :global(.hero:has(.selo-bn)) {
-      padding-top: 128px;
-    }
+
+  /* ---------- tag (só celular) ---------- */
+  .bn-tag {
+    display: none;
+    width: fit-content;
+    margin: 0 0 16px;
+    padding: 4px 14px 6px;
+    border: 1px solid var(--color-accent);
+    border-radius: 999px;
+    background: #0a0a0a;
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    pointer-events: none;
   }
+  .bn-tag b,
+  .bn-tag span {
+    color: var(--color-accent);
+    font-weight: inherit;
+  }
+
+  @media (max-width: 767px) {
+    .selo-bn { display: none; }
+    .bn-tag { display: block; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .selo-bn {
       animation: none;
