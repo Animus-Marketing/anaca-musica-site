@@ -42,7 +42,7 @@ const ativo = Date.now() < Date.parse(FIM);
     position: absolute;
     top: 40px;
     right: 5%;
-    z-index: 2; /* acima do conteúdo do hero (1), abaixo do header (100) */
+    z-index: 0; /* atrás do conteúdo do hero (1): se encostar, o texto fica por cima */
     width: 168px;
     height: auto;
     pointer-events: none;
@@ -80,9 +80,14 @@ const ativo = Date.now() < Date.parse(FIM);
   }
   @media (max-width: 767px) {
     .selo-bn {
-      top: 12px;
-      right: 12px;
+      top: 20px;
+      right: auto;
+      left: var(--container-padding);
       width: 84px;
+    }
+    /* Abre espaço em cima do título para o selo caber à esquerda. */
+    :global(.hero:has(.selo-bn)) {
+      padding-top: 128px;
     }
   }
   @media (prefers-reduced-motion: reduce) {
