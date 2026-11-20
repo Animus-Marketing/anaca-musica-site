@@ -4,7 +4,11 @@ slug: "show-case-adulto-anos-80"
 data: "2026-11-08"
 imagem_capa: "/images/eventos/showcase-anos-80/galeria/capa.webp"
 imagem_wide: "/images/eventos/showcase-anos-80/galeria/wide.webp"
-video_youtube: ""
+videos:
+  - titulo: "Dia 08/11"
+    url: "https://youtu.be/AIU9LTOPBv0"
+  - titulo: "Dia 11/11"
+    url: "https://youtu.be/r8YqlMFHd1w"
 albuns:
   - "showcase-anos-80-08-11"
   - "showcase-anos-80-11-11"

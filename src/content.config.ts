@@ -72,8 +72,8 @@ const eventos = defineCollection({
     imagem_capa: z.string().optional(),
     imagem_wide: z.string().optional(),
     galeria: z.array(z.string()).optional(),
-    // Link (ou id) do vídeo no YouTube. Vazio = não aparece.
-    video_youtube: z.string().optional(),
+    // Vídeos do YouTube: link (ou id) e um título opcional. Sem a lista, nada aparece.
+    videos: z.array(z.object({ titulo: z.string().optional(), url: z.string() })).optional(),
     // Ids de álbuns em src/data/albuns.json. Com álbum, o evento ganha a página /fotos/<slug>/.
     albuns: z.array(z.string()).optional(),
     destaque: z.boolean().default(false),
