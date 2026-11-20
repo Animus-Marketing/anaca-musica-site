@@ -1,0 +1,63 @@
+---
+/**
+ * Pixels sem GTM: GA4 + Google Ads (um gtag só) e Meta. Só PageView.
+ *
+ * Conversão NÃO sai daqui: quem manda Contact/Lead/Purchase para a Meta e
+ * "Fez Contato" para o Google Ads é o Tintim, quando a mensagem chega no
+ * WhatsApp. Não disparar evento de clique no WhatsApp (contaria duas vezes).
+ *
+ * Só dispara no domínio oficial. Para testar em preview/localhost: ?pixels=1.
+ * Vem depois do <Tracking /> no <head>.
+ */
+---
+
+<script is:inline>
+  (function () {
+    var GA4 = 'G-WZFF6QYBT5';
+    var ADS = 'AW-11171279601';
+    var META = '1585102478647393';
+    var ROOT = 'anacamusica.com.br';
+    var onRoot = location.hostname === ROOT || location.hostname.endsWith('.' + ROOT);
+    if (!onRoot && !/[?&]pixels=1/.test(location.search)) return;
+
+    // crypto.randomUUID falta no Safari < 15.4; fallback v4 com getRandomValues.
+    function uuid() {
+      if (crypto.randomUUID) return crypto.randomUUID();
+      var b = crypto.getRandomValues(new Uint8Array(16));
+      b[6] = (b[6] & 15) | 64;
+      b[8] = (b[8] & 63) | 128;
+      var h = Array.from(b).map(function (x) { return x.toString(16).padStart(2, '0'); }).join('');
+      return h.slice(0, 8) + '-' + h.slice(8, 12) + '-' + h.slice(12, 16) + '-' + h.slice(16, 20) + '-' + h.slice(20);
+    }
+
+    // Id do visitante (external_id da Meta).
+    var m = document.cookie.match(/(?:^|; )anaca_uid=([^;]*)/);
+    var uid = m ? m[1] : '';
+    if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(uid)) {
+      uid = uuid();
+      document.cookie = 'anaca_uid=' + uid + '; max-age=63072000; path=/' +
+        (onRoot ? '; domain=.' + ROOT : '') + '; SameSite=Lax; Secure';
+    }
+
+    // GA4 + Google Ads (remarketing e vinculador de conversões vêm do config do AW).
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA4);
+    gtag('config', ADS);
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4;
+    document.head.appendChild(s);
+
+    // Meta
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = [];
+      t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
+    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', META, { external_id: uid });
+    // eventID: pronto para deduplicar com a API de Conversões, se um dia entrar.
+    fbq('track', 'PageView', {}, { eventID: uuid() });
+  })();
+</script>

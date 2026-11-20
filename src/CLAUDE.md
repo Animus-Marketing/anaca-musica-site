@@ -40,7 +40,7 @@ Este arquivo fica em `src/` porque `src/pages/` e `src/content/` não podem ter 
 - **Hostname oficial está escrito no Worker** (`worker.ts:14`). Se o domínio mudar, o site inteiro vira `noindex`.
 - **`build.assets: '_assets'`** (`astro.config.mjs`) tem que bater com `public/_headers:4`.
 - **Payload do webhook** (`pages/indique-e-ganhe.astro`): `nome`, `email`, `whatsapp`, `whatsapp_pais`, `indicado_nome`, `indicado_whatsapp`, `indicado_whatsapp_pais`, `pagina`, `data_envio`. O n8n lê esses nomes.
-- **ID do GTM** `GTM-MCRPMZ7` aparece duas vezes em `layouts/BaseLayout.astro` (script e noscript).
+- **Tracking** (`components/Tracking.astro`, `components/Pixels.astro`, no `<head>` do `layouts/BaseLayout.astro`, nessa ordem, todos `is:inline`): não reescrever a URL da página nem links internos (gera `?fbp=` indexado no Google). Links `tintim.link` recebem todos os parâmetros (`FULL_PARAM_HOSTS`). Não disparar evento de clique no WhatsApp nem `Contact`/`Lead`: o Tintim já manda a conversão, contaria duas vezes. Pixels só disparam em `anacamusica.com.br`; em preview, usar `?pixels=1`.
 - **Nenhum `.md` extra em `content/**`**: todo `.md` lá é tratado como item da coleção.
 - **Não editar `data/albuns.json` à mão**: é saída do script. Os originais das fotos ficam fora do repo.
 - **`public/images/*` tem cache de 1 ano** (`public/_headers`). Trocar uma foto mantendo o nome não atualiza para quem já viu.

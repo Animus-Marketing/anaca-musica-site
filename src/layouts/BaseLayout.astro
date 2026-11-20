@@ -3,6 +3,9 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SEO from '../components/SEO.astro';
 import SchemaOrg from '../components/SchemaOrg.astro';
+import Tracking from '../components/Tracking.astro';
+import Pixels from '../components/Pixels.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -24,27 +27,22 @@ const { title, description, image, schemas = [], noindex = false } = Astro.props
   {noindex && <meta name="robots" content="noindex, nofollow" />}
   <SEO title={title} description={description} image={image} />
   <SchemaOrg schemas={schemas} />
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-MCRPMZ7');</script>
-  <!-- End Google Tag Manager -->
+  <Tracking />
+  <Pixels />
+  <!-- Tintim: defer, para rodar depois que os links (e o botão flutuante) existem -->
+  <script is:inline>window.tt = window.tt || {}; window.tt.accountCode = 'c3a08811-1dec-4386-b701-3f5ec0957175';</script>
+  <script is:inline defer src="https://s.tintim.app/static/core/tintim-1.0.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MCRPMZ7"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
   <Header />
   <main>
     <slot />
   </main>
   <Footer />
+  <WhatsAppFloat />
   <script>
     const els = document.querySelectorAll('[data-reveal]');
     const io = new IntersectionObserver((entries) => {

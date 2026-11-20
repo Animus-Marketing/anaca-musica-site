@@ -23,7 +23,7 @@ Leva o visitante ao WhatsApp da escola por um link do Tintim (`src/lib/categoria
 - Assets do build saem em `_assets/` (`astro.config.mjs:10`).
 - Fontes via Google Fonts: Darker Grotesque (títulos) e Poppins (corpo) (`src/layouts/BaseLayout.astro:34`).
 - Cor de destaque: `#FF6530` (laranja), `--color-accent` em `src/styles/global.css`.
-- GTM: `GTM-MCRPMZ7`, em todas as páginas (`src/layouts/BaseLayout.astro:30`).
+- Tracking no código, **sem GTM** (saiu em nov/2026): `src/components/Tracking.astro` (cookies de origem) e `src/components/Pixels.astro` (GA4 `G-WZFF6QYBT5`, Google Ads `AW-11171279601`, Meta `1585102478647393`). Ver `src/CLAUDE.md`.
 
 ## Comandos
 
@@ -47,7 +47,7 @@ Não há testes nem migrations.
 | `src/content/{cursos,professores,eventos}/` | Conteúdo em Markdown com frontmatter. | Não pode (quebra o build). Ver `src/CLAUDE.md` |
 | `src/content.config.ts` | Schema das três coleções. | `src/CLAUDE.md` |
 | `src/components/` | Componentes Astro (Header, Footer, SEO, SchemaOrg, TabsCarousel, Button...). | `src/CLAUDE.md` |
-| `src/layouts/BaseLayout.astro` | Wrapper único: Header, Footer, SEO, SchemaOrg, GTM e animação de entrada (`data-reveal`). | `src/CLAUDE.md` |
+| `src/layouts/BaseLayout.astro` | Wrapper único: Header, Footer, SEO, SchemaOrg, tracking (Tracking, Pixels, Tintim), botão flutuante de WhatsApp e animação de entrada (`data-reveal`). | `src/CLAUDE.md` |
 | `src/lib/categorias.ts` | Constantes: categorias de cursos, URL do WhatsApp (Tintim), Instagram, endereço, telefone. **Alterar dados de contato aqui.** | `src/CLAUDE.md` |
 | `src/styles/global.css` | Variáveis CSS e tipografia global. | Não |
 | `src/worker.ts` | Worker do Cloudflare: serve os assets e põe `noindex` fora do domínio oficial. | `src/CLAUDE.md` |
@@ -75,12 +75,12 @@ Os campos são validados pelo schema em `src/content.config.ts`. As páginas lee
 |---|---|---|
 | Tintim (WhatsApp) | Todo botão de contato abre o link `tintim.link/whatsapp/...`. O Tintim rastreia o lead. | `src/lib/categorias.ts:12`, usado por `src/components/Button.astro` e `src/components/Footer.astro` |
 | `dash-anaca` e `gestor-trafego-anaca` | Leem os leads que o Tintim grava (via n8n → Supabase). Não leem nada deste repo. | — |
-| GTM | Container `GTM-MCRPMZ7`. O form do Indique e Ganhe dispara o evento `indique_ganhe_submit`. | `src/layouts/BaseLayout.astro:30`, `src/pages/indique-e-ganhe.astro` |
+| GA4, Google Ads, Meta | O site manda só PageView. Conversão (Contact/Lead/Purchase na Meta, `Fez Contato` no Google) quem manda é o Tintim. O container `GTM-MCRPMZ7` não é mais carregado. O form do Indique e Ganhe ainda faz push de `indique_ganhe_submit` no `dataLayer`, sem ouvinte. | `src/components/Pixels.astro`, `src/pages/indique-e-ganhe.astro` |
 | n8n (Animus) | O form do Indique e Ganhe faz POST direto do navegador para `https://n8n.animusmkt.com.br/webhook/anaca-musica-indique-ganhe`. | `src/pages/indique-e-ganhe.astro` (`WEBHOOK_URL`) |
 
 Mudou o link do Tintim? Avise o orquestrador: toca também o `dash-anaca` (ver `../CLAUDE.md`).
 
-- **UTM:** este repo não tem código de UTM (o link do Tintim é fixo). A captura de UTM é feita no GTM, fora do repo (confirmado pelo dono em 10/11/2026).
+- **UTM:** `src/components/Tracking.astro` grava UTMs e parâmetros de anúncio em cookie e cola tudo nos links `tintim.link`. É por esse link que o Tintim sabe a origem do lead.
 - **Indique e Ganhe:** o n8n grava as indicações em uma planilha do Google Sheets (confirmado pelo dono em 10/11/2026).
 
 ## Regras de produção

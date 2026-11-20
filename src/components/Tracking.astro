@@ -1,0 +1,250 @@
+---
+/**
+ * Rastreio de origem (UTMs, Google Ads, Meta). Veio da tag 12_script_rastreio_4.0
+ * do GTM-MCRPMZ7; mesma lógica do Tracking.astro do site do IBREP.
+ *
+ * - Grava em cookie no domínio .anacamusica.com.br. A URL ganha do cookie; sem
+ *   UTM na URL, a origem é deduzida pelo referrer (Google, ChatGPT etc.).
+ * - UTMs duram 2 anos. Anúncio (gclid, gad_campaignid, gbraid, wbraid) dura
+ *   90 dias e é gravado em bloco junto com anaca_ads_ts (data do clique, em ms):
+ *   o que não veio na URL é apagado, para não misturar cliques. Recarga com os
+ *   mesmos valores não renova a data. Cookie de anúncio sem anaca_ads_ts é
+ *   legado de 2 anos sem data e é apagado.
+ *   Por quê: o Google recusa gclid velho (EXPIRED_CLICK).
+ * - Propaga parâmetros em links de saída. FULL_PARAM_HOSTS (tintim.link) recebe
+ *   TUDO, inclusive os parâmetros de anúncio: é pelo link que o Tintim sabe a
+ *   origem do lead. Outros sites externos só UTMs + fbp/fbc.
+ * - Links do próprio site e a URL da página NÃO são reescritos: os cookies já
+ *   valem no domínio, e reescrever gera ?fbp=… indexado no Google.
+ *
+ * Trocar o Tintim por worker próprio: mudar FULL_PARAM_HOSTS aqui e o
+ * whatsappUrl em src/lib/categorias.ts.
+ *
+ * Roda no <head>, síncrono, antes do Pixels e do tintim-1.0.js.
+ */
+---
+
+<script is:inline>
+  (function () {
+    var ROOT_DOMAIN = 'anacamusica.com.br';
+    var FULL_PARAM_HOSTS = ['tintim.link'];
+    var COOKIE_DURATION = 63072000; // 2 anos em segundos
+    var ADS_DURATION = 7776000; // 90 dias em segundos
+    var ADS_TS_COOKIE = 'anaca_ads_ts';
+    var UTM_PARAMS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id'];
+    var GOOGLE_ADS_PARAMS = ['gclid', 'gad_campaignid', 'gbraid', 'wbraid'];
+    var SAFE_TO_PROPAGATE = UTM_PARAMS.concat(['fbp', 'fbc']);
+    var ALL_PARAMS = SAFE_TO_PROPAGATE.concat(GOOGLE_ADS_PARAMS);
+    var FB_REGEX = /^fb\.[0-2]\.\d+\..+$/;
+
+    // Fora de *.anacamusica.com.br (localhost, preview) o cookie fica no host atual.
+    var onRoot = location.hostname === ROOT_DOMAIN || location.hostname.endsWith('.' + ROOT_DOMAIN);
+    var COOKIE_DOMAIN_ATTR = onRoot ? '; domain=.' + ROOT_DOMAIN : '';
+
+    // Domínios que NÃO recebem os parâmetros (redes sociais, buscadores, referências)
+    var PROPAGATION_BLOCKLIST = [
+      'facebook.com', 'instagram.com', 'twitter.com', 'x.com', 'linkedin.com',
+      'tiktok.com', 'youtube.com', 'pinterest.com', 'whatsapp.com', 't.me', 'telegram.org',
+      'reddit.com', 'google.com', 'bing.com', 'yahoo.com', 'duckduckgo.com', 'yandex.com',
+      'baidu.com', 'wikipedia.org', 'chatgpt.com', 'chat.openai.com', 'claude.ai',
+      'gemini.google.com', 'bard.google.com', 'poe.com', 'character.ai', 'github.com',
+      'stackoverflow.com',
+    ];
+
+    // O Linktree não entra aqui: o link de lá já traz utm_source=instagram&utm_medium=link-bio.
+    var referrerMappings = {
+      'gemini.google.com': { utm_source: 'gemini', utm_medium: 'ai' },
+      'bard.google.com': { utm_source: 'bard', utm_medium: 'ai' },
+      'google.com': { utm_source: 'google', utm_medium: 'organic' },
+      'bing.com': { utm_source: 'bing', utm_medium: 'organic' },
+      'yahoo.com': { utm_source: 'yahoo', utm_medium: 'organic' },
+      'duckduckgo.com': { utm_source: 'duckduckgo', utm_medium: 'organic' },
+      'yandex.com': { utm_source: 'yandex', utm_medium: 'organic' },
+      'baidu.com': { utm_source: 'baidu', utm_medium: 'organic' },
+      'instagram.com': { utm_source: 'instagram', utm_medium: 'organic' },
+      'youtube.com': { utm_source: 'youtube', utm_medium: 'organic' },
+      'facebook.com': { utm_source: 'facebook', utm_medium: 'organic' },
+      'twitter.com': { utm_source: 'twitter', utm_medium: 'organic' },
+      'x.com': { utm_source: 'twitter', utm_medium: 'organic' },
+      'linkedin.com': { utm_source: 'linkedin', utm_medium: 'organic' },
+      'tiktok.com': { utm_source: 'tiktok', utm_medium: 'organic' },
+      'pinterest.com': { utm_source: 'pinterest', utm_medium: 'organic' },
+      'whatsapp.com': { utm_source: 'whatsapp', utm_medium: 'organic' },
+      'telegram.org': { utm_source: 'telegram', utm_medium: 'organic' },
+      'reddit.com': { utm_source: 'reddit', utm_medium: 'organic' },
+      'chat.openai.com': { utm_source: 'chatgpt', utm_medium: 'ai' },
+      'chatgpt.com': { utm_source: 'chatgpt', utm_medium: 'ai' },
+      'claude.ai': { utm_source: 'claude', utm_medium: 'ai' },
+      'poe.com': { utm_source: 'poe', utm_medium: 'ai' },
+      'character.ai': { utm_source: 'character_ai', utm_medium: 'ai' },
+      'wikipedia.org': { utm_source: 'wikipedia', utm_medium: 'referral' },
+      'github.com': { utm_source: 'github', utm_medium: 'referral' },
+      'stackoverflow.com': { utm_source: 'stackoverflow', utm_medium: 'referral' },
+    };
+
+    function hostMatches(hostname, domain) {
+      return hostname === domain || hostname.endsWith('.' + domain);
+    }
+
+    function setCookie(name, value, maxAge) {
+      document.cookie = name + '=' + encodeURIComponent(value) +
+        '; max-age=' + (maxAge || COOKIE_DURATION) + '; path=/' + COOKIE_DOMAIN_ATTR + '; SameSite=None; Secure';
+    }
+
+    // Duas vezes: com domain e sem (cookie host-only legado não some com o domain).
+    function deleteCookie(name) {
+      var base = name + '=; max-age=0; path=/';
+      document.cookie = base + COOKIE_DOMAIN_ATTR + '; SameSite=None; Secure';
+      document.cookie = base + '; SameSite=None; Secure';
+    }
+
+    function getCookie(name) {
+      var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+      return m ? decodeURIComponent(m[1]) : '';
+    }
+
+    function getParam(name) {
+      return new URLSearchParams(location.search).get(name);
+    }
+
+    function isValidFb(v) {
+      return typeof v === 'string' && FB_REGEX.test(v);
+    }
+
+    // Link de saída http(s) fora da blocklist (não é página do próprio site), ou null.
+    function outboundTarget(href) {
+      if (!href || href.charAt(0) === '#' || href.indexOf('mailto:') === 0 || href.indexOf('tel:') === 0) return null;
+      try {
+        var u = new URL(href, location.href);
+        if (u.protocol !== 'http:' && u.protocol !== 'https:') return null;
+        if (u.hostname === location.hostname || u.hostname === ROOT_DOMAIN || u.hostname === 'www.' + ROOT_DOMAIN) return null;
+        for (var i = 0; i < PROPAGATION_BLOCKLIST.length; i++) {
+          if (hostMatches(u.hostname, PROPAGATION_BLOCKLIST[i])) return null;
+        }
+        return u;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function processAdsCookies() {
+      var fromUrl = {};
+      var urlHasAds = false;
+      GOOGLE_ADS_PARAMS.forEach(function (p) {
+        fromUrl[p] = getParam(p) || '';
+        if (fromUrl[p]) urlHasAds = true;
+      });
+
+      if (urlHasAds) {
+        // Recarga ou aba restaurada: mesmos valores e data já gravada, não renova.
+        var same = getCookie(ADS_TS_COOKIE) !== '' && GOOGLE_ADS_PARAMS.every(function (p) {
+          return fromUrl[p] === getCookie(p);
+        });
+        if (same) return;
+        GOOGLE_ADS_PARAMS.forEach(function (p) {
+          if (fromUrl[p]) setCookie(p, fromUrl[p], ADS_DURATION);
+          else deleteCookie(p);
+        });
+        setCookie(ADS_TS_COOKIE, String(Date.now()), ADS_DURATION);
+      } else if (!getCookie(ADS_TS_COOKIE)) {
+        // Legado de 2 anos sem data do clique.
+        GOOGLE_ADS_PARAMS.forEach(function (p) {
+          if (getCookie(p)) deleteCookie(p);
+        });
+      }
+    }
+
+    function processCookies() {
+      processAdsCookies();
+
+      var urlUtms = {};
+      var urlHasAnyUtm = false;
+      UTM_PARAMS.forEach(function (p) {
+        var v = getParam(p);
+        if (v !== null) {
+          urlUtms[p] = v;
+          if (v !== '') urlHasAnyUtm = true;
+        }
+      });
+
+      if (urlHasAnyUtm) {
+        UTM_PARAMS.forEach(function (p) {
+          setCookie(p, urlUtms[p] !== undefined ? urlUtms[p] : '');
+        });
+        return;
+      }
+
+      var refHost = '';
+      try { refHost = new URL(document.referrer).hostname; } catch (e) {}
+      if (refHost && refHost !== location.hostname && !hostMatches(refHost, ROOT_DOMAIN)) {
+        for (var domain in referrerMappings) {
+          if (hostMatches(refHost, domain)) {
+            var mapping = referrerMappings[domain];
+            UTM_PARAMS.forEach(function (p) {
+              setCookie(p, mapping[p] || '');
+            });
+            break;
+          }
+        }
+      }
+    }
+
+    function getTrackingData() {
+      var data = {};
+      UTM_PARAMS.concat(GOOGLE_ADS_PARAMS).forEach(function (p) {
+        data[p] = getCookie(p);
+      });
+
+      var fbpUrl = getParam('fbp');
+      data.fbp = isValidFb(fbpUrl) ? fbpUrl : getCookie('_fbp');
+
+      var fbcUrl = getParam('fbc');
+      var fbcMeta = getCookie('_fbc');
+      var fbclid = getParam('fbclid');
+      if (isValidFb(fbcUrl)) data.fbc = fbcUrl;
+      else if (isValidFb(fbcMeta)) data.fbc = fbcMeta;
+      else if (fbclid) data.fbc = 'fb.1.' + Date.now() + '.' + fbclid;
+      else data.fbc = '';
+
+      return data;
+    }
+
+    function applyParams(a, data, overwrite) {
+      var u = outboundTarget(a.getAttribute('href'));
+      if (!u) return;
+      var full = hostMatches(u.hostname, ROOT_DOMAIN) || FULL_PARAM_HOSTS.some(function (h) {
+        return hostMatches(u.hostname, h);
+      });
+      var changed = false;
+      (full ? ALL_PARAMS : SAFE_TO_PROPAGATE).forEach(function (p) {
+        if (data[p] && (overwrite || !u.searchParams.has(p))) {
+          u.searchParams.set(p, data[p]);
+          changed = true;
+        }
+      });
+      if (changed) a.setAttribute('href', u.toString());
+    }
+
+    processCookies();
+
+    function initDom() {
+      var data = getTrackingData();
+      document.querySelectorAll('a[href]').forEach(function (a) {
+        applyParams(a, data, false);
+      });
+
+      // No clique, usa os valores mais recentes (o _fbp/_fbc do Meta chega depois).
+      // Em captura: roda antes do listener do tintim-1.0.js, que lê o href do link.
+      document.addEventListener('click', function (e) {
+        var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+        if (a) applyParams(a, getTrackingData(), true);
+      }, true);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDom);
+    } else {
+      initDom();
+    }
+  })();
+</script>
