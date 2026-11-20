@@ -1,0 +1,358 @@
+---
+// Página interna: todas as fotos do evento para baixar, uma a uma.
+// Fora do Google (noindex + fora do sitemap em astro.config.mjs) e fora do menu. Sem senha.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import { getCollection } from 'astro:content';
+import albunsData from '../../data/albuns.json';
+
+type Album = { titulo: string; pasta: string; fotos: { nome: string; w: number; h: number }[] };
+const todos: Record<string, Album> = albunsData;
+
+export async function getStaticPaths() {
+  const eventos = await getCollection('eventos');
+  return eventos
+    .filter(evento => evento.data.albuns?.length)
+    .map(evento => ({ params: { slug: evento.data.slug }, props: { evento } }));
+}
+
+const { evento } = Astro.props;
+const albuns = evento.data.albuns!.map(id => {
+  if (!todos[id]) throw new Error(`Álbum "${id}" não existe em src/data/albuns.json`);
+  return { id, ...todos[id] };
+});
+const ICONE_BAIXAR = 'M12 3v12m0 0l-5-5m5 5l5-5M4 20h16';
+---
+
+<BaseLayout title={`Fotos: ${evento.data.titulo}`} description={`Fotos do ${evento.data.titulo} para baixar.`} image={evento.data.imagem_capa} noindex>
+  <Hero
+    title={evento.data.titulo}
+    subtitles={["Fotos"]}
+    backgroundImage="/images/cursos/microfone-hero.webp"
+    compact
+  />
+
+  <div class="container section">
+    <p class="fotos-intro">Toque na foto para ver maior. Use a seta para baixar em boa qualidade.</p>
+
+    {albuns.length > 1 && (
+      <div class="fotos-abas" role="tablist" aria-label="Dias do evento">
+        {albuns.map((album, i) => (
+          <button type="button" role="tab" class="fotos-aba" id={`aba-${album.id}`} aria-controls={`album-${album.id}`} aria-selected={i === 0 ? 'true' : 'false'}>
+            {album.titulo} <span class="fotos-aba__n">{album.fotos.length}</span>
+          </button>
+        ))}
+      </div>
+    )}
+
+    {albuns.map((album, a) => (
+      <section class="fotos-grade" id={`album-${album.id}`} role={albuns.length > 1 ? 'tabpanel' : undefined} aria-labelledby={albuns.length > 1 ? `aba-${album.id}` : undefined} hidden={a > 0}>
+        {album.fotos.map((foto, i) => (
+          <figure class="fotos-item">
+            <button type="button" class="fotos-item__abrir" data-abrir data-media={`${album.pasta}/media/${foto.nome}.webp`} aria-label={`Ver foto ${i + 1} maior`}>
+              <img
+                src={`${album.pasta}/mini/${foto.nome}.webp`}
+                alt={`${evento.data.titulo}, ${album.titulo}, foto ${i + 1}`}
+                width={foto.w}
+                height={foto.h}
+                loading="lazy"
+                decoding="async"
+              />
+            </button>
+            <a
+              class="fotos-item__baixar"
+              href={`${album.pasta}/baixar/${foto.nome}.jpg`}
+              download={`anaca-${album.id}-${foto.nome}.jpg`}
+              aria-label={`Baixar foto ${i + 1}`}
+              title="Baixar"
+              data-baixar
+            ><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={ICONE_BAIXAR} /></svg></a>
+          </figure>
+        ))}
+      </section>
+    ))}
+  </div>
+
+  <dialog class="fotos-lb" id="fotos-lb" aria-label="Foto ampliada">
+    <div class="fotos-lb__barra">
+      <span class="fotos-lb__conta" id="fotos-lb-conta"></span>
+      <a class="fotos-lb__baixar" id="fotos-lb-baixar" href="#" download data-baixar>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={ICONE_BAIXAR} /></svg>
+        Baixar
+      </a>
+      <button type="button" class="fotos-lb__botao" data-lb="fechar" aria-label="Fechar">&times;</button>
+    </div>
+    <button type="button" class="fotos-lb__botao fotos-lb__nav fotos-lb__nav--ant" data-lb="-1" aria-label="Foto anterior">&#8249;</button>
+    <img id="fotos-lb-img" src="" alt="" />
+    <button type="button" class="fotos-lb__botao fotos-lb__nav fotos-lb__nav--prox" data-lb="1" aria-label="Próxima foto">&#8250;</button>
+  </dialog>
+</BaseLayout>
+
+<style>
+  .fotos-intro {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .fotos-abas {
+    display: flex;
+    gap: 8px;
+    margin-bottom: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .fotos-aba {
+    padding: 12px 18px;
+    margin-bottom: -1px;
+    background: none;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    color: var(--color-text-muted);
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .fotos-aba[aria-selected='true'] {
+    color: var(--color-text);
+    border-bottom-color: var(--color-accent);
+  }
+
+  .fotos-aba__n {
+    font-size: 0.8em;
+    opacity: 0.6;
+    margin-left: 4px;
+  }
+
+  .fotos-grade {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px;
+  }
+
+  .fotos-grade[hidden] {
+    display: none;
+  }
+
+  .fotos-item {
+    margin: 0;
+    position: relative;
+  }
+
+  .fotos-item__abrir {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+  }
+
+  .fotos-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* botão redondo no canto da foto */
+  .fotos-item__baixar {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.65);
+    color: #fff;
+    transition: background 0.2s;
+  }
+
+  .fotos-item__baixar:hover,
+  .fotos-lb__baixar:hover {
+    background: var(--color-accent);
+  }
+
+  [data-baixar][aria-busy='true'] {
+    background: var(--color-accent);
+    animation: fotos-pulsa 0.8s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+
+  @keyframes fotos-pulsa {
+    to { opacity: 0.4; }
+  }
+
+  @media (max-width: 768px) {
+    .fotos-grade { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  }
+
+  /* Lightbox */
+  .fotos-lb {
+    width: 100vw;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: #000;
+    color: #fff;
+  }
+
+  .fotos-lb[open] {
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+
+  .fotos-lb__barra {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+  }
+
+  .fotos-lb__conta {
+    margin-right: auto;
+    font-size: 14px;
+    opacity: 0.7;
+  }
+
+  .fotos-lb__baixar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .fotos-lb__botao {
+    background: none;
+    border: 0;
+    color: #fff;
+    font-size: 34px;
+    line-height: 1;
+    padding: 4px 12px;
+    cursor: pointer;
+  }
+
+  .fotos-lb img {
+    grid-row: 2;
+    grid-column: 1;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    object-fit: contain;
+  }
+
+  .fotos-lb__nav {
+    grid-row: 2;
+    grid-column: 1;
+    z-index: 1;
+    align-self: center;
+    font-size: 48px;
+    padding: 24px 14px;
+  }
+
+  .fotos-lb__nav--ant { justify-self: start; }
+  .fotos-lb__nav--prox { justify-self: end; }
+</style>
+
+<style is:global>
+  html:has(#fotos-lb[open]) { overflow: hidden; }
+</style>
+
+<script>
+  // --- Abas (um álbum por dia) ---
+  const abas = [...document.querySelectorAll<HTMLButtonElement>('.fotos-aba')];
+  abas.forEach((aba) =>
+    aba.addEventListener('click', () => {
+      abas.forEach((a) => {
+        a.setAttribute('aria-selected', String(a === aba));
+        document.getElementById(a.getAttribute('aria-controls')!)!.hidden = a !== aba;
+      });
+    }),
+  );
+
+  // --- Lightbox: navega pelas fotos do álbum que está aberto ---
+  const lb = document.getElementById('fotos-lb') as HTMLDialogElement;
+  const lbImg = document.getElementById('fotos-lb-img') as HTMLImageElement;
+  const lbBaixar = document.getElementById('fotos-lb-baixar') as HTMLAnchorElement;
+  const lbConta = document.getElementById('fotos-lb-conta')!;
+  let itens: HTMLElement[] = [];
+  let atual = 0;
+
+  const mostrar = (i: number) => {
+    atual = (i + itens.length) % itens.length;
+    const abrir = itens[atual].querySelector<HTMLElement>('[data-abrir]')!;
+    const link = itens[atual].querySelector<HTMLAnchorElement>('a[data-baixar]')!;
+    lbImg.src = abrir.dataset.media!;
+    lbImg.alt = abrir.querySelector('img')!.alt;
+    lbBaixar.href = link.href;
+    lbBaixar.download = link.download;
+    lbConta.textContent = `${atual + 1} / ${itens.length}`;
+  };
+
+  document.addEventListener('click', (e) => {
+    const abrir = (e.target as Element).closest<HTMLElement>('[data-abrir]');
+    if (!abrir) return;
+    const item = abrir.closest<HTMLElement>('.fotos-item')!;
+    itens = [...item.parentElement!.querySelectorAll<HTMLElement>('.fotos-item')];
+    mostrar(itens.indexOf(item));
+    lb.showModal();
+  });
+
+  lb.addEventListener('click', (e) => {
+    const acao = (e.target as Element).closest<HTMLElement>('[data-lb]')?.dataset.lb;
+    if (acao === 'fechar' || e.target === lb || e.target === lbImg) lb.close();
+    else if (acao) mostrar(atual + Number(acao));
+  });
+  lb.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') mostrar(atual - 1);
+    if (e.key === 'ArrowRight') mostrar(atual + 1);
+  });
+  // arrastar o dedo para o lado troca de foto
+  let toqueX = 0;
+  lb.addEventListener('touchstart', (e) => { toqueX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - toqueX;
+    if (Math.abs(dx) > 50) mostrar(atual + (dx < 0 ? 1 : -1));
+  });
+
+  // --- Baixar ---
+  // Celular: abre a folha do sistema (tem "Salvar imagem"). Computador: o <a download> já baixa.
+  // A folha do desktop não tem opção de salvar, por isso só entra com ponteiro "coarse" (toque).
+  const baixar = (href: string, nome: string) => {
+    const a = document.createElement('a');
+    a.href = href;
+    a.download = nome;
+    a.click();
+  };
+
+  document.addEventListener('click', async (e) => {
+    const link = (e.target as Element).closest<HTMLAnchorElement>('a[data-baixar]');
+    if (!link || !matchMedia('(pointer: coarse)').matches || !navigator.canShare) return;
+    e.preventDefault();
+    if (link.ariaBusy === 'true') return;
+    link.ariaBusy = 'true';
+    const { href, download } = link; // o lightbox pode trocar de foto enquanto carrega
+    try {
+      const blob = await (await fetch(href)).blob();
+      const arquivo = new File([blob], download, { type: 'image/jpeg' });
+      if (!navigator.canShare({ files: [arquivo] })) throw new Error('sem share de arquivo');
+      await navigator.share({ files: [arquivo] });
+    } catch (erro) {
+      // AbortError = a pessoa fechou a folha. Qualquer outro erro cai no download normal.
+      if ((erro as Error).name !== 'AbortError') baixar(href, download);
+    } finally {
+      link.ariaBusy = 'false';
+    }
+  });
+</script>

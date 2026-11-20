@@ -67,11 +67,15 @@ const eventos = defineCollection({
     titulo: z.string(),
     slug: z.string(),
     data: z.string(),
-    local: z.string(),
+    local: z.string().optional(),
     horario: z.string().optional(),
     imagem_capa: z.string().optional(),
     imagem_wide: z.string().optional(),
     galeria: z.array(z.string()).optional(),
+    // Link (ou id) do vídeo no YouTube. Vazio = não aparece.
+    video_youtube: z.string().optional(),
+    // Ids de álbuns em src/data/albuns.json. Com álbum, o evento ganha a página /fotos/<slug>/.
+    albuns: z.array(z.string()).optional(),
     destaque: z.boolean().default(false),
   }),
 });

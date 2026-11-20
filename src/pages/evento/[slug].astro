@@ -2,6 +2,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import { getCollection, render } from 'astro:content';
+import albunsData from '../../data/albuns.json';
+
+type Album = { pasta: string; fotos: { nome: string; w: number; h: number }[] };
+const todos: Record<string, Album> = albunsData;
 
 export async function getStaticPaths() {
   const eventos = await getCollection('eventos');
@@ -13,11 +17,29 @@ export async function getStaticPaths() {
 
 const { evento } = Astro.props;
 const { Content } = await render(evento);
+
+// Galeria: evento com `albuns` mostra todas as fotos dos álbuns (miniatura na grade, média ao abrir).
+// Sem `albuns`, vale a lista `galeria` do .md. Baixar a foto boa é só na página interna /fotos/<slug>/,
+// que não tem link daqui de propósito.
+type Foto = { mini: string; grande: string; w?: number; h?: number };
+const fotos: Foto[] = evento.data.albuns?.length
+  ? evento.data.albuns.flatMap(id => {
+      if (!todos[id]) throw new Error(`Álbum "${id}" não existe em src/data/albuns.json`);
+      const { pasta, fotos } = todos[id];
+      return fotos.map(f => ({ mini: `${pasta}/mini/${f.nome}.webp`, grande: `${pasta}/media/${f.nome}.webp`, w: f.w, h: f.h }));
+    })
+  : (evento.data.galeria ?? []).map(src => ({ mini: src, grande: src }));
+// Galeria grande fica sem data-reveal: a animação só dispara com 12% do bloco na tela
+// (BaseLayout), e um bloco de 180 fotos nunca chega nisso. Ficaria invisível para sempre.
+const revelar = fotos.length > 40 ? undefined : 'fade-in';
+// aceita o link inteiro (watch?v=, youtu.be/, shorts/, embed/) ou só o id
+const video = evento.data.video_youtube?.trim();
+const videoId = video && (video.match(/(?:shorts\/|embed\/|watch\?v=|youtu\.be\/)([\w-]{6,})/)?.[1] ?? video);
 ---
 
 <BaseLayout
   title={evento.data.titulo}
-  description={`${evento.data.titulo} - ${evento.data.local}`}
+  description={[evento.data.titulo, evento.data.local].filter(Boolean).join(' - ')}
   image={evento.data.imagem_capa}
 >
   <Hero
@@ -32,14 +54,28 @@ const { Content } = await render(evento);
       <Content />
     </div>
 
-    {evento.data.galeria && evento.data.galeria.length > 0 && (
-      <div class="evento-galeria" data-reveal="fade-in">
-        {evento.data.galeria.map((src, i) => (
-          <a href={src} class="evento-galeria__item" data-lightbox="galeria">
+    {videoId && (
+      <div class="evento-video" data-reveal="fade-in">
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0`}
+          title={`Vídeo: ${evento.data.titulo}`}
+          loading="lazy"
+          allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+          allowfullscreen
+        ></iframe>
+      </div>
+    )}
+
+    {fotos.length > 0 && (
+      <div class="evento-galeria" data-reveal={revelar}>
+        {fotos.map((foto, i) => (
+          <a href={foto.grande} class="evento-galeria__item" data-lightbox="galeria">
             <img
-              src={src}
+              src={foto.mini}
               alt={`${evento.data.titulo} ${i + 1}`}
               loading="lazy"
+              width={foto.w}
+              height={foto.h}
             />
           </a>
         ))}
@@ -68,6 +104,18 @@ const { Content } = await render(evento);
   .evento-prose :global(strong) {
     color: var(--color-text);
     font-weight: 600;
+  }
+
+  .evento-video {
+    aspect-ratio: 16 / 9;
+    margin-bottom: var(--space-xl);
+  }
+
+  .evento-video iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
   }
 
   /* Masonry gallery */

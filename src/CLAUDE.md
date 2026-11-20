@@ -13,6 +13,7 @@ Este arquivo fica em `src/` porque `src/pages/` e `src/content/` não podem ter 
 - **SEO:** `components/SEO.astro` (title, canonical, Open Graph) e `components/SchemaOrg.astro` (JSON-LD da escola + breadcrumb em toda página). Páginas de curso somam `Course` e `FAQPage`; de professor, `Person`.
 - **Worker** (`worker.ts`): entrega os assets. Fora de `anacamusica.com.br` adiciona `X-Robots-Tag: noindex, nofollow`.
 - **Indique e Ganhe** (`pages/indique-e-ganhe.astro`): form validado no navegador, POST JSON para o webhook n8n, depois evento `indique_ganhe_submit` no `dataLayer`.
+- **Fotos de evento para baixar** (`pages/fotos/[slug].astro`): página interna `/fotos/<slug do evento>/`, gerada só para evento com o campo `albuns`. Um álbum por aba; a foto abre grande num `<dialog>` com setas e botão de baixar. Três tamanhos por foto: `mini/` (grade), `media/` (tela cheia), `baixar/` (JPEG ~2 MB). Lista de fotos em `data/albuns.json`, escrita por `scripts/gerar-fotos-album.mjs` (na raiz do repo). A página pública do evento (`pages/evento/[slug].astro`) mostra todas as fotos dos álbuns, sem botão de baixar; sem `albuns`, usa a lista `galeria` do `.md`. Vídeo do evento: campo opcional `video_youtube`.
 
 ## Por que é assim
 
@@ -27,6 +28,9 @@ Este arquivo fica em `src/` porque `src/pages/` e `src/content/` não podem ter 
 
 - **Categoria `percussao` aparece com o rótulo "Bateria"** (`lib/categorias.ts:4`) a pedido da Dani (confirmado pelo dono em 10/11/2026). Não "corrigir".
 - **Professor inativo mantém a página** de propósito: se ele voltar, a página já está pronta (confirmado pelo dono em 10/11/2026).
+- **`/fotos/` fica fora do Google de propósito:** `noindex` na página (prop `noindex` do `BaseLayout`) e `filter` no sitemap (`astro.config.mjs`). Não pôr no `robots.txt` (anuncia o endereço) nem no menu, **nem linkar de página pública** (a página do evento não aponta para ela; o dono manda o link direto). Sem senha: quem tem o link entra (decisão do dono, nov/2026).
+- **Baixar foto:** no celular usa Web Share com arquivo (a folha do sistema tem "Salvar imagem"); no computador, `<a download>`. A folha de compartilhar do desktop não tem opção de salvar, por isso só entra com `(pointer: coarse)`.
+- **Um álbum = uma pasta de fotos.** O evento escolhe os álbuns pelo id (`albuns:` no `.md`). Juntar ou separar dias em eventos é troca de dado, não de código.
 
 ## Restrições
 
@@ -38,6 +42,8 @@ Este arquivo fica em `src/` porque `src/pages/` e `src/content/` não podem ter 
 - **Payload do webhook** (`pages/indique-e-ganhe.astro`): `nome`, `email`, `whatsapp`, `whatsapp_pais`, `indicado_nome`, `indicado_whatsapp`, `indicado_whatsapp_pais`, `pagina`, `data_envio`. O n8n lê esses nomes.
 - **ID do GTM** `GTM-MCRPMZ7` aparece duas vezes em `layouts/BaseLayout.astro` (script e noscript).
 - **Nenhum `.md` extra em `content/**`**: todo `.md` lá é tratado como item da coleção.
+- **Não editar `data/albuns.json` à mão**: é saída do script. Os originais das fotos ficam fora do repo.
+- **`public/images/*` tem cache de 1 ano** (`public/_headers`). Trocar uma foto mantendo o nome não atualiza para quem já viu.
 
 ## Armadilhas
 
