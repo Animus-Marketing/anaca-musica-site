@@ -2,6 +2,7 @@
 // Página interna: todas as fotos do evento para baixar, uma a uma.
 // Fora do Google (noindex + fora do sitemap em astro.config.mjs) e fora do menu. Sem senha.
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import EventoVideos from '../../components/EventoVideos.astro';
 import Hero from '../../components/Hero.astro';
 import { getCollection } from 'astro:content';
 import albunsData from '../../data/albuns.json';
@@ -28,12 +29,14 @@ const ICONE_BAIXAR = 'M12 3v12m0 0l-5-5m5 5l5-5M4 20h16';
   <Hero
     title={evento.data.titulo}
     subtitles={["Fotos"]}
-    backgroundImage="/images/cursos/microfone-hero.webp"
+    backgroundImage={evento.data.imagem_wide || evento.data.imagem_capa || "/images/cursos/microfone-hero.webp"}
     compact
   />
 
   <div class="container section">
     <p class="fotos-intro">Toque na foto para ver maior. Use a seta para baixar em boa qualidade.</p>
+
+    <EventoVideos videos={evento.data.videos} evento={evento.data.titulo} />
 
     {albuns.length > 1 && (
       <div class="fotos-abas" role="tablist" aria-label="Dias do evento">

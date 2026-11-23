@@ -20,14 +20,16 @@ const DOWNLOADS = path.join(os.homedir(), 'Downloads');
 const ALBUNS = [
   { id: 'showcase-anos-80-08-11', titulo: 'Dia 08/11', origem: path.join(DOWNLOADS, 'Showcase adulto anos 80 - dia 08-11'), pasta: '/images/eventos/showcase-anos-80/08-11' },
   { id: 'showcase-anos-80-11-11', titulo: 'Dia 11/11', origem: path.join(DOWNLOADS, 'Showcase adulto anos 80 - 11-11'), pasta: '/images/eventos/showcase-anos-80/11-11' },
+  { id: 'showcase-kids-teens-cinema', titulo: 'Dia 15/11', origem: path.join(DOWNLOADS, 'FOTOS_FULL'), pasta: '/images/eventos/showcase-kids-teens-cinema/fotos' },
 ];
 
-// Capa e faixa do evento (a galeria pública usa as próprias fotos dos álbuns).
-const GALERIA = {
-  pasta: '/images/eventos/showcase-anos-80/galeria',
-  capa: [1, 'DSC06204'], // capa (1920x1080)
-  wide: [1, 'DSC05842'], // faixa da listagem /eventos (1920x558): precisa ser foto aberta, senão corta cabeça
-};
+// Capa e faixa de cada evento (a galeria pública usa as próprias fotos dos álbuns).
+// capa: 1920x1080. wide: faixa da listagem /eventos e do topo da página (1920x558);
+// precisa ser foto aberta, senão corta cabeça. Cada uma é [índice do álbum, nome da foto].
+const GALERIAS = [
+  { pasta: '/images/eventos/showcase-anos-80/galeria', capa: [1, 'DSC06204'], wide: [1, 'DSC05842'] },
+  { pasta: '/images/eventos/showcase-kids-teens-cinema/galeria', capa: [2, 'DSC06567'], wide: [2, 'DSC06500'] },
+];
 
 const MINI_PX = 600;
 const MEDIA_PX = 1600;
@@ -80,11 +82,15 @@ for (const album of ALBUNS) {
   console.log();
   manifesto[album.id] = { titulo: album.titulo, pasta: album.pasta, fotos };
 }
-const gal = path.join(RAIZ, 'public', GALERIA.pasta);
-await fs.mkdir(gal, { recursive: true });
-const capa = path.join(ALBUNS[GALERIA.capa[0]].origem, `${GALERIA.capa[1]}.jpg`);
-await sharp(capa).rotate().resize(1920, 1080, { fit: 'cover' }).webp({ quality: 80 }).toFile(path.join(gal, 'capa.webp'));
-const wide = path.join(ALBUNS[GALERIA.wide[0]].origem, `${GALERIA.wide[1]}.jpg`);
-await sharp(wide).rotate().resize(1920, 558, { fit: 'cover', position: 'attention' }).webp({ quality: 80 }).toFile(path.join(gal, 'wide.webp'));
+for (const g of GALERIAS) {
+  const gal = path.join(RAIZ, 'public', g.pasta);
+  await fs.mkdir(gal, { recursive: true });
+  for (const [nome, altura, extra] of [['capa', 1080, {}], ['wide', 558, { position: 'attention' }]]) {
+    const saida = path.join(gal, `${nome}.webp`);
+    if (await existe(saida)) continue;
+    const origem = path.join(ALBUNS[g[nome][0]].origem, `${g[nome][1]}.jpg`);
+    await sharp(origem).rotate().resize(1920, altura, { fit: 'cover', ...extra }).webp({ quality: 80 }).toFile(saida);
+  }
+}
 
 await fs.writeFile(path.join(RAIZ, 'src/data/albuns.json'), JSON.stringify(manifesto, null, 1) + '\n');

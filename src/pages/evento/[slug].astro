@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import EventoVideos from '../../components/EventoVideos.astro';
 import Hero from '../../components/Hero.astro';
 import { getCollection, render } from 'astro:content';
 import albunsData from '../../data/albuns.json';
@@ -32,11 +33,6 @@ const fotos: Foto[] = evento.data.albuns?.length
 // Galeria grande fica sem data-reveal: a animação só dispara com 12% do bloco na tela
 // (BaseLayout), e um bloco de 180 fotos nunca chega nisso. Ficaria invisível para sempre.
 const revelar = fotos.length > 40 ? undefined : 'fade-in';
-// aceita o link inteiro (watch?v=, youtu.be/, shorts/, embed/) ou só o id
-const videos = (evento.data.videos ?? []).map(v => ({
-  titulo: v.titulo,
-  id: v.url.trim().match(/(?:shorts\/|embed\/|watch\?v=|youtu\.be\/)([\w-]{6,})/)?.[1] ?? v.url.trim(),
-}));
 ---
 
 <BaseLayout
@@ -47,7 +43,7 @@ const videos = (evento.data.videos ?? []).map(v => ({
   <Hero
     title={evento.data.titulo}
     subtitles={["Eventos"]}
-    backgroundImage="/images/cursos/microfone-hero.webp"
+    backgroundImage={evento.data.imagem_wide || evento.data.imagem_capa || "/images/cursos/microfone-hero.webp"}
     compact
   />
 
@@ -56,24 +52,7 @@ const videos = (evento.data.videos ?? []).map(v => ({
       <Content />
     </div>
 
-    {videos.length > 0 && (
-      <div class="evento-videos" data-reveal="fade-in">
-        {videos.map(video => (
-          <div>
-            {video.titulo && <h3 class="evento-videos__titulo">{video.titulo}</h3>}
-            <div class="evento-video">
-              <iframe
-                src={`https://www.youtube-nocookie.com/embed/${video.id}?rel=0`}
-                title={`Vídeo: ${evento.data.titulo}${video.titulo ? `, ${video.titulo}` : ''}`}
-                loading="lazy"
-                allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-                allowfullscreen
-              ></iframe>
-            </div>
-          </div>
-        ))}
-      </div>
-    )}
+    <EventoVideos videos={evento.data.videos} evento={evento.data.titulo} reveal="fade-in" />
 
     {fotos.length > 0 && (
       <div class="evento-galeria" data-reveal={revelar}>
@@ -113,29 +92,6 @@ const videos = (evento.data.videos ?? []).map(v => ({
   .evento-prose :global(strong) {
     color: var(--color-text);
     font-weight: 600;
-  }
-
-  /* um vídeo ocupa a largura toda; dois ou mais ficam lado a lado no computador */
-  .evento-videos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
-    gap: var(--space-md);
-    margin-bottom: var(--space-xl);
-  }
-
-  .evento-videos__titulo {
-    margin-bottom: 12px;
-  }
-
-  .evento-video {
-    aspect-ratio: 16 / 9;
-  }
-
-  .evento-video iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    display: block;
   }
 
   /* Masonry gallery */

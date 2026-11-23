@@ -1,0 +1,58 @@
+---
+// Vídeos do YouTube de um evento. Usado na página pública e na página interna de fotos.
+interface Props {
+  videos?: { titulo?: string; url: string }[];
+  evento: string;
+  reveal?: string;
+}
+const { evento, reveal } = Astro.props;
+// aceita o link inteiro (watch?v=, youtu.be/, shorts/, embed/) ou só o id
+const videos = (Astro.props.videos ?? []).map(v => ({
+  titulo: v.titulo,
+  id: v.url.trim().match(/(?:shorts\/|embed\/|watch\?v=|youtu\.be\/)([\w-]{6,})/)?.[1] ?? v.url.trim(),
+}));
+---
+
+{videos.length > 0 && (
+  <div class="evento-videos" data-reveal={reveal}>
+    {videos.map(video => (
+      <div>
+        {video.titulo && <h3 class="evento-videos__titulo">{video.titulo}</h3>}
+        <div class="evento-video">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${video.id}?rel=0`}
+            title={`Vídeo: ${evento}${video.titulo ? `, ${video.titulo}` : ''}`}
+            loading="lazy"
+            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    ))}
+  </div>
+)}
+
+<style>
+  /* um vídeo ocupa a largura toda; dois ou mais ficam lado a lado no computador */
+  .evento-videos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+
+  .evento-videos__titulo {
+    margin-bottom: 12px;
+  }
+
+  .evento-video {
+    aspect-ratio: 16 / 9;
+  }
+
+  .evento-video iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+</style>
