@@ -15,12 +15,14 @@ const sharp = createRequire(require.resolve('astro/package.json'))('sharp');
 const RAIZ = path.resolve(import.meta.dirname, '..');
 const DOWNLOADS = path.join(os.homedir(), 'Downloads');
 
-// Um álbum = uma pasta de originais. O evento (src/content/eventos/*.md) escolhe
+// Um álbum = uma ou mais pastas de originais (remessas da mesma noite). Foto com o mesmo
+// nome em duas pastas entra uma vez só (vale a da primeira pasta).
+// Um álbum = um conjunto de fotos. O evento (src/content/eventos/*.md) escolhe
 // quais álbuns mostra pelo id, no campo `albuns`.
 const ALBUNS = [
-  { id: 'showcase-anos-80-08-11', titulo: 'Dia 08/11', origem: path.join(DOWNLOADS, 'Showcase adulto anos 80 - dia 08-11'), pasta: '/images/eventos/showcase-anos-80/08-11' },
-  { id: 'showcase-anos-80-11-11', titulo: 'Dia 11/11', origem: path.join(DOWNLOADS, 'Showcase adulto anos 80 - 11-11'), pasta: '/images/eventos/showcase-anos-80/11-11' },
-  { id: 'showcase-kids-teens-cinema', titulo: 'Dia 15/11', origem: path.join(DOWNLOADS, 'FOTOS_FULL'), pasta: '/images/eventos/showcase-kids-teens-cinema/fotos' },
+  { id: 'showcase-anos-80-08-11', titulo: 'Dia 08/11', origem: [path.join(DOWNLOADS, 'Showcase adulto anos 80 - dia 08-11'), path.join(DOWNLOADS, 'FOTOS_FULL 2')], pasta: '/images/eventos/showcase-anos-80/08-11' },
+  { id: 'showcase-anos-80-11-11', titulo: 'Dia 11/11', origem: [path.join(DOWNLOADS, 'Showcase adulto anos 80 - 11-11'), path.join(DOWNLOADS, 'FOTOS_FULL 3')], pasta: '/images/eventos/showcase-anos-80/11-11' },
+  { id: 'showcase-kids-teens-cinema', titulo: 'Dia 15/11', origem: [path.join(DOWNLOADS, 'FOTOS_FULL')], pasta: '/images/eventos/showcase-kids-teens-cinema/fotos' },
 ];
 
 // Capa e faixa de cada evento (a galeria pública usa as próprias fotos dos álbuns).
@@ -39,13 +41,12 @@ const QUALIDADES = [92, 88, 84, 80, 76, 72, 68, 64];
 
 const existe = (f) => fs.access(f).then(() => true, () => false);
 
-async function foto(album, arquivo) {
-  const nome = path.parse(arquivo).name;
+async function foto(album, origem) {
+  const nome = path.parse(origem).name;
   const destino = path.join(RAIZ, 'public', album.pasta);
   const mini = path.join(destino, 'mini', `${nome}.webp`);
   const media = path.join(destino, 'media', `${nome}.webp`);
   const boa = path.join(destino, 'baixar', `${nome}.jpg`);
-  const origem = path.join(album.origem, arquivo);
 
   // .rotate() aplica a orientação do EXIF antes de o sharp jogar os metadados fora
   if (!(await existe(mini))) {
@@ -73,7 +74,14 @@ for (const album of ALBUNS) {
   await fs.mkdir(path.join(destino, 'mini'), { recursive: true });
   await fs.mkdir(path.join(destino, 'media'), { recursive: true });
   await fs.mkdir(path.join(destino, 'baixar'), { recursive: true });
-  const arquivos = (await fs.readdir(album.origem)).filter((f) => /\.jpe?g$/i.test(f)).sort();
+  const porNome = new Map();
+  for (const dir of album.origem) {
+    for (const f of await fs.readdir(dir)) {
+      const nome = path.parse(f).name;
+      if (/\.jpe?g$/i.test(f) && !porNome.has(nome)) porNome.set(nome, path.join(dir, f));
+    }
+  }
+  const arquivos = [...porNome.keys()].sort().map((n) => porNome.get(n));
   const fotos = [];
   for (let i = 0; i < arquivos.length; i += 4) {
     fotos.push(...(await Promise.all(arquivos.slice(i, i + 4).map((a) => foto(album, a)))));
@@ -88,7 +96,7 @@ for (const g of GALERIAS) {
   for (const [nome, altura, extra] of [['capa', 1080, {}], ['wide', 558, { position: 'attention' }]]) {
     const saida = path.join(gal, `${nome}.webp`);
     if (await existe(saida)) continue;
-    const origem = path.join(ALBUNS[g[nome][0]].origem, `${g[nome][1]}.jpg`);
+    const origem = path.join(ALBUNS[g[nome][0]].origem[0], `${g[nome][1]}.jpg`);
     await sharp(origem).rotate().resize(1920, altura, { fit: 'cover', ...extra }).webp({ quality: 80 }).toFile(saida);
   }
 }
