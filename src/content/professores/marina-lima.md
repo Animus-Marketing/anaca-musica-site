@@ -6,7 +6,7 @@ modalidades: ["Musicalização baby", "Instrumentalização infantil"]
 categorias: ["kids"]
 excerpt: "Cantora, compositora e artista educadora. Atua como professora de musicalização para bebês no Anacã Música."
 ordem: 5
-ativo: true
+ativo: false
 ---
 
 É formada em Pedagogia pela USP e pós-graduada em Canção Popular pela Faculdade Santa Marcelina, com especializações em arte-educação pelo Instituto Brincante e Ateliê Musical Enny Parejo.
